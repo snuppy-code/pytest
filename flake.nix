@@ -30,7 +30,7 @@
 
         alias npy="nixGLIntel python"
 
-        echo "Aliased: `npy=\"nixGLIntel python\"`"
+        echo "Aliased: \`npy=\"nixGLIntel python\"\`"
       '';
     };
   };

@@ -26,11 +26,11 @@
       ];
       shellHook = ''
         echo "Entered Nix devShell."
-        echo "Use 'nixGL python <file>.py' to run with hardware acceleration."
+        echo "Use 'nixGLIntel python <file>.py' to run with hardware acceleration."
 
-        alias npy="nixGL python"
+        alias npy="nixGLIntel python"
 
-        echo "Aliased: `npy="nixGL python"`"
+        echo "Aliased: `npy=\"nixGLIntel python\"`"
       '';
     };
   };

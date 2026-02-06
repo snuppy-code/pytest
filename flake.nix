@@ -16,7 +16,7 @@
     pkgs = import nixpkgs {
       inherit system;
       overlays = [ nixgl.overlay ];
-    }
+    };
     # pkgs = nixpkgs.legacyPackages.${system};
   in {
     devShells.${system}.default = pkgs.mkShell {
@@ -34,5 +34,4 @@
         '';
       };
     };
-  };
 }

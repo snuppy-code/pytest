@@ -25,17 +25,19 @@ class MainMenu:
 class LoadingScreen:
     def __init__(self):
         self.loading_progress = 0
-        self.loading_font = pygame.font.SysFont(pygame.font.get_default_font(),12)
+        self.loading_font = pygame.font.SysFont(pygame.font.get_default_font(),50)
         
     def onFrame(self):
         if self.loading_progress >= 100:
             pass #cleanup? and transition
         else:
-            self.loading_progress += 0.5 * dt_s
+            self.loading_progress += 5 * dt_s
         
+        screen.fill("black")
         print("LoadingScene onFrame called!")
         t = "Loading progress: "+str(self.loading_progress)+"%"
-        # text_surface self.loading_font.render(t,True,(255,255,255))
+        text_surface = self.loading_font.render(t,True,(255,255,255))
+        screen.blit(text_surface)
 
 scenes = {
     "MainMenu": MainMenu(),

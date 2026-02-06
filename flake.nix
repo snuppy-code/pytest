@@ -21,11 +21,11 @@
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
-        pkgs.nixgl.auto.nixGLDefault
+        pkgs.nixgl.nixGLIntel
         (pkgs.python314.withPackages (ps: with ps; [pygame-ce numpy]))
       ];
       shellHook = ''
-        echo "Entered Nix devShell for AMD iGPU"
+        echo "Entered Nix devShell."
         echo "Use 'nixGL python <file>.py' to run with hardware acceleration."
 
         alias npy="nixGL python"
@@ -33,4 +33,5 @@
         echo "Aliased: `npy="nixGL python"`"
       '';
     };
+  };
 }

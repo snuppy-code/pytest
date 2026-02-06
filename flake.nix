@@ -16,7 +16,7 @@
     pkgs = import nixpkgs {
       inherit system;
       overlays = [ nixgl.overlay ];
-    }
+    };
     # pkgs = nixpkgs.legacyPackages.${system};
   in {
     devShells.${system}.default = pkgs.mkShell {
@@ -25,14 +25,13 @@
         (pkgs.python314.withPackages (ps: with ps; [pygame-ce numpy]))
       ];
       shellHook = ''
-          echo "Entered Nix devShell for AMD iGPU"
-          echo "Use 'nixGL python <file>.py' to run with hardware acceleration."
+        echo "Entered Nix devShell for AMD iGPU"
+        echo "Use 'nixGL python <file>.py' to run with hardware acceleration."
 
-          alias npy="nixGL python"
+        alias npy="nixGL python"
 
-          echo "Aliased: `npy="nixGL python"`"
-        '';
-      };
+        echo "Aliased: `npy="nixGL python"`"
+      '';
     };
   };
 }

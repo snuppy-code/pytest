@@ -1,4 +1,4 @@
-import pygame # type: ignore
+import pygame
 
 pygame.init()
 screen = pygame.display.set_mode((1280,720))
@@ -24,11 +24,18 @@ class MainMenu:
 
 class LoadingScreen:
     def __init__(self):
-        self.loadingprogress = 0
+        self.loading_progress = 0
+        self.loading_font = pygame.font.SysFont(pygame.font.get_default_font(),12)
         
     def onFrame(self):
+        if self.loading_progress >= 100:
+            pass #cleanup? and transition
+        else:
+            self.loading_progress += 0.5 * dt_s
+        
         print("LoadingScene onFrame called!")
-        pygame.draw.circle(screen, "blue", (200,500), 50)
+        t = "Loading progress: "+str(self.loading_progress)+"%"
+        # text_surface self.loading_font.render(t,True,(255,255,255))
 
 scenes = {
     "MainMenu": MainMenu(),
@@ -47,8 +54,7 @@ while running:
             running = False
 
     # call onFrame callback for each scene
-    for scene in scenes:
-        scene.onFrame()
+    scenes[current_scene].onFrame()
     
 
     # renders allat to the screen !

@@ -33,5 +33,4 @@
         echo "Aliased: `npy="nixGL python"`"
       '';
     };
-  };
 }

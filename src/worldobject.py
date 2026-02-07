@@ -3,7 +3,6 @@ from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
 from src.scenes.test_scene import TestScene
 from src.audio import Audios
-from src.images import Images
 
 class World:
     def __init__(self):
@@ -17,7 +16,9 @@ class World:
         
         self.audios = Audios
 
-        self.images = { # {string: surface}
+        # {string: surface}
+        # initialized as {string: None} and filled in after, so I dont have to write the same path twice on one line
+        self.images = {
             "mainmenu_background.png": None,
             
             "mainmenu_newgame_normal.png": None,

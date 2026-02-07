@@ -11,6 +11,8 @@ class Foraging:
 
 
     def onEnter(self):
+        # fix this mama
+        # you don't want to have rocks and stuff ON THE ROAD!!!!!!
         insertInfo(self.ctx.foraging_sprites, self.ctx)
 
         choices = [PotatoBush, Rock]

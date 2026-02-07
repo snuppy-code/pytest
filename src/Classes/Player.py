@@ -18,7 +18,7 @@ class Player:
         self.pos = toPos
 
     def draw_indicator(self, obj):
-        pass
+        indicator = 
         
 
     def update(self):

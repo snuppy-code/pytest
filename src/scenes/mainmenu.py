@@ -1,18 +1,23 @@
 import pygame
-
 from src.button import Button
-
 
 class MainMenu:
     def __init__(self,ctx):
         self.ctx = ctx
 
-        self.continueButton = Button(
+        self.newgameButton = Button(
             (186,83),
             self.ctx.images["mainmenu_newgame_normal.png"],
             self.ctx.images["mainmenu_newgame_hover.png"],
             self.ctx.images["mainmenu_newgame_select.png"],
             self.ctx.images["mainmenu_newgame_disabled.png"],
+        )
+        self.continueButton = Button(
+            (186,175),
+            self.ctx.images["mainmenu_continue_normal.png"],
+            self.ctx.images["mainmenu_continue_hover.png"],
+            self.ctx.images["mainmenu_continue_select.png"],
+            self.ctx.images["mainmenu_continue_disabled.png"],
         )
     
     def onEnter(self):
@@ -28,10 +33,10 @@ class MainMenu:
 
         self.ctx.vscreen.blit(self.ctx.images["mainmenu_background.png"])
         
-        been_pressed = self.continueButton.tick_just_pressed(events)
-
-        self.ctx.vscreen.blit(self.ctx.images["mainmenu_newgame_normal.png"],dest=(186,83))
-        self.ctx.vscreen.blit(self.ctx.images["mainmenu_continue_normal.png"],dest=(186,175))
+        continue_pressed = self.continueButton.tick_just_pressed(events)
+        newgame_pressed = self.newgameButton.tick_just_pressed(events)
+        self.continueButton.draw_to(self.ctx.vscreen)
+        self.newgameButton.draw_to(self.ctx.vscreen)
 
         # menu = pygame.Surface((self.ctx.w,self.ctx.h))
         

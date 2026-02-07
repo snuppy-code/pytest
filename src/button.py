@@ -35,7 +35,10 @@ class Button:
                     self.state = "normal"
                     return True
         return False
-    
+
+    def draw_to(self,surface):
+        surface.blit(self.image_states[self.state],dest=self.pos)
+
     def disable_button(self):
         self.state = "disabled"
     

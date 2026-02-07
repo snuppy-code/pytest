@@ -28,16 +28,17 @@ class LoadingScreen:
 
         # load all images
         # {string: surface}
+        s2x = pygame.transform.scale2x
         self.ctx.images = {
-            "mainmenu_background.png": pygame.transform.scale2x(pygame.image.load("assets/images/mainmenu_background.png")),
+            "mainmenu_background.png": s2x(pygame.image.load("assets/images/mainmenu_background.png")),
             
-            "mainmenu_newgame_normal.png": pygame.image.load("assets/images/mainmenu_newgame_normal.png"),
-            "mainmenu_newgame_hover.png": pygame.image.load("assets/images/mainmenu_newgame_hover.png"),
-            "mainmenu_newgame_selected.png": pygame.image.load("assets/images/mainmenu_newgame_selected.png"),
+            "mainmenu_newgame_normal.png": s2x(pygame.image.load("assets/images/mainmenu_newgame_normal.png")),
+            "mainmenu_newgame_hover.png": s2x(pygame.image.load("assets/images/mainmenu_newgame_hover.png")),
+            "mainmenu_newgame_selected.png": s2x(pygame.image.load("assets/images/mainmenu_newgame_selected.png")),
 
-            "mainmenu_continue_normal.png": pygame.image.load("assets/images/mainmenu_continue_normal.png"),
-            "mainmenu_continue_hover.png": pygame.image.load("assets/images/mainmenu_continue_hover.png"),
-            "mainmenu_continue_selected.png": pygame.image.load("assets/images/mainmenu_continue_selected.png"),
+            "mainmenu_continue_normal.png": s2x(pygame.image.load("assets/images/mainmenu_continue_normal.png")),
+            "mainmenu_continue_hover.png": s2x(pygame.image.load("assets/images/mainmenu_continue_hover.png")),
+            "mainmenu_continue_selected.png": s2x(pygame.image.load("assets/images/mainmenu_continue_selected.png")),
 
             # "foraging_background.png": pygame.image.load("assets/images/foraging_background.png")
             # "potato_bush.png": pygame.image.load("assets/sprites/foraging/potato_bush.png").convert_alpha()

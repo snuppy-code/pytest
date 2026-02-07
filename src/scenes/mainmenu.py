@@ -19,8 +19,8 @@ class MainMenu:
         # self.ctx.screen.fill((195, 176, 165))
         self.ctx.screen.blit(self.ctx.images["mainmenu_background.png"])
         
-        self.ctx.screen.blit(self.ctx.images["mainmenu_newgame_normal.png"],dest=(400,400))
-        self.ctx.screen.blit(self.ctx.images["mainmenu_continue_normal.png"],dest=(400,500))
+        self.ctx.screen.blit(self.ctx.images["mainmenu_newgame_normal.png"],dest=(370,160))
+        self.ctx.screen.blit(self.ctx.images["mainmenu_continue_normal.png"],dest=(370,350))
 
         # menu = pygame.Surface((self.ctx.w,self.ctx.h))
         

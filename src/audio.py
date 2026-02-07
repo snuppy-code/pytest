@@ -23,7 +23,7 @@ class Audios(Enum):
             path = str(BASE_PATH / self.filename)
             self._cache = Sound(path)
 
-        self._cache.play()
+        return self._cache
 
     def play(self):
-        self.sound
+        self.sound.play()

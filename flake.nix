@@ -22,7 +22,7 @@
     devShells.${system}.default = pkgs.mkShell {
       packages = [
         pkgs.nixgl.nixGLIntel
-        (pkgs.python314.withPackages (ps: with ps; [pygame-ce pillow]))
+        (pkgs.python314.withPackages (ps: with ps; [pygame-ce pygame-gui]))
       ];
       shellHook = ''
         echo "Entered Nix devShell."

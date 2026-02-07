@@ -4,6 +4,7 @@ from src.worldobject import World
 world = World()
 
 # from src.font import Fonts
+from src.font import Fonts
 
 running = True
 while running:

@@ -1,9 +1,10 @@
 import pygame
 pygame.init()
 from src.worldobject import World
-from src.font import Fonts
-World.init()
+world = World()
+ctx = world.ctx
 
+# from src.font import Fonts
 
 running = True
 while running:
@@ -15,11 +16,11 @@ while running:
             running = False
 
     # call onFrame callback for each scene
-    World.scenes[World.current_scene].onFrame()
+    world.scenes[world.current_scene].onFrame()
 
     # renders allat to the screen !
     pygame.display.flip()
-    World.dt_s = World.clock.tick(144) / 1000
+    ctx.dt_s = ctx.clock.tick(144) / 1000
     # print(dt_s)
 
 

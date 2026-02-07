@@ -1,22 +1,22 @@
 import pygame
-from src.worldobject import World
 from src.audio import Audios
 
 class MainMenu:
-    def __init__(self):
+    def __init__(self,ctx):
+        self.ctx = ctx
         self.once = True
         
     def onFrame(self):
         # replace with background image 
-        World.screen.fill((195, 176, 165))
+        self.ctx.screen.fill((195, 176, 165))
         
-        menu = pygame.Surface((World.w,World.h))
+        menu = pygame.Surface((self.ctx.w,self.ctx.h))
         
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(World.w/2-400/2,60+(150+20)*0,400,150),0,40)
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(World.w/2-400/2,60+(150+20)*1,400,150),0,40)
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(World.w/2-400/2,60+(150+20)*2,400,150),0,40)
+        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*0,400,150),0,40)
+        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*1,400,150),0,40)
+        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*2,400,150),0,40)
         
-        World.screen.blit(menu)
+        self.ctx.screen.blit(menu)
         
         if self.once:
             self.once = False

@@ -3,6 +3,7 @@ from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
 from src.scenes.test_scene import TestScene
 from src.audio import Audios
+from math import pi, sin
 
 class World:
     def __init__(self):
@@ -21,7 +22,7 @@ class World:
         }
         self.current_scene = "MainMenu"
 
-    def get_time(self) -> str:
+    def get_time_str(self) -> str:
         real_seconds_passed = self.day_night_clock
         
         game_hours_passed = (4/75) * real_seconds_passed + 8
@@ -29,6 +30,10 @@ class World:
         game_hours_passed = int(game_hours_passed)
 
         return str(game_hours_passed) + ":" + str(game_minutes_passed)
+
+    def get_sunlight(self):
+        t = (4/75) * self.day_night_clock + 8
+        return max(0, 0.5 * sin((pi/12) * t - (pi/2)) + 0.5)
 
     
     def run(self):

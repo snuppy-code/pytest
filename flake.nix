@@ -3,29 +3,35 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixgl.url = "github:nix-community/nixGL";
+    nixgl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
     self,
     nixpkgs,
+    nixgl,
   }: let
-    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-  in {
-    devShells."x86_64-linux".default = pkgs.mkShell {
-      packages = with pkgs; [(python311.withPackages (ps: [ps.pygame-ce]))];
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [ nixgl.overlay ];
     };
+    # pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    devShells.${system}.default = pkgs.mkShell {
+      packages = [
+        pkgs.nixgl.nixGLIntel
+        (pkgs.python314.withPackages (ps: with ps; [pygame-ce pygame-gui]))
+      ];
+      shellHook = ''
+        echo "Entered Nix devShell."
+        echo "Use 'nixGLIntel python <file>.py' to run with hardware acceleration."
 
-    #pkgs.mkShell {
-    #      # could also be buildInputs,, for my purposes it do not matter: https://discourse.nixos.org/t/difference-between-buildinputs-and-packages-in-mkshell/60598/2
-    #      buildInputs = with pkgs; [
-    #        python315.withPackages
-    #        (ps: [
-    #          #pygame-ce
-    #          ps.numpy
-    #        ])
-    #      ];
-    #      # env variables..
-    #      #env.RUST_SRC_PATH = "${pkgs.rust.blablabla.rustLibSrc}";
-    #    };
+        alias npy="nixGLIntel python -m"
+
+        echo "Aliased: \`npy=\"nixGLIntel python -m\"\`"
+      '';
+    };
   };
 }

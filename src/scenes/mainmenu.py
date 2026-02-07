@@ -14,11 +14,14 @@ class MainMenu:
         w = self.ctx.w
         h = self.ctx.h
         dt_s = self.ctx.dt_s
-        
+            
         # replace with background image 
         # self.ctx.screen.fill((195, 176, 165))
         self.ctx.screen.blit(self.ctx.images["mainmenu_background.png"])
         
+        self.ctx.screen.blit(self.ctx.images["mainmenu_newgame_normal.png"],dest=(400,400))
+        self.ctx.screen.blit(self.ctx.images["mainmenu_continue_normal.png"],dest=(400,500))
+
         # menu = pygame.Surface((self.ctx.w,self.ctx.h))
         
         # pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*0,400,150),0,40)

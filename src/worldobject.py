@@ -14,24 +14,6 @@ class World:
         self.dt_s = 0
         self.day_night_clock = 0 # seconds
         
-        self.audios = Audios
-
-        # {string: surface}
-        # initialized as {string: None} and filled in after, so I dont have to write the same path twice on one line
-        self.images = {
-            "mainmenu_background.png": None,
-            
-            "mainmenu_newgame_normal.png": None,
-            "mainmenu_newgame_hover.png": None,
-            "mainmenu_newgame_selected.png": None,
-
-            "mainmenu_continue_normal.png": None,
-            "mainmenu_continue_hover.png": None,
-            "mainmenu_continue_selected.png": None,
-        }
-        for path in self.images:
-            self.images[path] = pygame.image.load(path)
-        
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
@@ -74,3 +56,5 @@ class World:
         self.scenes[self.current_scene].onExit()
         self.current_scene = newSceneName
         self.scenes[self.current_scene].onEnter()
+
+        #todo: maybe add fade in/out of black between scenes here?

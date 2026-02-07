@@ -20,7 +20,22 @@ class LoadingScreen:
         # just draw black screen so we don't flash "loading!" for 1 microsecond
         self.ctx.screen.fill("black")
         self.ctx.audios = Audios
-        # self. 
+
+        # {string: surface}
+        # initialized as {string: None} and filled in after, so I dont have to write the same path twice on one line
+        self.ctx.images = {
+            "mainmenu_background.png": None,
+            
+            "mainmenu_newgame_normal.png": None,
+            "mainmenu_newgame_hover.png": None,
+            "mainmenu_newgame_selected.png": None,
+
+            "mainmenu_continue_normal.png": None,
+            "mainmenu_continue_hover.png": None,
+            "mainmenu_continue_selected.png": None,
+        }
+        for path in self.ctx.images:
+            self.ctx.images[path] = pygame.image.load(path)
 
     def onExit(self):
         pass

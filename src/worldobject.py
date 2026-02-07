@@ -1,7 +1,8 @@
 import pygame
 from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
-from src.audio import Audios
+from src.scenes.thorpytest import TestThorPy
+
 
 class World:
     def __init__(self):
@@ -12,17 +13,19 @@ class World:
         self.clock = pygame.time.Clock()
         self.dt_s = 0
         
-        self.audios = Audios()
+        self.audios = None
         
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
+            "TestThorPy": TestThorPy(self),
         }
-        self.current_scene = "MainMenu"
+        self.current_scene = "TestThorPy"
     
-    def onFrame(self):
-        self.dt_s = self.clock.tick(144) / 1000
-        self.scenes[self.current_scene].onFrame()
+    def onFrame(self,events):
+        self.dt_s = self.clock.tick(30) / 1000
+        self.scenes[self.current_scene].onFrame(events)
     
     def transition_scene_to(self,newSceneName):
         self.current_scene = newSceneName
+        self.scenes[self.current_scene].onEnter()

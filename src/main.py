@@ -10,12 +10,13 @@ while running:
     
     # allow closing the window,,
     # .get gives a list of all events since last call
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.QUIT:
             running = False
 
     # call onFrame callback for each scene
-    world.onFrame()
+    world.onFrame(events)
 
     # renders allat to the screen !
     pygame.display.flip()

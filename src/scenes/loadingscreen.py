@@ -1,4 +1,5 @@
 import pygame
+from src.audio import Audios
 
 class LoadingScreen:
     def __init__(self,ctx):
@@ -18,9 +19,9 @@ class LoadingScreen:
         # Loading is expected to be very short,
         # just draw black screen so we don't flash "loading!" for 1 microsecond
         self.ctx.screen.fill("black")
-        self.ctx.audios.load()
+        self.ctx.audios = Audios()
         
-    def onFrame(self):
+    def onFrame(self,events):
         pass
         # w = self.ctx.w
         # h = self.ctx.h

@@ -25,7 +25,7 @@ class PotatoBush(pygame.sprite.Sprite):
         screen.blit(self.image, self.rect)
 
     def forage(self):
-        
+        pass
 
 class Rock:
     def __init__(self, pos=pygame.math.Vector2(0,0)):

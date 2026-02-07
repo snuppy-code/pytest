@@ -20,6 +20,7 @@ class World:
         World.scenes = {
             "LoadingScreen": LoadingScreen(),
             "MainMenu": MainMenu(),
+            
         }
         World.current_scene = "MainMenu"
     

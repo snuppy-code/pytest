@@ -18,9 +18,9 @@ class World:
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
-            "TestThorPy": TestThorPy(self),
+            "TestScene": TestScene(self)
         }
-        self.current_scene = "TestThorPy"
+        self.current_scene = "TestScene"
     
     def onFrame(self,events):
         self.dt_s = self.clock.tick(30) / 1000

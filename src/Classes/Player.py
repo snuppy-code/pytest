@@ -18,7 +18,6 @@ class Player:
         self.pos = toPos
 
     def draw_indicator(self, obj):
-        obj.rect.midtop
         pass
         
 

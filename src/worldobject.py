@@ -53,9 +53,8 @@ class World:
         while running:
             self.onFrame()
 
-    def onFrame(self,events):
+    def onFrame(self):
         self.dt_s = self.clock.tick(30) / 1000
-        self.scenes[self.current_scene].onFrame(events)
         self.day_night_clock += self.dt_s
 
         # .get gives a list of all events since last call
@@ -64,6 +63,8 @@ class World:
             # allow closing the window,,
             if event.type == pygame.QUIT:
                 running = False
+
+        self.scenes[self.current_scene].onFrame(events)
 
         # renders allat to the screen !
         pygame.display.flip()

@@ -3,6 +3,7 @@ from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
 from src.scenes.test_scene import TestScene
 from src.audio import Audios
+from math import pi, sin
 
 class World:
     def __init__(self):
@@ -31,7 +32,8 @@ class World:
         return str(game_hours_passed) + ":" + str(game_minutes_passed)
 
     def get_sunlight(self):
-        return 
+        t = (4/75) * self.day_night_clock + 8
+        return max(0, 0.5 * sin((pi/12) * t - (pi/2)) + 0.5)
 
     
     def run(self):

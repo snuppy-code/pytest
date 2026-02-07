@@ -1,6 +1,7 @@
 import pygame
 pygame.init()
 from worldobject import World
+from font import Fonts
 World.init()
 
 
@@ -20,5 +21,6 @@ while running:
     pygame.display.flip()
     World.dt_s = World.clock.tick(144) / 1000
     # print(dt_s)
+
 
 pygame.quit()

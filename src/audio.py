@@ -5,7 +5,7 @@ from pygame.mixer import Sound
 
 ###########
 
-BASE_PATH = Path(__file__).relative_to(Path.cwd()).parent
+BASE_PATH = Path.cwd() / "assets" / "audio"
 
 if not pygame.mixer.get_init():
     pygame.mixer.init()
@@ -27,4 +27,3 @@ class Audios(Enum):
 
     def play(self):
         self.sound.play()   
-

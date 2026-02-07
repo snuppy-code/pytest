@@ -12,7 +12,6 @@ def insertInfo(sprites, incoming_ctx):
     ctx = incoming_ctx
 
 
-
 class PotatoBush(pygame.sprite.Sprite):
     def __init__(self, pos=pygame.math.Vector2(0,0)):
         super().__init__()

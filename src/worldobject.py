@@ -41,7 +41,12 @@ class World:
     def get_time(self) -> str:
         real_seconds_passed = self.day_night_clock
         
-        game_hours_passed = 0.08 * real_seconds_passed
+        game_hours_passed = (4/75) * real_seconds_passed + 8
+        game_minutes_passed = int((game_hours_passed - int(game_hours_passed)) * 60)
+        game_hours_passed = int(game_hours_passed)
+
+        return str(game_hours_passed) + ":" + str(game_minutes_passed)
+
     
     def run(self):
         running = True

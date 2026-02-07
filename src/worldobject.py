@@ -21,7 +21,7 @@ class World:
         }
         self.current_scene = "MainMenu"
 
-    def get_time(self) -> str:
+    def get_time_str(self) -> str:
         real_seconds_passed = self.day_night_clock
         
         game_hours_passed = (4/75) * real_seconds_passed + 8
@@ -29,6 +29,9 @@ class World:
         game_hours_passed = int(game_hours_passed)
 
         return str(game_hours_passed) + ":" + str(game_minutes_passed)
+
+    def get_sunlight(self):
+        return 
 
     
     def run(self):

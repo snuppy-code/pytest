@@ -7,6 +7,11 @@ class MainMenu:
         self.once = True
         
     def onFrame(self):
+        w = self.ctx.w
+        h = self.ctx.h
+        dt_s = self.ctx.dt_s
+        
+        
         # replace with background image 
         self.ctx.screen.fill((195, 176, 165))
         

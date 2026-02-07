@@ -16,6 +16,10 @@ class LoadingScreen:
         
         
     def onFrame(self):
+        w = self.ctx.w
+        h = self.ctx.h
+        dt_s = self.ctx.dt_s
+        
         if self.loading_progress >= 100:
             self.ctx.transition_scene_to("MainMenu")
         else:

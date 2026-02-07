@@ -28,9 +28,9 @@
         echo "Entered Nix devShell."
         echo "Use 'nixGLIntel python <file>.py' to run with hardware acceleration."
 
-        alias npy="nixGLIntel python"
+        alias npy="nixGLIntel python -m"
 
-        echo "Aliased: \`npy=\"nixGLIntel python\"\`"
+        echo "Aliased: \`npy=\"nixGLIntel python -m\"\`"
       '';
     };
   };

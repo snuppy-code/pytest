@@ -7,4 +7,5 @@ if not pygame.font.get_init():
     pygame.font.init()
 
 class Fonts:
-    NOTO_SERIF_KHMER = pygame.font.SysFont("notoserifkhmer")
+    pass
+    #NOTO_SERIF_KHMER = pygame.font.SysFont("notoserifkhmer")

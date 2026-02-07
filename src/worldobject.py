@@ -1,6 +1,8 @@
 import pygame
 from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
+from src.scenes.test_scene import TestScene
+from src.audio import Audios
 
 
 class World:
@@ -12,14 +14,14 @@ class World:
         self.clock = pygame.time.Clock()
         self.dt_s = 0
         
-        self.audios = None
+        self.audios = Audios
         
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
-            "TestThorPy": TestThorPy(self),
+            "TestScene": TestScene(self)
         }
-        self.current_scene = "TestThorPy"
+        self.current_scene = "TestScene"
     
     def onFrame(self,events):
         self.dt_s = self.clock.tick(30) / 1000

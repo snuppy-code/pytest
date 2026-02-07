@@ -15,12 +15,10 @@ while running:
             running = False
 
     # call onFrame callback for each scene
-    world.scenes[world.current_scene].onFrame()
+    world.onFrame()
 
     # renders allat to the screen !
     pygame.display.flip()
-    world.dt_s = world.clock.tick(144) / 1000
-    # print(dt_s)
 
 
 pygame.quit()

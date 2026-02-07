@@ -28,7 +28,10 @@ class Audios(Enum):
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     def play(self):
         self.sound.play()
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

@@ -12,6 +12,7 @@ class World:
         
         self.clock = pygame.time.Clock()
         self.dt_s = 0
+        self.day_night_clock = 0 # seconds
         
         self.audios = Audios
         
@@ -21,6 +22,11 @@ class World:
             "TestScene": TestScene(self)
         }
         self.current_scene = "MainMenu"
+
+    def get_time(self) -> str:
+        real_seconds_passed = self.day_night_clock
+        
+        game_hours_passed = 0.08 * real_seconds_passed
     
     def run(self):
         running = True
@@ -30,6 +36,7 @@ class World:
     def onFrame(self,events):
         self.dt_s = self.clock.tick(30) / 1000
         self.scenes[self.current_scene].onFrame(events)
+        self.day_night_clock += self.dt_s
 
         # .get gives a list of all events since last call
         events = pygame.event.get()

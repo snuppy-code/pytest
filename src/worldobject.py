@@ -1,7 +1,6 @@
 import pygame
 from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
-from src.scenes.thorpytest import TestThorPy
 
 
 class World:
@@ -18,9 +17,9 @@ class World:
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
-            "TestScene": TestScene(self)
+            "TestThorPy": TestThorPy(self),
         }
-        self.current_scene = "TestScene"
+        self.current_scene = "TestThorPy"
     
     def onFrame(self,events):
         self.dt_s = self.clock.tick(30) / 1000

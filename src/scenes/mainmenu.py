@@ -1,4 +1,5 @@
 import pygame
+import pygame_gui # type: ignore
 
 class MainMenu:
     def __init__(self,ctx):

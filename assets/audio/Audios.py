@@ -1,10 +1,30 @@
+import pygame
 from enum import Enum
-from pygame.mixer import Sound
 from pathlib import Path
+from pygame.mixer import Sound
 
-script_path = Path(__file__).resolve()
-script_dir = script_path.parent
+###########
 
+BASE_PATH = Path(__file__).relative_to(Path.cwd()).parent
+
+if not pygame.mixer.get_init():
+    pygame.mixer.init()
 
 class Audios(Enum):
-    CHOPPING = Sound(path)
+    PLING = "PLING.wav"
+
+    def __init__(self, filename):
+        self.filename = filename
+        self._cache = None
+
+    @property
+    def sound(self):
+        if self._cache is None:
+            path = str(BASE_PATH / self.filename)
+            self._cache = Sound(path)
+
+        return self._cache
+
+    def play(self):
+        self.sound.play()
+

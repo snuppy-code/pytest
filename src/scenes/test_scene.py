@@ -1,0 +1,15 @@
+import pygame
+
+class TestScene:
+    def __init__(self,ctx):
+        self.ctx = ctx
+        self.once = True
+        
+    def onFrame(self):
+        # replace with background image 
+        self.ctx.screen.fill((195, 176, 165))
+        
+        if self.once:
+            self.once = False
+            self.ctx.audios.PLING.play()
+            

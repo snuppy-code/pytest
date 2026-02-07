@@ -24,6 +24,5 @@ class Audios(Enum):
     def play(self, loops=0, volume=0.5):
         if self.s:
             self.s.set_volume(volume)
-            self.s.play(loops=loops)
-
+            self.s.play(loops=loops)    
 

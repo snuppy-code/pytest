@@ -21,24 +21,23 @@ class LoadingScreen:
         print("entered loadingscreen")
         # Loading is expected to be very short,
         # just draw black screen so we don't flash "loading!" for 1 microsecond
-        self.ctx.screen.fill("black")
+        self.ctx.vscreen.fill("black")
         
         # load audio
         self.ctx.audios = Audios
 
-        # load all images
+        # load all images - designed for 640x360 canvas
         # {string: surface}
-        s2x = pygame.transform.scale2x
         self.ctx.images = {
-            "mainmenu_background.png": s2x(pygame.image.load("assets/images/mainmenu_background.png")),
+            "mainmenu_background.png": pygame.image.load("assets/images/mainmenu_background.png"),
             
-            "mainmenu_newgame_normal.png": s2x(pygame.image.load("assets/images/mainmenu_newgame_normal.png")),
-            "mainmenu_newgame_hover.png": s2x(pygame.image.load("assets/images/mainmenu_newgame_hover.png")),
-            "mainmenu_newgame_selected.png": s2x(pygame.image.load("assets/images/mainmenu_newgame_selected.png")),
+            "mainmenu_newgame_normal.png": pygame.image.load("assets/images/mainmenu_newgame_normal.png"),
+            "mainmenu_newgame_hover.png": pygame.image.load("assets/images/mainmenu_newgame_hover.png"),
+            "mainmenu_newgame_selected.png": pygame.image.load("assets/images/mainmenu_newgame_selected.png"),
 
-            "mainmenu_continue_normal.png": s2x(pygame.image.load("assets/images/mainmenu_continue_normal.png")),
-            "mainmenu_continue_hover.png": s2x(pygame.image.load("assets/images/mainmenu_continue_hover.png")),
-            "mainmenu_continue_selected.png": s2x(pygame.image.load("assets/images/mainmenu_continue_selected.png")),
+            "mainmenu_continue_normal.png": pygame.image.load("assets/images/mainmenu_continue_normal.png"),
+            "mainmenu_continue_hover.png": pygame.image.load("assets/images/mainmenu_continue_hover.png"),
+            "mainmenu_continue_selected.png": pygame.image.load("assets/images/mainmenu_continue_selected.png"),
 
             # "foraging_background.png": pygame.image.load("assets/images/foraging_background.png")
             # "potato_bush.png": pygame.image.load("assets/sprites/foraging/potato_bush.png").convert_alpha()
@@ -60,11 +59,11 @@ class LoadingScreen:
         # else:
         #     self.loading_progress += 60 * self.ctx.dt_s
         
-        # self.ctx.screen.fill("black")
+        # self.ctx.vscreen.fill("black")
         
         # print("LoadingScene onFrame called!")
         
         # t = f"Loading progress: {self.loading_progress:.2f}%"
         # s = self.loading_font.render(t,True,(255,255,255))
         # p = (self.ctx.w/2-self.initial_w/2,self.ctx.h/2-self.initial_h/2)
-        # self.ctx.screen.blit(s,p)
+        # self.ctx.vscreen.blit(s,p)

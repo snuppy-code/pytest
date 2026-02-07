@@ -21,8 +21,8 @@ class Plant(pygame.sprite.Sprite):
         self.image = pygame.image.load(f"assets/sprites/{self.species}_{self.stage.name.lower()}.png").convert_alpha()
         self.rect = self.image.get_rect(center=self.center_pos)
 
-    def draw(self, screen):
-        screen.blit(self.image, self.rect)
+    def draw(self):
+        ctx.vscreen.blit(self.image, self.rect)
 
     def grow(self):
         if self.stage != GrowthStages.HARVESTABLE:

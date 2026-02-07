@@ -10,9 +10,18 @@ class World:
     def __init__(self):
         self.running = True
 
-        self.screen = pygame.display.set_mode((1280,720))
-        self.w = self.screen.get_width()
-        self.h = self.screen.get_height()
+        primary_display_size = pygame.display.get_desktop_sizes()[0]
+        vscreen_scaling_factor_x = (primary_display_size[0]//640)
+        vscreen_scaling_factor_y = (primary_display_size[1]//360)
+        self.vscreen_scaling_factor = min(vscreen_scaling_factor_x,vscreen_scaling_factor_y)
+
+        self.screen = pygame.display.set_mode((640*self.vscreen_scaling_factor, 360*self.vscreen_scaling_factor))
+        self.vscreen = pygame.Surface((640,360))
+        self.non_v_w = self.screen.get_width()
+        self.non_v_h = self.screen.get_height()
+        self.w = self.vscreen.get_width()
+        self.h = self.vscreen.get_height()
+
         self.clock = pygame.time.Clock()
         self.dt_s = 0
         self.day_night_clock = 0 # seconds
@@ -78,4 +87,5 @@ class World:
         self.scenes[self.current_scene].onFrame(events)
 
         # renders allat to the screen !
+        pygame.transform.scale(self.vscreen, (self.non_v_w,self.non_v_h), self.screen)
         pygame.display.flip()

@@ -13,7 +13,7 @@ class Example_RedDotWASD:
         pass
 
     def onFrame(self):
-        World.screen.fill("black")
+        self.ctx.vscreen.fill("black")
         pygame.draw.circle(World.screen, "red", self.player_pos, 40)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_w]:

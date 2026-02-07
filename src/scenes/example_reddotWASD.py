@@ -5,7 +5,13 @@ from src.worldobject import World
 class Example_RedDotWASD:
     def __init__(self):
         self.player_pos = Vector2(World.w/2,World.h/2)
-        
+
+    def onEnter(self):
+        pass
+
+    def onExit(self):
+        pass
+
     def onFrame(self):
         World.screen.fill("black")
         pygame.draw.circle(World.screen, "red", self.player_pos, 40)

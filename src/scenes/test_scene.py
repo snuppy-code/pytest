@@ -13,3 +13,9 @@ class TestScene:
         if self.once:
             self.once = False
             self.ctx.audios.PLING.play()
+
+    def onEnter(self):
+        pass
+
+    def onExit(self):
+        pass

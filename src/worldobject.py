@@ -3,6 +3,7 @@ from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
 from src.scenes.test_scene import TestScene
 from src.audio import Audios
+from src.images import Images
 
 class World:
     def __init__(self):
@@ -15,6 +16,20 @@ class World:
         self.day_night_clock = 0 # seconds
         
         self.audios = Audios
+
+        self.images = { # {string: surface}
+            "mainmenu_background.png": None,
+            
+            "mainmenu_newgame_normal.png": None,
+            "mainmenu_newgame_hover.png": None,
+            "mainmenu_newgame_selected.png": None,
+
+            "mainmenu_continue_normal.png": None,
+            "mainmenu_continue_hover.png": None,
+            "mainmenu_continue_selected.png": None,
+        }
+        for path in self.images:
+            self.images[path] = pygame.image.load(path)
         
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),

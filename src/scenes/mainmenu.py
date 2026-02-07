@@ -18,6 +18,7 @@ class MainMenu:
         # replace with background image 
         self.ctx.screen.fill((195, 176, 165))
         
+        
         menu = pygame.Surface((self.ctx.w,self.ctx.h))
         
         pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*0,400,150),0,40)

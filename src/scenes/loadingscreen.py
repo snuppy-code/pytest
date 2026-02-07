@@ -5,15 +5,15 @@ class LoadingScreen:
     def __init__(self,ctx):
         self.ctx = ctx
         
-        self.loading_progress = 0
-        self.loading_font = pygame.font.SysFont(pygame.font.get_default_font(),50)
+        # self.loading_progress = 0
+        # self.loading_font = pygame.font.SysFont(pygame.font.get_default_font(),50)
         
-        # initial variables to get width/height that doesn't change as text changes
-        # fixes text jittering during loading
-        t = f"Loading progress: {self.loading_progress:.2f}%"
-        s = self.loading_font.render(t,True,(255,255,255))
-        self.initial_w = s.width
-        self.initial_h = s.height
+        # # initial variables to get width/height that doesn't change as text changes
+        # # fixes text jittering during loading
+        # t = f"Loading progress: {self.loading_progress:.2f}%"
+        # s = self.loading_font.render(t,True,(255,255,255))
+        # self.initial_w = s.width
+        # self.initial_h = s.height
     
     def onEnter(self):
         # Loading is expected to be very short,

@@ -17,4 +17,3 @@ class World:
         
     def transition_scene_to(self,newSceneName):
         self.current_scene = newSceneName
-        self.current_scene = "MainMenu"

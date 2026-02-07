@@ -1,10 +1,8 @@
 import pygame
-from src.audio import Audios
 
 class MainMenu:
     def __init__(self,ctx):
         self.ctx = ctx
-        self.once = True
     
     def onEnter(self):
         pass
@@ -25,7 +23,3 @@ class MainMenu:
         pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*2,400,150),0,40)
         
         self.ctx.screen.blit(menu)
-        
-        if self.once:
-            self.once = False
-            Audios.sound

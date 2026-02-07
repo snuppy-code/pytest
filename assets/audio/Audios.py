@@ -26,5 +26,5 @@ class Audios(Enum):
         return self._cache
 
     def play(self):
-        self.sound.play()
+        self.sound.play()   
 

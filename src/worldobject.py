@@ -3,13 +3,14 @@ from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
 from src.scenes.test_scene import TestScene
 from src.audio import Audios
-
+import pygame_gui # type: ignore
 
 class World:
     def __init__(self):
         self.screen = pygame.display.set_mode((1280,720))
         self.w = self.screen.get_width()
         self.h = self.screen.get_height()
+        self.manager = pygame_gui.UIManager((800, 600))
         
         self.clock = pygame.time.Clock()
         self.dt_s = 0

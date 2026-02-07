@@ -15,6 +15,9 @@ class Player:
     def teleport(self, toPos):
         self.pos = toPos
 
+    def quick_time_event(self, desired_plant):
+        
+
     def update(self):
         keys = pygame.key.get_pressed()
 

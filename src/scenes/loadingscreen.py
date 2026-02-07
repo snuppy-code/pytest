@@ -1,4 +1,5 @@
 import pygame
+import pygame
 from src.audio import Audios
 
 class LoadingScreen:
@@ -13,7 +14,7 @@ class LoadingScreen:
         # # fixes text jittering during loading
         # t = f"Loading progress: {self.loading_progress:.2f}%"
         # s = self.loading_font.render(t,True,(255,255,255))
-        # self.initial_w = s.width
+        # self.initial_w = s.widthygame_shaders
         # self.initial_h = s.height
     
     def onEnter(self):
@@ -38,7 +39,11 @@ class LoadingScreen:
             "mainmenu_continue_hover.png": pygame.image.load("assets/images/mainmenu_continue_hover.png"),
             "mainmenu_continue_selected.png": pygame.image.load("assets/images/mainmenu_continue_selected.png"),
 
-            
+            "foraging_background.png": pygame.image.load("assets/images/foraging_background.png")
+        }
+
+        self.ctx.foraging_sprites = {
+            "potato_bush.png": pygame.image.load("assets/sprites/foraging/potato_bush.png").convert_alpha()
         }
 
         self.ctx.transition_scene_to("MainMenu")

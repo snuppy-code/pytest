@@ -17,6 +17,7 @@ class World:
         self.dt_s = 0
         self.day_night_clock = 0 # seconds
         
+        # initialized in loadingscreen
         self.images = None
 
         self.scenes = {

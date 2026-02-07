@@ -15,16 +15,15 @@ class Audios(Enum):
     PLING_2 = "PLING2.wav"
 
     def __init__(self, filename):
-        self.filename = filename
-        self._cache = None
+        full_path = str(BASE_PATH / filename)
+        try:
+            self.s = pygame.mixer.Sound(full_path)
+        except pygame.error:
+            self.s = None
 
-    @property
-    def sound(self):
-        if self._cache is None:
-            path = str(BASE_PATH / self.filename)
-            self._cache = Sound(path)
+    def play(self, loops=0, volume=0.5):
+        if self.s:
+            self.s.set_volume(volume)
+            self.s.play(loops=loops)
 
-        return self._cache
 
-    def play(self):
-        self.sound.play()   

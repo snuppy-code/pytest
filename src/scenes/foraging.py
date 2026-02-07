@@ -44,9 +44,11 @@ class Foraging:
     def onExit(self):
         pass
 
-    def onFrame(self,events=None):
+    def onFrame(self,events):
         w = self.ctx.w
         h = self.ctx.h
         dt_s = self.ctx.dt_s
+
+
     
-        self.ctx.player.update()
+        self.ctx.player.update(events)

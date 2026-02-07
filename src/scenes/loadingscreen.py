@@ -40,7 +40,12 @@ class LoadingScreen:
             "mainmenu_continue_selected.png": pygame.image.load("assets/images/mainmenu_continue_selected.png"),
 
             # "foraging_background.png": pygame.image.load("assets/images/foraging_background.png")
-            # "potato_bush.png": pygame.image.load("assets/sprites/foraging/potato_bush.png").convert_alpha()
+            # "potato_bush.png": pygame.image.load("assets/sprites/potato_bush.png").convert_alpha()
+            "idle.png": pygame.image.load("assets/sprites/idle.png").convert_alpha(),
+            "walk_down_1.png": pygame.image.load("assets/sprites/walk_down_1.png").convert_alpha(),
+            "walk_down_2.png": pygame.image.load("assets/sprites/walk_down_2.png").convert_alpha(),
+            "walk_down_3.png": pygame.image.load("assets/sprites/walk_down_3.png").convert_alpha(),
+            "walk_down_4.png": pygame.image.load("assets/sprites/walk_down_4.png").convert_alpha()
         }
 
         self.ctx.transition_scene_to("MainMenu")

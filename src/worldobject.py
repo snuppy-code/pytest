@@ -73,7 +73,7 @@ class World:
             self.onFrame()
 
     def onFrame(self):
-        print("World frame!")
+        # print("World frame!")
         self.dt_s = self.clock.tick(30) / 1000
         self.day_night_clock += self.dt_s
 

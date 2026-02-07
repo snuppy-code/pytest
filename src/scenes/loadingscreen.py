@@ -38,6 +38,7 @@ class LoadingScreen:
             "mainmenu_continue_normal.png": pygame.image.load("assets/images/mainmenu_continue_normal.png"),
             "mainmenu_continue_hover.png": pygame.image.load("assets/images/mainmenu_continue_hover.png"),
             "mainmenu_continue_selected.png": pygame.image.load("assets/images/mainmenu_continue_selected.png"),
+            "mainmenu_continue_disabled.png": pygame.image.load("assets/images/mainmenu_continue_disabled.png")
 
             # "foraging_background.png": pygame.image.load("assets/images/foraging_background.png")
             # "potato_bush.png": pygame.image.load("assets/sprites/foraging/potato_bush.png").convert_alpha()

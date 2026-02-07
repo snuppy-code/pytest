@@ -1,19 +1,18 @@
 import pygame
-from src.worldobject import World
 from pygame.math import Vector2
 from src.constants.vectors import *
 
 class Player:
     MIN_DIST = 20
 
-    def __init__(self):
-        self.pos = Vector2(World.w/2, World.h/2)
+    def __init__(self,ctx):
+        self.pos = Vector2(ctx.w/2, ctx.h/2)
         self.inventory = {}
         self.health = 100
         self.objects_on_screen = []
 
     def _move(self, lookVector):
-        self.pos += (lookVector * 200) * World.dt_s
+        self.pos += (lookVector * 200) * self.ctx.dt_s
 
     def teleport(self, toPos):
         self.pos = toPos

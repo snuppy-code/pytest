@@ -2,7 +2,6 @@ import pygame
 pygame.init()
 from src.worldobject import World
 world = World()
-ctx = world.ctx
 
 # from src.font import Fonts
 
@@ -20,7 +19,7 @@ while running:
 
     # renders allat to the screen !
     pygame.display.flip()
-    ctx.dt_s = ctx.clock.tick(144) / 1000
+    world.dt_s = world.clock.tick(144) / 1000
     # print(dt_s)
 
 

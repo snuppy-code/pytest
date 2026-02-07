@@ -23,17 +23,25 @@ class World:
         self.current_scene = "MainMenu"
 
     def get_time_str(self) -> str:
-        real_seconds_passed = self.day_night_clock
-        
-        game_hours_passed = (4/75) * real_seconds_passed + 8
-        game_minutes_passed = int((game_hours_passed - int(game_hours_passed)) * 60)
-        game_hours_passed = int(game_hours_passed)
+        DAY_DURATION_SECONDS = 5 * 60 
+        START_TIME = 6 # 6 am
+        END_TIME = 22 # 10 pm
 
-        return str(game_hours_passed) + ":" + str(game_minutes_passed)
+        seconds_passed = self.day_night_clock
+        
+        raw_hours = (4/75) * seconds_passed + START_TIME
+        game_hours = int(raw_hours)
+        game_minutes = int((raw_hours - game_hours) * 60)
+
+        return f"{game_hours:02d}:{game_minutes:02d}"
 
     def get_sunlight(self):
-        t = (4/75) * self.day_night_clock + 8
-        return max(0, 0.5 * sin((pi/12) * t - (pi/2)) + 0.5)
+        START_TIME = 6
+        
+        t = (4/75) * self.day_night_clock + START_TIME
+        sunlight_intensity = sin((pi / 24) * t)
+
+        return max(0, sunlight_intensity)
 
     
     def run(self):

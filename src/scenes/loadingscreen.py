@@ -4,6 +4,7 @@ from src.audio import Audios
 class LoadingScreen:
     def __init__(self,ctx):
         self.ctx = ctx
+        print("Loadingscreen init")
         
         # self.loading_progress = 0
         # self.loading_font = pygame.font.SysFont(pygame.font.get_default_font(),50)
@@ -16,6 +17,7 @@ class LoadingScreen:
         # self.initial_h = s.height
     
     def onEnter(self):
+        print("entered loadingscreen")
         # Loading is expected to be very short,
         # just draw black screen so we don't flash "loading!" for 1 microsecond
         self.ctx.screen.fill("black")
@@ -26,16 +28,20 @@ class LoadingScreen:
         # load all images
         # {string: surface}
         self.ctx.images = {
-            "mainmenu_background.png": pygame.transform.scale2x(pygame.image.load("mainmenu_background.png")),
+            "mainmenu_background.png": pygame.transform.scale2x(pygame.image.load("assets/images/mainmenu_background.png")),
             
-            "mainmenu_newgame_normal.png": pygame.image.load("mainmenu_newgame_normal.png"),
-            "mainmenu_newgame_hover.png": pygame.image.load("mainmenu_newgame_hover.png"),
-            "mainmenu_newgame_selected.png": pygame.image.load("mainmenu_newgame_selected.png"),
+            "mainmenu_newgame_normal.png": pygame.image.load("assets/images/mainmenu_newgame_normal.png"),
+            "mainmenu_newgame_hover.png": pygame.image.load("assets/images/mainmenu_newgame_hover.png"),
+            "mainmenu_newgame_selected.png": pygame.image.load("assets/images/mainmenu_newgame_selected.png"),
 
-            "mainmenu_continue_normal.png": pygame.image.load("mainmenu_continue_normal.png"),
-            "mainmenu_continue_hover.png": pygame.image.load("mainmenu_continue_hover.png"),
-            "mainmenu_continue_selected.png": pygame.image.load("mainmenu_continue_selected.png"),
+            "mainmenu_continue_normal.png": pygame.image.load("assets/images/mainmenu_continue_normal.png"),
+            "mainmenu_continue_hover.png": pygame.image.load("assets/images/mainmenu_continue_hover.png"),
+            "mainmenu_continue_selected.png": pygame.image.load("assets/images/mainmenu_continue_selected.png"),
+
+            
         }
+
+        self.ctx.transition_scene_to("MainMenu")
 
     def onExit(self):
         pass

@@ -13,11 +13,10 @@ class World:
         self.screen = pygame.display.set_mode((1280,720))
         self.w = self.screen.get_width()
         self.h = self.screen.get_height()
-        play
         self.clock = pygame.time.Clock()
         self.dt_s = 0
         self.day_night_clock = 0 # seconds
-        self.player = Player()
+        self.player = Player(self)
         
         # initialized in loadingscreen
         self.images = None

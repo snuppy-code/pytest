@@ -7,10 +7,11 @@ from src.Classes.ForagingAssets import *
 class Foraging:
     def __init__(self,ctx):
         self.ctx = ctx
-        self.assets = []
+        self.objects_on_screen = []
+
 
     def onEnter(self):
-        insertSprites(self.ctx.foraging_sprites)
+        insertInfo(self.ctx.foraging_sprites, self.ctx)
 
         choices = [PotatoBush, Rock]
         weights = [1, 1]
@@ -29,30 +30,22 @@ class Foraging:
 
                 new_rect = pygame.Rect(x, y, w, h)
 
-                if any(new_rect.colliderect(a.rect) for a in self.assets):
+                if any(new_rect.colliderect(a.rect) for a in self.objects_on_screen):
                     continue
 
                 temp_sprite.pos = pygame.math.Vector2(x, y)
                 temp_sprite.rect = new_rect
-                self.assets.append(temp_sprite)
+                self.objects_on_screen.append(temp_sprite)
                 break
 
+        ctx.player.objects_on_screen = self.objects_on_screen
 
     def onExit(self):
         pass
 
-    def onFrame(self,events):
+    def onFrame(self,events=None):
         w = self.ctx.w
         h = self.ctx.h
         dt_s = self.ctx.dt_s
     
-        self.ctx.screen.blit(self.ctx.images["foraging_background.png"])
-    
-        menu = pygame.Surface((self.ctx.w,self.ctx.h))
-    
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*0,400,150),0,40)
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*1,400,150),0,40)
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*2,400,150),0,40)
-
-        self.ctx.screen.blit(menu)    
-        self.ctx.screen.blit(menu)
+        self.ctx.player.update()

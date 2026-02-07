@@ -5,8 +5,11 @@ class MainMenu:
     def __init__(self,ctx):
         self.ctx = ctx
         self.once = True
-        
-    def onFrame(self):
+    
+    def onEnter(self):
+        pass
+    
+    def onFrame(self,events):
         w = self.ctx.w
         h = self.ctx.h
         dt_s = self.ctx.dt_s

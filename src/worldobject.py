@@ -1,7 +1,8 @@
 import pygame
 from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
-from src.scenes.thorpytest import TestThorPy
+from src.scenes.test_scene import TestScene
+from src.audio import Audios
 
 
 class World:
@@ -13,7 +14,7 @@ class World:
         self.clock = pygame.time.Clock()
         self.dt_s = 0
         
-        self.audios = None
+        self.audios = Audios
         
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),

@@ -1,5 +1,4 @@
 import pygame
-import pygame_gui
 
 class TestScene:
     def __init__(self,ctx):

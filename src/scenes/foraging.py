@@ -1,6 +1,5 @@
 from src.Classes.ForagingAssets import insertSprites
 import pygame
-import pygame_gui # type: ignore
 import random
 from src.Classes.ForagingAssets import *
 

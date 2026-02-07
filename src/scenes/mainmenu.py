@@ -1,8 +1,19 @@
 import pygame
 
+from src.button import Button
+
+
 class MainMenu:
     def __init__(self,ctx):
         self.ctx = ctx
+
+        self.continueButton = Button(
+            (186,83),
+            self.ctx.images["mainmenu_newgame_normal.png"],
+            self.ctx.images["mainmenu_newgame_hover.png"],
+            self.ctx.images["mainmenu_newgame_select.png"],
+            self.ctx.images["mainmenu_newgame_disabled.png"],
+        )
     
     def onEnter(self):
         pass
@@ -14,11 +25,11 @@ class MainMenu:
         w = self.ctx.w
         h = self.ctx.h
         dt_s = self.ctx.dt_s
-            
-        # replace with background image 
-        # self.ctx.vscreen.fill((195, 176, 165))
+
         self.ctx.vscreen.blit(self.ctx.images["mainmenu_background.png"])
         
+        been_pressed = self.continueButton.tick_just_pressed(events)
+
         self.ctx.vscreen.blit(self.ctx.images["mainmenu_newgame_normal.png"],dest=(186,83))
         self.ctx.vscreen.blit(self.ctx.images["mainmenu_continue_normal.png"],dest=(186,175))
 

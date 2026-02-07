@@ -20,6 +20,7 @@ class LoadingScreen:
         # just draw black screen so we don't flash "loading!" for 1 microsecond
         self.ctx.screen.fill("black")
         self.ctx.audios = Audios
+        # self. 
 
     def onExit(self):
         pass

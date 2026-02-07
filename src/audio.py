@@ -27,3 +27,5 @@ class Audios(Enum):
             self.s.play(loops=loops)
 
 
+
+

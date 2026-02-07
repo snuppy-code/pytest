@@ -1,8 +1,9 @@
 import pygame
-from src.worldobject import World
 
 class LoadingScreen:
-    def __init__(self):
+    def __init__(self,ctx):
+        self.ctx = ctx
+        
         self.loading_progress = 0
         self.loading_font = pygame.font.SysFont(pygame.font.get_default_font(),50)
         
@@ -16,15 +17,15 @@ class LoadingScreen:
         
     def onFrame(self):
         if self.loading_progress >= 100:
-            World.transition_scene_to("MainMenu")
+            self.ctx.transition_scene_to("MainMenu")
         else:
-            self.loading_progress += 60 * World.dt_s
+            self.loading_progress += 60 * self.ctx.dt_s
         
-        World.screen.fill("black")
+        self.ctx.screen.fill("black")
         
         print("LoadingScene onFrame called!")
         
         t = f"Loading progress: {self.loading_progress:.2f}%"
         s = self.loading_font.render(t,True,(255,255,255))
-        p = (World.w/2-self.initial_w/2,World.h/2-self.initial_h/2)
-        World.screen.blit(s,p)
+        p = (self.ctx.w/2-self.initial_w/2,self.ctx.h/2-self.initial_h/2)
+        self.ctx.screen.blit(s,p)

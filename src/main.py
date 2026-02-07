@@ -1,7 +1,7 @@
 import pygame
 pygame.init()
-from worldobject import World
-from font import Fonts
+from src.worldobject import World
+from src.font import Fonts
 World.init()
 
 

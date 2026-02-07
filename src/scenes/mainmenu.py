@@ -1,9 +1,10 @@
 import pygame
 from src.worldobject import World
+from src.audio import Audios
 
 class MainMenu:
     def __init__(self):
-        pass
+        self.once = True
         
     def onFrame(self):
         # replace with background image 
@@ -16,3 +17,7 @@ class MainMenu:
         pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(World.w/2-400/2,60+(150+20)*2,400,150),0,40)
         
         World.screen.blit(menu)
+        
+        if self.once:
+            self.once = False
+            Audios.sound

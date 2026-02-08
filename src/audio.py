@@ -23,6 +23,6 @@ class Audios(Enum):
             self.s.set_volume(volume)
             self.s.play(loops=loops)
 
-
-
-
+    def stop(self):
+        if self.s:
+            self.s.stop()

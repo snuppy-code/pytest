@@ -1,17 +1,20 @@
 import pygame
 import random
 from src.Classes.ForagingAssets import *
+from src.audio import Audios
 
 class Foraging:
     def __init__(self,ctx):
         self.ctx = ctx
         self.objects_on_screen = []
+        self.background_sound = Audios.WILDWIND
 
 
     def onEnter(self):
         # fix this mama
         # you don't want to have rocks and stuff ON THE ROAD!!!!!!
         insertInfo(self.ctx.foraging_sprites, self.ctx)
+        self.background_sound.WALKING.play(-1, 0.2)
 
         choices = [PotatoBush, Rock]
         weights = [1, 1]
@@ -41,6 +44,7 @@ class Foraging:
         ctx.player.objects_on_screen = self.objects_on_screen
 
     def onExit(self):
+        self.background_sound.WALKING.stop()
         pass
 
     def onFrame(self,events):

@@ -15,6 +15,9 @@ class AnimationHelper:
         
         members = self.__class__._members_list
         index = members.index(self)
+        print(self)
+        print(members)
+        print(index)
         return members[(index + 1) % len(members)]
 
 class WalkDownAnimations(AnimationHelper, Enum):
@@ -81,7 +84,8 @@ class Player:
         self.tick = 0
         self.t0 = 0
         self.dt = 1 / self.fps
-        self.current_frame = "idle.png"
+        print(self.ctx)
+        self.current_frame = self.ctx.images["idle.png"]
 
         self.walk_channel = pygame.mixer.Channel(1) # Reserve Channel 1 for walking
         self.walk_sound = Audios.WALKING
@@ -103,7 +107,7 @@ class Player:
 
     def draw(self):
         image = self.current_frame
-        pygame.draw.circle(self.ctx.vscreen,"red",self.pos+self.ctx.player.pos*-0.5,20)
+        self.ctx.vscreen.blit(image, dest=self.pos+self.ctx.player.pos*-0.5)
 
     def lock(self):
         self.locked = True
@@ -113,7 +117,9 @@ class Player:
 
     def animate(self):
         if (self.tick - self.t0) >= self.dt:
-            self.current_frame = self.animation_class.next().value
+            self.animation_class = self.animation_class.next()
+            self.current_frame = self.ctx.images[self.animation_class.value]
+            self.t0 = self.tick
             self.draw()
         
     def update(self, events):
@@ -146,19 +152,22 @@ class Player:
         }
 
         look_dir = max(directions, key=directions.get)
-        self.animation_class = self.animations[look_dir]
+        target_anim = None
 
         if facing_vec.length_squared() < 0.001:
-            self.animation_class = self.animations["idle"]
+            target_anim = self.animations["idle"]
             self.walk_channel.stop()
         else:
+            target_anim = self.animations[look_dir]
             if not self.walk_channel.get_busy():
                 self.walk_channel.play(self.walk_sound.s, loops=-1)
             facing_vec = facing_vec.normalize()
+
+        if type(self.animation_class) != type(target_anim):
+            self.animation_class = target_anim
         
         self.animate()
         self.pos += (facing_vec * 200) * self.ctx.dt_s
         self.pos = self.ctx.scenes[self.ctx.current_scene].bounds.moveinside(self.pos)
         self.tick += self.ctx.dt_s
-        print(self.current_frame)
         

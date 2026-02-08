@@ -45,7 +45,7 @@ class LevelInteractibles:
 
 class Harvestable:
     def __init__(self,):
-        self.sprite = 
+        self.sprite = 0
     
     def tick(self):
         pass

@@ -5,7 +5,7 @@ from pygame.mixer import Sound
 
 ###########
 
-BASE_PATH = Path.cwd() / "assets" / "audio"
+BASE_PATH = "assets/audio/"
 
 if not pygame.mixer.get_init():
     pygame.mixer.init()
@@ -15,7 +15,7 @@ class Audios(Enum):
     PLING_2 = "PLING2.wav"
 
     def __init__(self, filename):
-        full_path = str(BASE_PATH / filename)
+        full_path = BASE_PATH + filename
         try:
             self.s = pygame.mixer.Sound(full_path)
         except pygame.error:

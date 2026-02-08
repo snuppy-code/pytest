@@ -24,11 +24,11 @@ class Foraging:
         self.background_sound.WILDWIND.play(-1)
 
         choices = [PotatoBush, DaikonBush]
-        weights = [1, 1]
+        weights = [1, 1/2]
 
 
         background_width, background_height = self.ctx.images["foraging_map.png"].get_size()
-        for i in range(100):
+        for i in range(50):
             asset_class = random.choices(choices, weights, k=1)[0]
             temp_sprite = asset_class()
             w, h = temp_sprite.image.get_size()
@@ -47,13 +47,17 @@ class Foraging:
                 temp_sprite.rect = new_rect
                 temp_sprite.collision_rect = pygame.Rect(0,0, 10, 10)
                 temp_sprite.collision_rect.center = temp_sprite.rect.center
+                temp_sprite.node = ForageNode(
+                    ctx=self.ctx,
+                    reachable_prompt=self.ctx.font.render("Press f to forage",15),
+                    zone=CircleZone(temp_sprite.rect.center, 50),
+                )
                 self.collidables.append(temp_sprite.collision_rect)
                 self.objects_on_screen.append(temp_sprite)
                 break
         
         self.bounds = RectZone(self.ctx.images["foraging_map.png"].get_rect())
         self.ctx.player.teleport(pygame.math.Vector2(40, 162))
-
         self.ctx.player.obj_in_scene = self.objects_on_screen
 
     def onExit(self):
@@ -67,10 +71,17 @@ class Foraging:
 
         self.ctx.vscreen.blit(self.ctx.images["foraging_map.png"], self.ctx.player.pos*-0.8)
 
+        to_keep = [obj for obj in self.objects_on_screen if not getattr(obj, 'to_del', False)]
+        self.objects_on_screen = to_keep
+
         for obj in self.objects_on_screen:
+            if obj.node.tick():
+                self.ctx.player.available_plants.append(obj)
+                obj.node.draw()
+            
             obj.draw()
     
-        pygame.draw.rect(self.ctx.vscreen, "red", self.collision_rect)
+        #pygame.draw.rect(self.ctx.vscreen, "red", self.collision_rect)
         self.ctx.player.update(events)
         self.ctx.player.draw()
 

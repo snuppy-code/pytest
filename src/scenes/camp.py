@@ -2,6 +2,7 @@ import pygame
 
 from src.Player import Player
 from src.interactibles import *
+from src.storm import Storm
 
 class Camp:
     def __init__(self,ctx):
@@ -69,8 +70,9 @@ class Camp:
         
         self.ctx.player.update(events)
         self.ctx.player.draw()
-
         self.interactibles.tick_and_draw(self.ctx,events)
+
+        self.ctx.storm.draw()
     
     def alwaysTick(self, events):
         pass

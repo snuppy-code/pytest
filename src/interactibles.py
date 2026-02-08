@@ -11,8 +11,9 @@ class LevelInteractibles:
     def tick_and_draw(self,ctx,events):
         interact_pressed = False
         for e in events:
-            if e.type == pygame.KEYDOWN and e.key == pygame.K_e:
+            if e.type == pygame.KEYDOWN and e.key == pygame.K_f:
                 interact_pressed = True
+                print("Detected PLAYER pressed F")
         
         interacted = False
         for interactible in self.interactibles:
@@ -35,6 +36,7 @@ class Interactible:
     
     def tick(self):
         self.reachable = self.collider_zone.contains(self.ctx.player.pos)
+        return self.reachable
         # print("Is reachable?: "+self.reachable)
     
     def interact():
@@ -42,7 +44,7 @@ class Interactible:
 
     def draw(self):
         if self.image: # some interactibles don't have an image
-            print("Drawing at: "+str(self.pos))
+            # print("Drawing at: "+str(self.pos))
             self.ctx.vscreen.blit(self.image,self.pos+pygame.Vector2(0,0)+self.ctx.player.pos*-0.5)
         
         if self.reachable:

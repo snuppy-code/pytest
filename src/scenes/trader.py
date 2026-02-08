@@ -11,7 +11,10 @@ class Trader:
         money_image = self.ctx.images["blueberry_seedbag.png"]
         potato_image = self.ctx.images["potato_growing_grown.png"]
         daikon_image = self.ctx.images["daikon_growing_grown.png"]
+<<<<<<< Updated upstream
         # camp
+=======
+>>>>>>> Stashed changes
 
         offer_type = random.randint(1,2)
         amount = 0

@@ -16,12 +16,12 @@ class Foraging:
 
     def onEnter(self):
         print("hi")
-        self.collision_rect = pygame.Rect(40,50,200,170)
+        self.collision_rect = pygame.Rect(40,90,200,170)
 
         # fix this mama
         # you don't want to have rocks and stuff ON THE ROAD!!!!!!
         insertInfo(self.ctx.images, self.ctx)
-        self.background_sound.WILDWIND.play(-1, 0.5)
+        self.background_sound.WILDWIND.play(-1)
 
         choices = [PotatoBush, DaikonBush]
         weights = [1, 1]
@@ -66,7 +66,7 @@ class Foraging:
         h = self.ctx.h
         dt_s = self.ctx.dt_s
 
-        self.ctx.vscreen.blit(self.ctx.images["foraging_map.png"], self.ctx.player.pos*-0.3)
+        self.ctx.vscreen.blit(self.ctx.images["foraging_map.png"], self.ctx.player.pos*-0.9)
 
         for obj in self.objects_on_screen:
             obj.draw()

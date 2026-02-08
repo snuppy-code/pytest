@@ -109,7 +109,10 @@ class Player:
 
     def draw(self):
         image = self.current_frame
-        self.ctx.vscreen.blit(image, dest=(self.pos+self.ctx.player.pos*-0.5)-Vector2(20,40))
+        if self.ctx.current_scene == "Foraging":
+            self.ctx.vscreen.blit(image, dest=(self.pos+self.ctx.player.pos*-0.9)-Vector2(20,40))
+        else:
+            self.ctx.vscreen.blit(image, dest=(self.pos+self.ctx.player.pos*-0.5)-Vector2(20,40))
         self.rect = self.current_frame.get_rect()
         self.rect.x, self.rect.y = self.pos.x, self.pos.y
 

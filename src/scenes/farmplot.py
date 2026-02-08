@@ -11,6 +11,7 @@ class Farmplot:
             "horleft": "empty", "hormiddle": "empty", "horright": "empty",
             "lowleft": "empty", "lowmiddle": "empty", "lowright": "empty",
         }
+        self.holding_bag = None
 
     def onEnter(self):
         pass
@@ -25,16 +26,22 @@ class Farmplot:
         self.ctx.font.draw(str(self.ctx.player.inventory.daikon_grown),492,240)
         self.ctx.font.draw(str(self.ctx.player.inventory.blueberry_grown),571,240)
 
+        if not (self.holding_bag is None):
+            self.ctx.vscreen.blit(self.ctx.images["potato_seedbag.png"])
+            self.ctx.vscreen.blit(self.ctx.images["daikon_seedbag.png"])
+            self.ctx.vscreen.blit(self.ctx.images["blueberry_seedbag.png"])
 
+        mouse_over_bag = self.get_bag_mouse_over()
+        if not (mouse_over_bag is None):
+            if pygame.mouse.get_pressed()[0]:
+                print("grab bag "+str(mouse_over_bag))
 
     def alwaysTick(self, events):
-        for e in events:
-            if e.type():
-                pass
+        pass
     
     def get_bag_mouse_over(self):
         mousepos = get_mouse_pos(self.ctx)
-        mx, my = mousepos.x, mousepos.y
+        mx, my = mousepos[0], mousepos[1]
 
         if not (40 <= my <= 113):
             return None

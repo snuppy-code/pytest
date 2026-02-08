@@ -82,6 +82,22 @@ class LoadingScreen:
             "walk_down_2.png": pygame.image.load("assets/sprites/walk_down_2.png").convert_alpha(),
             "walk_down_3.png": pygame.image.load("assets/sprites/walk_down_3.png").convert_alpha(),
             "walk_down_4.png": pygame.image.load("assets/sprites/walk_down_4.png").convert_alpha(),
+
+            "walk_left_1.png": pygame.image.load("assets/sprites/walk_left_1.png").convert_alpha(),
+            "walk_left_2.png": pygame.image.load("assets/sprites/walk_left_2.png").convert_alpha(),
+            "walk_left_3.png": pygame.image.load("assets/sprites/walk_left_3.png").convert_alpha(),
+            "walk_left_4.png": pygame.image.load("assets/sprites/walk_left_4.png").convert_alpha(),
+
+            "walk_right_1.png": pygame.transform.flip(pygame.image.load("assets/sprites/walk_left_1.png").convert_alpha(), True, False),
+            "walk_right_2.png": pygame.transform.flip(pygame.image.load("assets/sprites/walk_left_2.png").convert_alpha(), True, False),
+            "walk_right_3.png": pygame.transform.flip(pygame.image.load("assets/sprites/walk_left_3.png").convert_alpha(), True, False),
+            "walk_right_4.png": pygame.transform.flip(pygame.image.load("assets/sprites/walk_left_4.png").convert_alpha(), True, False),
+
+            "walk_up_1.png": pygame.image.load("assets/sprites/walk_up_1.png").convert_alpha(),
+            "walk_up_2.png": pygame.image.load("assets/sprites/walk_up_2.png").convert_alpha(),
+            "walk_up_3.png": pygame.image.load("assets/sprites/walk_up_3.png").convert_alpha(),
+            "walk_up_4.png": pygame.image.load("assets/sprites/walk_up_4.png").convert_alpha(),
+
             "idle.png": pygame.image.load("assets/sprites/idle.png").convert_alpha()
         }
         print("loaded EVERYTHING !")

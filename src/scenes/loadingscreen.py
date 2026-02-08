@@ -48,6 +48,7 @@ class LoadingScreen:
             "press_f_to_talk_with_trader.png": pygame.image.load("assets/images/press_f_to_talk_with_trader.png"),
             
             "farmplot.png": pygame.image.load("assets/images/farmplot.png"),
+            "foraging_map.png": pygame.image.load("assets/images/foraging_map.png"),
             
             "bush_sprite_foraging.png": pygame.image.load("assets/images/bush_sprite_foraging.png").convert_alpha(),
             

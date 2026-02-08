@@ -94,7 +94,7 @@ class World:
         brightness = self.get_sunlight()
         assert brightness >= 0 and brightness <= 1
         alpha = int((1 - brightness) * 200) # not darker than 200 out of 255 alpha for darkening
-        print(f"time: {self.get_time_str()}, sunlight: {self.get_sunlight()}, clamped: {brightness}, alpha: {alpha}")
+        #print(f"time: {self.get_time_str()}, sunlight: {self.get_sunlight()}, clamped: {brightness}, alpha: {alpha}")
 
         lighting_overlay.set_alpha(alpha)
         lighting_overlay.fill(NIGHT_COLOR)

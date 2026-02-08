@@ -19,6 +19,9 @@ class PotatoBush(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=pos)
         self.collision_rect = pygame.Rect(0,0, 10, 10)
         self.collision_rect.center = self.rect.center
+
+        print(self.collision_rect)
+        print(self.rect)
         self.rarity = "common"
         self.harvestable = True
 

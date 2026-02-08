@@ -1,5 +1,5 @@
 import pygame
-from src.interactibles import ForageNode
+from src.interactibles import *
 pygame.init()
 
 sprites_dict = {}
@@ -20,18 +20,14 @@ class PotatoBush(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=pos)
         self.collision_rect = pygame.Rect(0,0, 10, 10)
         self.collision_rect.center = self.rect.center
+        self.to_del = False
         
         self.node = ForageNode(
-            ctx=self.ctx,
-            reachable_prompt=self.ctx.font.render("Press f to talk with the trader",15),
-            zone=RectZone(pygame.Rect(238,472,200,200)),
-            image=demo_surface4,
-            pos=pygame.Vector2(238,472),
-            target_scene="Trader",
+            ctx=ctx,
+            reachable_prompt=ctx.font.render("Press f to forage potato",15),
+            zone=CircleZone(self.rect.center, 20),
         )
 
-        print(self.collision_rect)
-        print(self.rect)
         self.rarity = "common"
         self.harvestable = True
 
@@ -49,9 +45,8 @@ class DaikonBush(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=pos)
         self.collision_rect = pygame.Rect(0,0, 10, 10)
         self.collision_rect.center = self.rect.center
+        self.to_del = False
 
-        print(self.collision_rect)
-        print(self.rect)
         self.rarity = "common"
         self.harvestable = True
 

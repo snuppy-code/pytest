@@ -88,6 +88,7 @@ class Player:
         self.rect = self.current_frame.get_rect()
         self.rect.x, self.rect.y = self.pos.x, self.pos.y
         self.obj_in_scene = []
+        self.available_plants = []
 
         self.walk_channel = pygame.mixer.Channel(1) # Reserve Channel 1 for walking
         self.walk_sound = Audios.WALKING
@@ -147,6 +148,18 @@ class Player:
         if keys[pygame.K_d]:
             facing_vec += RIGHT
 
+        for e in events:
+            if e.type == pygame.KEYDOWN:
+                if e.key == pygame.K_f:
+                    if len(self.available_plants) > 0:
+                        item = self.available_plants[0]
+
+                        if item.__class__.__name__ == "PotatoBush":
+                            self.inventory.potato_seed += 1
+                        elif item.__class__.__name__ == "DaikonBush":
+                            self.inventory.daikon_seed += 1
+                        
+                        item.to_del = True
 
         directions = {
             "up": facing_vec.dot(UP),
@@ -189,6 +202,7 @@ class Player:
             max(buffer["left"], min(bound_rect.x+bound_rect.width-buffer["right"],self.pos.x)),
             max(buffer["top"], min(bound_rect.y+bound_rect.height-buffer["bottom"],self.pos.y)))
         self.animate()
+        self.available_plants = []
         self.tick += self.ctx.dt_s
 
 

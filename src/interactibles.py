@@ -16,7 +16,7 @@ class LevelInteractibles:
         
         interacted = False
         for interactible in self.interactibles:
-            in_range = interactible.tick_reachable(ctx.player_pos)
+            in_range = interactible.tick()
             
             interactible.draw()
             

@@ -50,7 +50,7 @@ class Foraging:
         self.bounds = RectZone(self.ctx.images["camp_background.png"].get_rect())
         self.ctx.player.teleport(pygame.math.Vector2(50, 50))
 
-        #ctx.player.objects_on_screen = self.objects_on_screen
+        self.ctx.player.obj_in_scene = self.objects_on_screen
 
     def onExit(self):
         self.background_sound.WILDWIND.stop()
@@ -62,8 +62,6 @@ class Foraging:
         dt_s = self.ctx.dt_s
 
         self.ctx.vscreen.blit(self.ctx.images["camp_background.png"], self.ctx.player.pos*-0.5)
-
-        #self.ctx.player.update(events)
 
         for obj in self.objects_on_screen:
             obj.draw()

@@ -17,6 +17,8 @@ class PotatoBush(pygame.sprite.Sprite):
         super().__init__()
         self.image = sprites_dict["bush_sprite_foraging.png"]
         self.rect = self.image.get_rect(topleft=pos)
+        self.collision_rect = pygame.Rect(0,0, 10, 10)
+        self.collision_rect.center = self.rect.center
         self.rarity = "common"
         self.harvestable = True
 
@@ -31,6 +33,8 @@ class Rock:
         super().__init__()
         self.image = sprites_dict["bush_sprite_foraging.png"]
         self.rect = self.image.get_rect(topleft=pos)
+        self.collision_rect = pygame.Rect(0,0, 10, 10)
+        self.collision_rect.center = self.rect.center
         self.harvestable = False
 
     def draw(self):

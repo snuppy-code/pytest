@@ -127,3 +127,4 @@ class World:
         # renders allat to the screen !
         pygame.transform.scale(self.vscreen, (self.non_v_w,self.non_v_h), self.screen)
         pygame.display.flip()
+

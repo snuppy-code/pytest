@@ -1,4 +1,5 @@
 import pygame
+from src.Player import Player
 from src.fadeblack import FadeBlackManager
 from src.scenes.camp import Camp
 from src.scenes.loadingscreen import LoadingScreen
@@ -48,6 +49,8 @@ class World:
         }
         self.current_scene = "LoadingScreen"
         self.scenes[self.current_scene].onEnter()
+
+        self.player = Player(self,pygame.Vector2(640,360))
 
     def transition_scene_to(self,newSceneName,reset_time=False):
         self.nextscene = newSceneName

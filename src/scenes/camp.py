@@ -9,8 +9,8 @@ class Camp:
         self.interactibles = LevelInteractibles()
 
     def onEnter(self):
-        if self.ctx.player is not None:
-            self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
+        # if self.ctx.player is None:
+        #     self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
 
         demo_surface1 = pygame.Surface((360,217),pygame.SRCALPHA)
         demo_surface1.fill((255,0,0,100))
@@ -62,8 +62,8 @@ class Camp:
         h = self.ctx.h
         dt_s = self.ctx.dt_s
         
-        if self.ctx.player is None:
-            self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
+        # if self.ctx.player is None:
+        #     self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
 
         self.ctx.vscreen.blit(self.ctx.images["camp_background.png"],self.ctx.player.pos*-0.5)
         

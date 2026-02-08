@@ -2,6 +2,7 @@ import pygame
 import random
 from src.Classes.ForagingAssets import *
 from src.audio import Audios
+from src.interactibles import *
 
 class Foraging:
     def __init__(self,ctx):
@@ -14,7 +15,7 @@ class Foraging:
         # fix this mama
         # you don't want to have rocks and stuff ON THE ROAD!!!!!!
         insertInfo(self.ctx.images, self.ctx)
-        self.background_sound.WALKING.play(-1, 0.2)
+        self.background_sound.WILDWIND.play(-1, 0.2)
 
         choices = [PotatoBush, Rock]
         weights = [1, 1]
@@ -40,11 +41,13 @@ class Foraging:
                 temp_sprite.rect = new_rect
                 self.objects_on_screen.append(temp_sprite)
                 break
+        
+        self.bounds = RectZone(self.ctx.images["camp_background.png"].get_rect())
 
-        ctx.player.objects_on_screen = self.objects_on_screen
+        #ctx.player.objects_on_screen = self.objects_on_screen
 
     def onExit(self):
-        self.background_sound.WALKING.stop()
+        self.background_sound.WILDWIND.stop()
         pass
 
     def onFrame(self,events):
@@ -53,5 +56,4 @@ class Foraging:
         dt_s = self.ctx.dt_s
 
 
-    
-        self.ctx.player.update(events)
+        #self.ctx.player.update(events)

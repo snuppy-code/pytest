@@ -50,13 +50,15 @@ class Farmplot:
                 maybe_oneheld_coords[self.holding_bag][1]-20
             )
 
+        self.draw_growths()
+
         self.ctx.vscreen.blit(self.ctx.images["potato_seedbag.png"],maybe_oneheld_coords[0])
         self.ctx.vscreen.blit(self.ctx.images["daikon_seedbag.png"],maybe_oneheld_coords[1])
         self.ctx.vscreen.blit(self.ctx.images["blueberry_seedbag.png"],maybe_oneheld_coords[2])
 
 
     def alwaysTick(self, events):
-        for maybe_growth in self.slots:
+        for _,maybe_growth in self.slots.items():
             if not (maybe_growth is None):
                 maybe_growth.tick(self.ctx.dt_s)
                 if self.ctx.dt_s > 0.1:
@@ -65,25 +67,25 @@ class Farmplot:
     def draw_growths(self):
         slot_coords = {
             # top
-            "topleft": (13, 42),
-            "topmiddle": (136, 38),
-            "topright": (260, 35),
+            "topleft": pygame.Vector2(12, 37),
+            "topmiddle": pygame.Vector2(132, 38),
+            "topright": pygame.Vector2(260, 35),
             
             # hor
-            "horleft": (11, 128),
-            "hormiddle": (123, 129),
-            "horright": (262, 130),
+            "horleft": pygame.Vector2(11, 128),
+            "hormiddle": pygame.Vector2(134, 129),
+            "horright": pygame.Vector2(262, 130),
             
             # low
-            "lowleft": (14, 239),
-            "lowmiddle": (128, 235),
-            "lowright": (259, 238)
+            "lowleft": pygame.Vector2(14, 239),
+            "lowmiddle": pygame.Vector2(139, 239),
+            "lowright": pygame.Vector2(262, 238)
         }
 
         for slot_name, position in slot_coords.items():
             growth = self.slots[slot_name]
             if growth is not None:
-                self.ctx.vscreen.blit(growth.current_image, position)
+                self.ctx.vscreen.blit(growth.current_image, position-growth.offset)
 
     def try_plant_in(self,target_tile):
         if self.holding_bag == 0:
@@ -101,7 +103,8 @@ class Farmplot:
             self.slots[target_tile] = Growth(
                 self.ctx.images["potato_growing_sprout.png"],
                 self.ctx.images["potato_growing_medium.png"],
-                self.ctx.images["potato_growing_grown.png"])
+                self.ctx.images["potato_growing_grown.png"],
+                pygame.Vector2(0,14))
 
     def try_plant_daikon(self,target_tile):
         there = self.slots[target_tile]
@@ -109,7 +112,8 @@ class Farmplot:
             self.slots[target_tile] = Growth(
                 self.ctx.images["daikon_growing_sprout.png"],
                 self.ctx.images["daikon_growing_medium.png"],
-                self.ctx.images["daikon_growing_grown.png"])
+                self.ctx.images["daikon_growing_grown.png"],
+                pygame.Vector2(0,55))
             
     def try_plant_blueberry(self,target_tile):
         there = self.slots[target_tile]
@@ -117,7 +121,8 @@ class Farmplot:
             self.slots[target_tile] = Growth(
                 self.ctx.images["blueberry_growing_sprout.png"],
                 self.ctx.images["blueberry_growing_medium.png"],
-                self.ctx.images["blueberry_growing_grown.png"])
+                self.ctx.images["blueberry_growing_grown.png"],
+                pygame.Vector2(0,49))
     
     def get_bag_mouse_over(self):
         mousepos = get_mouse_pos(self.ctx)
@@ -153,11 +158,13 @@ class Farmplot:
         return None
 
 class Growth:
-    def __init__(self, image_sprout, image_medium, image_grown):
+    def __init__(self, image_sprout, image_medium, image_grown, offset):
         self.image_sprout = image_sprout
         self.image_medium = image_medium
         self.image_grown = image_grown
         
+        self.offset = offset
+
         self.growth_stages = [
             {"range": (0, 160), "image": self.image_sprout},
             {"range": (161, 320), "image": self.image_medium},

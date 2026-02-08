@@ -25,6 +25,18 @@ class Farmplot:
         if self.holding_bag is None:
             if pygame.mouse.get_just_pressed()[0]:
                 self.holding_bag = self.get_bag_mouse_over()
+                trying_to_harvest_tile = self.get_tile_mouse_in()
+                if trying_to_harvest_tile is not None:
+                    at_tile = self.slots[trying_to_harvest_tile]
+                    if at_tile is not None:
+                        if at_tile.is_grown():
+                            if at_tile.type == "potato":
+                                self.ctx.player.inventory.potato_grown += 1
+                            elif at_tile.type == "daikon":
+                                self.ctx.player.inventory.daikon_grown += 1
+                            elif at_tile.type == "blueberry":
+                                self.ctx.player.inventory.blueberry_grown += 1
+                            self.slots[trying_to_harvest_tile] = None
         else:
             if pygame.mouse.get_just_released()[0]:
                 target_tile = self.get_tile_mouse_in()
@@ -67,6 +79,8 @@ class Farmplot:
         self.ctx.font.draw(str(self.ctx.player.inventory.potato_seed),x0+40,y0+20)
         self.ctx.font.draw(str(self.ctx.player.inventory.daikon_seed),x1+40,y1+20)
         self.ctx.font.draw(str(self.ctx.player.inventory.blueberry_seed),x2+40,y2+20)
+
+        
 
         self.ctx.font.draw("Press e to exit",10,319,22)
 
@@ -111,31 +125,40 @@ class Farmplot:
             assert False
     
     def try_plant_potato(self,target_tile):
-        there = self.slots[target_tile]
-        if there is None:
-            self.slots[target_tile] = Growth(
-                self.ctx.images["potato_growing_sprout.png"],
-                self.ctx.images["potato_growing_medium.png"],
-                self.ctx.images["potato_growing_grown.png"],
-                pygame.Vector2(0,14))
+        if self.ctx.player.inventory.potato_seed > 0:
+            there = self.slots[target_tile]
+            if there is None:
+                self.slots[target_tile] = Growth(
+                    self.ctx.images["potato_growing_sprout.png"],
+                    self.ctx.images["potato_growing_medium.png"],
+                    self.ctx.images["potato_growing_grown.png"],
+                    pygame.Vector2(0,14),
+                    "potato")
+                self.ctx.player.inventory.potato_seed -= 1
 
     def try_plant_daikon(self,target_tile):
-        there = self.slots[target_tile]
-        if there is None:
-            self.slots[target_tile] = Growth(
-                self.ctx.images["daikon_growing_sprout.png"],
-                self.ctx.images["daikon_growing_medium.png"],
-                self.ctx.images["daikon_growing_grown.png"],
-                pygame.Vector2(0,55))
+        if self.ctx.player.inventory.daikon_seed > 0:
+            there = self.slots[target_tile]
+            if there is None:
+                self.slots[target_tile] = Growth(
+                    self.ctx.images["daikon_growing_sprout.png"],
+                    self.ctx.images["daikon_growing_medium.png"],
+                    self.ctx.images["daikon_growing_grown.png"],
+                    pygame.Vector2(0,55),
+                    "daikon")
+                self.ctx.player.inventory.daikon_seed -= 1
             
     def try_plant_blueberry(self,target_tile):
-        there = self.slots[target_tile]
-        if there is None:
-            self.slots[target_tile] = Growth(
-                self.ctx.images["blueberry_growing_sprout.png"],
-                self.ctx.images["blueberry_growing_medium.png"],
-                self.ctx.images["blueberry_growing_grown.png"],
-                pygame.Vector2(0,49))
+        if self.ctx.player.inventory.blueberry_seed > 0:
+            there = self.slots[target_tile]
+            if there is None:
+                self.slots[target_tile] = Growth(
+                    self.ctx.images["blueberry_growing_sprout.png"],
+                    self.ctx.images["blueberry_growing_medium.png"],
+                    self.ctx.images["blueberry_growing_grown.png"],
+                    pygame.Vector2(0,49),
+                    "blueberry")
+                self.ctx.player.inventory.blueberry_seed -= 1
     
     def get_bag_mouse_over(self):
         mousepos = get_mouse_pos(self.ctx)
@@ -171,17 +194,22 @@ class Farmplot:
         return None
 
 class Growth:
-    def __init__(self, image_sprout, image_medium, image_grown, offset):
+    def __init__(self, image_sprout, image_medium, image_grown, offset,type):
         self.image_sprout = image_sprout
         self.image_medium = image_medium
         self.image_grown = image_grown
         
+        self.type = type
+        
         self.offset = offset
 
         self.growth_stages = [
-            {"range": (0, 160), "image": self.image_sprout},
-            {"range": (161, 320), "image": self.image_medium},
-            {"range": (321, 480), "image": self.image_grown}
+            # {"range": (0, 160), "image": self.image_sprout},
+            # {"range": (161, 320), "image": self.image_medium},
+            # {"range": (321, 480), "image": self.image_grown},
+            {"range": (0, 1), "image": self.image_sprout},
+            {"range": (1.1, 2), "image": self.image_medium},
+            {"range": (2.1, 3), "image": self.image_grown}
         ]
 
         self.existed_s = 0
@@ -200,3 +228,6 @@ class Growth:
                 self.current_image = self.image_grown
 
         return self.current_image
+    
+    def is_grown(self):
+        return self.current_image is self.image_grown

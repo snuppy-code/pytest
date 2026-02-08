@@ -13,13 +13,13 @@ class Foraging:
     def onEnter(self):
         # fix this mama
         # you don't want to have rocks and stuff ON THE ROAD!!!!!!
-        insertInfo(self.ctx.foraging_sprites, self.ctx)
+        insertInfo(self.ctx.images, self.ctx)
         self.background_sound.WALKING.play(-1, 0.2)
 
         choices = [PotatoBush, Rock]
         weights = [1, 1]
 
-        background_width, background_height = self.ctx.images["foraging_background.png"].get_size()
+        background_width, background_height = self.ctx.images["camp_background.png"].get_size()
 
         for i in range(50):
             asset_class = random.choices(choices, weights, k=1)[0]

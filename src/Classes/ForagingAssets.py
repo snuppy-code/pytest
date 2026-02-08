@@ -15,7 +15,7 @@ def insertInfo(sprites, incoming_ctx):
 class PotatoBush(pygame.sprite.Sprite):
     def __init__(self, pos=pygame.math.Vector2(0,0)):
         super().__init__()
-        self.image = sprites_dict["potato_bush.png"]
+        self.image = sprites_dict["bush_sprite_foraging.png"]
         self.rect = self.image.get_rect(topleft=pos)
         self.rarity = "common"
         self.harvestable = True
@@ -29,7 +29,7 @@ class PotatoBush(pygame.sprite.Sprite):
 class Rock:
     def __init__(self, pos=pygame.math.Vector2(0,0)):
         super().__init__()
-        self.image = sprites_dict["rock.png"]
+        self.image = sprites_dict["bush_sprite_foraging.png"]
         self.rect = self.image.get_rect(topleft=pos)
         self.harvestable = False
 

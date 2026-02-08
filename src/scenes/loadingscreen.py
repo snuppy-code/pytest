@@ -49,6 +49,7 @@ class LoadingScreen:
             
             "farmplot.png": pygame.image.load("assets/images/farmplot.png"),
             
+            "bush_sprite_foraging.png": pygame.image.load("assets/images/bush_sprite_foraging.png").convert_alpha(),
             
             # "potato_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
             # "potato_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),

@@ -68,22 +68,25 @@ class World:
         DAY_DURATION_SECONDS = 4 * 60 
         START_TIME = 6 # 6 am
         END_TIME = 22 # 10 pm
-
-        seconds_passed = self.day_night_clock
         
-        raw_hours = (4/75) * seconds_passed + START_TIME
+        raw_hours = ((DAY_DURATION_SECONDS / (END_TIME-START_TIME)) ** -1) * self.day_night_clock + START_TIME
         game_hours = int(raw_hours)
         game_minutes = int((raw_hours - game_hours) * 60)
 
         return f"{game_hours:02d}:{game_minutes:02d}"
 
     def get_sunlight(self):
+        DAY_DURATION_SECONDS = 4 * 60
         START_TIME = 6
+        END_TIME = 22
         
-        t = (4/75) * self.day_night_clock + START_TIME
+        t = ((DAY_DURATION_SECONDS / (END_TIME-START_TIME)) ** -1) * self.day_night_clock + START_TIME
         sunlight_intensity = sin((pi / 24) * t)
 
         return max(0, sunlight_intensity)
+
+    def reset_clock(self):
+        self.day_night_clock = 0
 
     def draw_night_overlay(self):
         NIGHT_COLOR = (20, 20, 50)
@@ -136,3 +139,4 @@ class Font:
     def draw(self,text,x,y):
         self.ctx.vscreen.blit(self.font_daydream.render(text,False,"black"),(x,y))
         self.ctx.vscreen.blit(self.font_daydream.render(text,False,"white"),(x+2,y+2))
+

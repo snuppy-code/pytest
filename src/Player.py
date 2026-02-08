@@ -84,8 +84,10 @@ class Player:
         self.tick = 0
         self.t0 = 0
         self.dt = 1 / self.fps
-        print(self.ctx)
         self.current_frame = self.ctx.images["idle.png"]
+        self.rect = self.current_frame.get_rect()
+        self.rect.x, self.rect.y = self.pos.x, self.pos.y
+        self.obj_in_scene = []
 
         self.walk_channel = pygame.mixer.Channel(1) # Reserve Channel 1 for walking
         self.walk_sound = Audios.WALKING
@@ -108,6 +110,8 @@ class Player:
     def draw(self):
         image = self.current_frame
         self.ctx.vscreen.blit(image, dest=self.pos+self.ctx.player.pos*-0.5)
+        self.rect = self.current_frame.get_rect()
+        self.rect.x, self.rect.y = self.pos.x, self.pos.y
 
     def lock(self):
         self.locked = True
@@ -167,7 +171,21 @@ class Player:
         if type(self.animation_class) != type(target_anim):
             self.animation_class = target_anim
         
-        self.pos += (facing_vec * 200) * self.ctx.dt_s
+        self.target_pos = self.pos + (facing_vec * 200) * self.ctx.dt_s
+        self.rect = self.current_frame.get_rect()
+        self.rect.x, self.rect.y = self.target_pos.x, self.target_pos.y
+
+        self.collides = False
+
+        for obj in self.obj_in_scene:
+            if self.rect.colliderect(obj.collision_rect):
+                self.collides = True
+                break
+        
+        if not self.collides:
+            self.pos = self.target_pos
+        self.collides = False
+
         bound_rect = self.ctx.scenes[self.ctx.current_scene].bounds.rect
         buffer = {
             "left": 40,

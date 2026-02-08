@@ -1,4 +1,5 @@
 import pygame
+from src.scenes.camp import Camp
 from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
 from src.scenes.test_scene import TestScene
@@ -33,6 +34,7 @@ class World:
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
+            "Camp": Camp(self),
             "TestScene": TestScene(self),
         }
         self.current_scene = "LoadingScreen"

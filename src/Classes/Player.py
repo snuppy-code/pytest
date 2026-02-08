@@ -34,7 +34,7 @@ class Player:
         self.pos += (lookVector * 200) * self.ctx.dt_s
 
     def _animate(self):
-
+        pass
 
     def teleport(self, toPos):
         self.pos = toPos

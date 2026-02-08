@@ -34,19 +34,20 @@ class LoadingScreen:
             "mainmenu_newgame_normal.png": pygame.image.load("assets/images/mainmenu_newgame_normal.png"),
             "mainmenu_newgame_hover.png": pygame.image.load("assets/images/mainmenu_newgame_hover.png"),
             "mainmenu_newgame_selected.png": pygame.image.load("assets/images/mainmenu_newgame_selected.png"),
+            "mainmenu_newgame_disabled.png": pygame.image.load("assets/images/mainmenu_newgame_disabled.png"),
 
             "mainmenu_continue_normal.png": pygame.image.load("assets/images/mainmenu_continue_normal.png"),
             "mainmenu_continue_hover.png": pygame.image.load("assets/images/mainmenu_continue_hover.png"),
             "mainmenu_continue_selected.png": pygame.image.load("assets/images/mainmenu_continue_selected.png"),
-            "mainmenu_continue_disabled.png": pygame.image.load("assets/images/mainmenu_continue_disabled.png")
+            "mainmenu_continue_disabled.png": pygame.image.load("assets/images/mainmenu_continue_disabled.png"),
 
             # "foraging_background.png": pygame.image.load("assets/images/foraging_background.png")
             # "potato_bush.png": pygame.image.load("assets/sprites/potato_bush.png").convert_alpha()
-            "idle.png": pygame.image.load("assets/sprites/idle.png").convert_alpha(),
-            "walk_down_1.png": pygame.image.load("assets/sprites/walk_down_1.png").convert_alpha(),
-            "walk_down_2.png": pygame.image.load("assets/sprites/walk_down_2.png").convert_alpha(),
-            "walk_down_3.png": pygame.image.load("assets/sprites/walk_down_3.png").convert_alpha(),
-            "walk_down_4.png": pygame.image.load("assets/sprites/walk_down_4.png").convert_alpha()
+            # "idle.png": pygame.image.load("assets/sprites/idle.png").convert_alpha(),
+            # "walk_down_1.png": pygame.image.load("assets/sprites/walk_down_1.png").convert_alpha(),
+            # "walk_down_2.png": pygame.image.load("assets/sprites/walk_down_2.png").convert_alpha(),
+            # "walk_down_3.png": pygame.image.load("assets/sprites/walk_down_3.png").convert_alpha(),
+            # "walk_down_4.png": pygame.image.load("assets/sprites/walk_down_4.png").convert_alpha()
         }
 
         self.ctx.transition_scene_to("MainMenu")

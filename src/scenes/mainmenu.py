@@ -12,6 +12,7 @@ class MainMenu:
             self.ctx.images["mainmenu_newgame_normal.png"],
             self.ctx.images["mainmenu_newgame_hover.png"],
             self.ctx.images["mainmenu_newgame_selected.png"],
+            self.ctx.images["mainmenu_newgame_disabled.png"],
         )
         self.continueButton = Button(
             self.ctx,
@@ -21,6 +22,7 @@ class MainMenu:
             self.ctx.images["mainmenu_continue_selected.png"],
             self.ctx.images["mainmenu_continue_disabled.png"],
         )
+        self.continueButton.disable_button()
 
     def onExit(self):
         pass
@@ -31,17 +33,10 @@ class MainMenu:
         dt_s = self.ctx.dt_s
         self.ctx.vscreen.blit(self.ctx.images["mainmenu_background.png"])
         
-        continue_pressed = self.continueButton.tick_just_pressed(events)
-        newgame_pressed = self.newgameButton.tick_just_pressed(events)
+        continue_pressed = self.continueButton.tick_just_pressed()
+        newgame_pressed = self.newgameButton.tick_just_pressed()
         self.continueButton.draw_to(self.ctx.vscreen)
         self.newgameButton.draw_to(self.ctx.vscreen)
 
-        # menu = pygame.Surface((self.ctx.w,self.ctx.h))
-        
-        # pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*0,400,150),0,40)
-        # pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*1,400,150),0,40)
-        # pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*2,400,150),0,40)
-        
-        # self.ctx.vscreen.blit(menu)
-        
-        
+        if newgame_pressed:
+            self.ctx.transition_scene_to("Camp")

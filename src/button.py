@@ -1,7 +1,7 @@
 import pygame
 
 class Button:
-    def __init__(self,ctx,pos_tuple,image_surface_normal,image_surface_hover,image_surface_selected,name,image_surface_disabled=None,collider_rect=None):
+    def __init__(self,ctx,pos_tuple,image_surface_normal,image_surface_hover,image_surface_selected,image_surface_disabled=None,collider_rect=None):
         
         self.image_states = {
             "normal": image_surface_normal,
@@ -10,15 +10,12 @@ class Button:
         }
         assert (image_surface_normal.get_width(),image_surface_normal.get_height()) == (image_surface_hover.get_width(),image_surface_hover.get_height())
         assert (image_surface_hover.get_width(),image_surface_hover.get_height()) == (image_surface_selected.get_width(),image_surface_selected.get_height())
-        if image_surface_disabled is None:
-            self.can_be_disabled = False
-        else:
-            self.image_states["disabled"] = image_surface_disabled,
+        if not (image_surface_disabled is None):
+            self.image_states["disabled"] = image_surface_disabled
             assert (image_surface_selected.get_width(),image_surface_selected.get_height()) == (image_surface_disabled.get_width(),image_surface_disabled.get_height())
 
-
         if collider_rect is None:
-            self.collider_rect = pygame.Rect(pos_tuple,(pos_tuple[0]+image_surface_normal.get_width(),pos_tuple[1]+image_surface_normal.get_height()))
+            self.collider_rect = pygame.Rect(pos_tuple,image_surface_normal.get_size())
         else:
             self.collider_rect = collider_rect
 
@@ -27,25 +24,23 @@ class Button:
         self.state = "normal"
         self.ctx = ctx
 
-    def tick_just_pressed(self,events):
+    def tick_just_pressed(self):
         if self.state == "disabled":
             return False
-
-        self.state = "normal"
+        
         mousepos = pygame.mouse.get_pos()
-        mousepos = (mousepos[0]/self.ctx.vscreen_scaling_factor,mousepos[1]/self.ctx.vscreen_scaling_factor)
-        print(mousepos)
+        mousepos = (mousepos[0]/self.ctx.vscreen_scaling_factor, mousepos[1]/self.ctx.vscreen_scaling_factor)
+        # print(mousepos)
+        self.state = "normal"
         if self.collider_rect.collidepoint(mousepos):
             self.state = "hover"
-            print("Hovering!")
-            for event in events:
-                if event == pygame.MOUSEBUTTONDOWN:
-                    self.state = "selected"
-                    print("Selected!")
-                if event == pygame.MOUSEBUTTONUP:
-                    self.state = "normal"
-                    print("Pressed!")
-                    return True
+            # print("Hovering!")
+            if pygame.mouse.get_pressed()[0]:
+                self.state = "selected"
+            if pygame.mouse.get_just_released()[0]:
+                self.state = "normal"
+                return True
+            
         return False
 
     def draw_to(self,surface):

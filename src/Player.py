@@ -109,7 +109,10 @@ class Player:
 
     def draw(self):
         image = self.current_frame
-        self.ctx.vscreen.blit(image, dest=self.pos+self.ctx.player.pos*-0.5)
+        if self.ctx.current_scene == "Foraging":
+            self.ctx.vscreen.blit(image, dest=(self.pos+self.ctx.player.pos*-0.9)-Vector2(20,40))
+        else:
+            self.ctx.vscreen.blit(image, dest=(self.pos+self.ctx.player.pos*-0.5)-Vector2(20,40))
         self.rect = self.current_frame.get_rect()
         self.rect.x, self.rect.y = self.pos.x, self.pos.y
 
@@ -171,20 +174,9 @@ class Player:
         if type(self.animation_class) != type(target_anim):
             self.animation_class = target_anim
         
-        self.target_pos = self.pos + (facing_vec * 200) * self.ctx.dt_s
-        self.rect = self.current_frame.get_rect()
+        self.target_pos = (self.pos + (facing_vec * 200) * self.ctx.dt_s)
         self.rect.x, self.rect.y = self.target_pos.x, self.target_pos.y
-
-        self.collides = False
-
-        for obj in self.obj_in_scene:
-            if self.rect.colliderect(obj.collision_rect):
-                self.collides = True
-                break
-        
-        if not self.collides:
-            self.pos = self.target_pos
-        self.collides = False
+        self.pos = self.target_pos
 
         bound_rect = self.ctx.scenes[self.ctx.current_scene].bounds.rect
         buffer = {

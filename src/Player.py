@@ -205,9 +205,12 @@ class Inventory:
         self.potato_seed = 0
         self.daikon_seed = 0
         self.blueberry_seed = 0
+
         self.potato_grown = 0
         self.daikon_grown = 0
         self.blueberry_grown = 0
+
+        self.rouble = 0
     
 class Health:
     def __init__(self):
@@ -217,6 +220,3 @@ class Health:
         self.health += amount
         if self.health <= 0:
             print("you dead !")
-
-    
-    

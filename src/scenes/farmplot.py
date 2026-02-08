@@ -20,13 +20,32 @@ class Farmplot:
 
     def onFrame(self, events):
         self.ctx.vscreen.blit(self.ctx.images["farmplot.png"])
-        # self.ctx.font.draw("7",30,50)
+
+        self.ctx.font.draw(str(self.ctx.player.inventory.potato_grown),415,240)
+        self.ctx.font.draw(str(self.ctx.player.inventory.daikon_grown),492,240)
+        self.ctx.font.draw(str(self.ctx.player.inventory.blueberry_grown),571,240)
+
+
 
     def alwaysTick(self, events):
-        pass
+        for e in events:
+            if e.type():
+                pass
     
-    def get_bag_mouse_over():
+    def get_bag_mouse_over(self):
+        mousepos = get_mouse_pos(self.ctx)
+        mx, my = mousepos.x, mousepos.y
+
+        if not (40 <= my <= 113):
+            return None
+
+        x_bounds = [(409, 473), (482, 548), (552, 616)]
         
+        for index, (low, high) in enumerate(x_bounds):
+            if low <= mx <= high:
+                return index  # 0, 1, eller 2 for the bag
+        
+        return None
 
     def get_tile_mouse_in(self):
         mousepos = get_mouse_pos(self.ctx)
@@ -46,6 +65,25 @@ class Farmplot:
         
         return None
 
-'''
+# class Tile:
+#     def __init__(self):
+#         contained = 
+#         self.image_sprout = image_sprout
+#         self.image_medium = image_medium
+#         self.image_grown = image_grown
 
-'''
+
+# class PotatoGrowing:
+    
+#     @staticmethod
+#     def draw_at():
+        
+    
+# class DaikonGrowing:
+    
+# class BlueberryGrowing:
+
+
+# '''
+
+# '''

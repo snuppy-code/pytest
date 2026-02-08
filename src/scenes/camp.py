@@ -50,7 +50,8 @@ class Camp:
             target_scene="Trader",
         ))
         self.bounds = RectZone(self.ctx.images["camp_background.png"].get_rect())
-        self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
+        if self.ctx.player is not None:
+            self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
 
     def onExit(self):
         pass

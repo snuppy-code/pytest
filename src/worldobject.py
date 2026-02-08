@@ -39,15 +39,7 @@ class World:
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
             "Camp": Camp(self),
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            # "Foraging":   (self),
-=======
             "Foraging": Foraging(self),
->>>>>>> Stashed changes
-=======
-            "Foraging": Foraging(self),
->>>>>>> Stashed changes
             "Farmplot": Farmplot(self),
         }
         self.current_scene = "LoadingScreen"

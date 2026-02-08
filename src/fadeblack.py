@@ -22,7 +22,6 @@ class FadeBlackManager():
                 self.fadedtoblack = True
                 self.blackscreen.fill((0,0,0,(1-((self.elapsed_time-self.fadeout_time)/self.fadeout_time))*255))
             else:
-                self.fadedtoblack = False
                 self.blackscreen.fill((0,0,0,self.elapsed_time/self.fadeout_time*255))
 
             self.ctx.vscreen.blit(self.blackscreen)
@@ -32,3 +31,6 @@ class FadeBlackManager():
         self.elapsed_time = 0
         self.fadeout_time = fadeout_time
         self.fadetotal_time = fadeout_time*2
+    
+    def faded_to_black(self):
+        return self.fadedtoblack

@@ -24,7 +24,7 @@ class World:
         self.w = self.vscreen.get_width()
         self.h = self.vscreen.get_height()
 
-
+        self.transitioning = False
         self.fademanager = FadeBlackManager(self)
         self.clock = pygame.time.Clock()
         self.dt_s = 0
@@ -46,12 +46,16 @@ class World:
         self.scenes[self.current_scene].onEnter()
 
     def transition_scene_to(self,newSceneName):
-        print(f"transitioning from {self.current_scene} to {newSceneName}")
-        self.fademanager.request_fadeoutin(1)
+        self.nextscene = newSceneName
+        print(f"preparing transition from {self.current_scene} to {newSceneName}")
+        self.fademanager.request_fadeoutin(0.5)
+    
+    def _actually_transition_scene(self):
+        print(f"actually transitioning from {self.current_scene} to {self.nextscene}")
         self.scenes[self.current_scene].onExit()
-        self.current_scene = newSceneName
+        self.current_scene = self.nextscene
+        self.nextscene = None
         self.scenes[self.current_scene].onEnter()
-        #todo: maybe add fade in/out of black between scenes here?
 
     def get_time_str(self) -> str:
         DAY_DURATION_SECONDS = 5 * 60 
@@ -94,6 +98,8 @@ class World:
 
         self.scenes[self.current_scene].onFrame(events)
         self.fademanager.world_tick_draw()
+        if self.fademanager.faded_to_black() and not (self.nextscene is None):
+            self._actually_transition_scene()
 
         # renders allat to the screen !
         pygame.transform.scale(self.vscreen, (self.non_v_w,self.non_v_h), self.screen)

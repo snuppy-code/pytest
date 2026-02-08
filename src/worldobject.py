@@ -6,7 +6,7 @@ from src.scenes.farmplot import Farmplot
 from src.scenes.foraging import Foraging
 from src.audio import Audios
 from math import pi, sin
-from src.Classes.Player import Player
+from src.Player import Player
 
 class World:
     def __init__(self):

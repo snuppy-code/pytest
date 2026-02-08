@@ -1,6 +1,6 @@
 import pygame
 
-from src.Classes.Player import Player
+from src.Player import Player
 from src.interactibles import *
 
 class Camp:
@@ -8,7 +8,6 @@ class Camp:
         self.ctx = ctx
         
         self.ctx.player = Player(ctx,pygame.Vector2(640,360))
-        
         self.interactibles = LevelInteractibles()
 
     def onEnter(self):
@@ -39,6 +38,7 @@ class Camp:
             image=demo_surface3,
             target_scene="Trader",
         ))
+        self.bounds = RectZone(self.ctx.images["camp_background.png"].get_rect())
 
     def onExit(self):
         pass
@@ -53,5 +53,4 @@ class Camp:
         self.interactibles.tick_and_draw(self.ctx,events)
         
         self.ctx.player.update(events)
-        self.ctx.player.pos # constrain that shit
         self.ctx.player.draw()

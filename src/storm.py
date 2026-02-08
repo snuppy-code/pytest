@@ -17,12 +17,9 @@ class Storm:
         self.overlay.set_alpha(150)
 
     def update(self):
-        # 1. Shrink over time
         self.radius = self.ctx.day_night_clock * (-16.667) + 2000
         print(self.radius)
 
-        # 2. Move between maps based on time
-        # DAY_DURATION is 4 mins (240s) in your World class
         cycle_progress = (self.ctx.day_night_clock % 240) / 240 
         
         if cycle_progress < 0.5:
@@ -32,10 +29,10 @@ class Storm:
             # Second half: Move towards/stay at Foraging
             self.current_world_pos = self.forage_center
 
+
     def draw(self):
         self.overlay.fill((75, 0, 130))
         
-        # Use the specific parallax multiplier based on the current scene
         multiplier = 0.5 if self.ctx.current_scene == "Camp" else 0.8
         
         screen_x = self.current_world_pos.x - (self.ctx.player.pos.x * multiplier)

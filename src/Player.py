@@ -168,8 +168,6 @@ class Player:
             self.animation_class = target_anim
         
         self.pos += (facing_vec * 200) * self.ctx.dt_s
-        self.pos = self.ctx.scenes[self.ctx.current_scene].bounds.moveinside(self.pos)
-        self.animate()
         bound_rect = self.ctx.scenes[self.ctx.current_scene].bounds.rect
         buffer = {
             "left": 40,
@@ -180,6 +178,6 @@ class Player:
         self.pos = pygame.Vector2(
             max(buffer["left"], min(bound_rect.x+bound_rect.width-buffer["right"],self.pos.x)),
             max(buffer["top"], min(bound_rect.y+bound_rect.height-buffer["bottom"],self.pos.y)))
-        
+        self.animate()
         self.tick += self.ctx.dt_s
         

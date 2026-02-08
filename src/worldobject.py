@@ -4,7 +4,6 @@ from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
 from src.scenes.farmplot import Farmplot
 from src.scenes.foraging import Foraging
-from src.audio import Audios
 from math import pi, sin
 from src.Player import Player
 
@@ -37,6 +36,7 @@ class World:
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
             "Camp": Camp(self),
+            # "Foraging": Foraging(self),
             "Farmplot": Farmplot(self),
         }
         self.current_scene = "LoadingScreen"

@@ -25,25 +25,28 @@ class LevelInteractibles:
                 interacted = True
 
 class Interactible:
-    def __init__(self,ctx,reachable_prompt,zone,image=None):
+    def __init__(self,ctx,reachable_prompt,zone,image=None,pos=None):
         self.ctx = ctx
         self.image = image
         self.reachable_prompt = reachable_prompt
-        self.zone = zone
+        self.pos = pos
+        self.collider_zone = zone
         self.reachable = False
     
     def tick(self):
-        self.is_reachable = self.zone.contains(self.ctx.player.pos)
+        self.reachable = self.collider_zone.contains(self.ctx.player.pos)
+        # print("Is reachable?: "+self.reachable)
     
     def interact():
         print("Base interaction, did you mean for your interactible to do nothing when interacted?") # override me .. most of the time
 
     def draw(self):
         if self.image: # some interactibles don't have an image
-            self.ctx.vscreen.blit(self.image,(0,0))
+            print("Drawing at: "+str(self.pos))
+            self.ctx.vscreen.blit(self.image,self.pos+pygame.Vector2(0,0)+self.ctx.player.pos*-0.5)
         
         if self.reachable:
-            self.ctx.vscreen.blit(self.reachable_prompt,(20,20))
+            self.ctx.vscreen.blit(self.reachable_prompt,pygame.Vector2(20,20))
 
 class Zone:
     def contains(self, pos):
@@ -56,9 +59,6 @@ class RectZone(Zone):
     def contains(self, pos):
         return self.rect.collidepoint(pos)
 
-    def moveinside(self,pos):
-        return pygame.Vector2(max(0,min(self.rect.x+self.rect.width,pos.x)),max(0,min(self.rect.y+self.rect.height,pos.y)))
-
 class CircleZone(Zone):
     def __init__(self, center_pos, radius):
         self.center = pygame.Vector2(center_pos)
@@ -69,16 +69,16 @@ class CircleZone(Zone):
 
 
 class ScenePortal(Interactible):
-    def __init__(self,ctx,reachable_prompt,zone,target_scene,image=None):
-        super().__init__(ctx,reachable_prompt,zone,image)
+    def __init__(self,ctx,reachable_prompt,zone,target_scene,image=None,pos=None):
+        super().__init__(ctx,reachable_prompt,zone,image,pos)
         self.target_scene = target_scene
     
     def interact(self):
         self.ctx.transition_scene_to(self.target_scene)
-    
+
 class ForageNode(Interactible):
-    def __init__(self,ctx,reachable_prompt,zone,image=None):
-        super().__init__(ctx,reachable_prompt,zone,image)
+    def __init__(self,ctx,reachable_prompt,zone,image=None,pos=None):
+        super().__init__(ctx,reachable_prompt,zone,image,pos)
         
     def interact(self):
         self.ctx.player.playMinigame("foresting")

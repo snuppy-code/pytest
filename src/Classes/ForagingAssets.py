@@ -1,4 +1,5 @@
 import pygame
+from src.interactibles import ForageNode
 pygame.init()
 
 sprites_dict = {}
@@ -19,6 +20,7 @@ class PotatoBush(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=pos)
         self.collision_rect = pygame.Rect(0,0, 10, 10)
         self.collision_rect.center = self.rect.center
+        self.node = 
 
         print(self.collision_rect)
         print(self.rect)
@@ -26,8 +28,8 @@ class PotatoBush(pygame.sprite.Sprite):
         self.harvestable = True
 
     def draw(self):
-        self.collision_rect.topleft = self.pos+ctx.player.pos*-0.9
-        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.9)
+        self.collision_rect.topleft = self.pos+ctx.player.pos*-0.8
+        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.8)
 
     def forage(self):
         pass
@@ -46,8 +48,8 @@ class DaikonBush(pygame.sprite.Sprite):
         self.harvestable = True
 
     def draw(self):
-        self.collision_rect.topleft = self.pos+ctx.player.pos*-0.9
-        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.9)
+        self.collision_rect.topleft = self.pos+ctx.player.pos*-0.8
+        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.8)
 
     def forage(self):
         pass
@@ -63,5 +65,5 @@ class Rock:
         self.harvestable = False
 
     def draw(self):
-        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.9)
+        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.8)
         """

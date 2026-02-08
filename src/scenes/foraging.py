@@ -28,7 +28,6 @@ class Foraging:
 
 
         background_width, background_height = self.ctx.images["foraging_map.png"].get_size()
-
         for i in range(100):
             asset_class = random.choices(choices, weights, k=1)[0]
             temp_sprite = asset_class()
@@ -66,11 +65,12 @@ class Foraging:
         h = self.ctx.h
         dt_s = self.ctx.dt_s
 
-        self.ctx.vscreen.blit(self.ctx.images["foraging_map.png"], self.ctx.player.pos*-0.9)
+        self.ctx.vscreen.blit(self.ctx.images["foraging_map.png"], self.ctx.player.pos*-0.8)
 
         for obj in self.objects_on_screen:
             obj.draw()
     
+        pygame.draw.rect(self.ctx.vscreen, "red", self.collision_rect)
         self.ctx.player.update(events)
         self.ctx.player.draw()
 

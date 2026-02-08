@@ -73,6 +73,15 @@ class LoadingScreen:
             "trader_stall.png": pygame.image.load("assets/images/trader_stall.png"),
 
             "moneybag.png": pygame.image.load("assets/images/moneybag.png"),
+
+            "blue_trader.png": pygame.image.load("assets/images/blue_trader.png"),
+            "daik_trader.png": pygame.image.load("assets/images/daik_trader.png"),
+            "potato_trader.png": pygame.image.load("assets/images/potato_trader.png"),
+
+            "sell_checkmark_hovered.png": pygame.image.load("assets/images/sell_checkmark_hovered.png"),
+            "sell_checkmark_normal.png": pygame.image.load("assets/images/sell_checkmark_normal.png"),
+            "sell_checkmark_selected.png": pygame.image.load("assets/images/sell_checkmark_selected.png"),
+            "sell_checkmark_disabled.png": pygame.image.load("assets/images/sell_checkmark_disabled.png"),
             
             "walk_down_1.png": pygame.image.load("assets/sprites/walk_down_1.png").convert_alpha(),
             "walk_down_2.png": pygame.image.load("assets/sprites/walk_down_2.png").convert_alpha(),

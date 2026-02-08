@@ -158,6 +158,7 @@ class Player:
         
         self.animate()
         self.pos += (facing_vec * 200) * self.ctx.dt_s
+        self.pos = self.ctx.scenes[self.ctx.current_scene].bounds.moveinside(self.pos)
         self.tick += self.ctx.dt_s
         print(self.current_frame)
         

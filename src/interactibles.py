@@ -56,6 +56,9 @@ class RectZone(Zone):
     def contains(self, pos):
         return self.rect.collidepoint(pos)
 
+    def moveinside(self,pos):
+        return pygame.Vector2(max(0,min(self.rect.x+self.rect.width,pos.x)),max(0,min(self.rect.y+self.rect.height,pos.y)))
+
 class CircleZone(Zone):
     def __init__(self, center_pos, radius):
         self.center = pygame.Vector2(center_pos)

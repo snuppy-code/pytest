@@ -61,7 +61,7 @@ class Foraging:
         h = self.ctx.h
         dt_s = self.ctx.dt_s
 
-        self.ctx.vscreen.blit(self.ctx.images["camp_background.png"], self.ctx.player.pos*-0.5)
+        self.ctx.vscreen.blit(self.ctx.images["farmplot.png"], self.ctx.player.pos*-0.5)
 
         #self.ctx.player.update(events)
 

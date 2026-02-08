@@ -24,6 +24,8 @@ class World:
         self.w = self.vscreen.get_width()
         self.h = self.vscreen.get_height()
 
+        self.font = Font(self)
+
         self.transitioning = False
         self.fademanager = FadeBlackManager(self)
         self.clock = pygame.time.Clock()
@@ -91,11 +93,9 @@ class World:
         alpha = int((1 - brightness) * 200) # not darker than 200 out of 255 alpha for darkening
         print(f"time: {self.get_time_str()}, sunlight: {self.get_sunlight()}, clamped: {brightness}, alpha: {alpha}")
 
-        # 2. Prepare the overlay
         lighting_overlay.set_alpha(alpha)
         lighting_overlay.fill(NIGHT_COLOR)
 
-        # 3. Blit it over the entire screen
         self.vscreen.blit(lighting_overlay, (0, 0))
     
     def run(self):
@@ -124,3 +124,15 @@ class World:
         # renders allat to the screen !
         pygame.transform.scale(self.vscreen, (self.non_v_w,self.non_v_h), self.screen)
         pygame.display.flip()
+    
+class Font:
+    def __init__(self,ctx):
+        self.font_daydream = pygame.font.Font("assets/fonts/Daydream DEMO.otf",26)
+        self.ctx = ctx
+    
+    # def draw_at(self,text,x,y):
+        # self.ctx.vscreen.blit(self.font_daydream_20.render(text,False,"white"),(x,y))
+    
+    def draw(self,text,x,y):
+        self.ctx.vscreen.blit(self.font_daydream.render(text,False,"black"),(x,y))
+        self.ctx.vscreen.blit(self.font_daydream.render(text,False,"white"),(x+2,y+2))

@@ -1,5 +1,7 @@
 import pygame
 
+from src.util import get_mouse_pos
+
 class Button:
     def __init__(self,ctx,pos_tuple,image_surface_normal,image_surface_hover,image_surface_selected,image_surface_disabled=None,collider_rect=None):
         
@@ -28,8 +30,7 @@ class Button:
         if self.state == "disabled":
             return False
         
-        mousepos = pygame.mouse.get_pos()
-        mousepos = (mousepos[0]/self.ctx.vscreen_scaling_factor, mousepos[1]/self.ctx.vscreen_scaling_factor)
+        mousepos = get_mouse_pos(self.ctx)
         # print(mousepos)
         self.state = "normal"
         if self.collider_rect.collidepoint(mousepos):

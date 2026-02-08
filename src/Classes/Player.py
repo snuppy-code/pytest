@@ -17,7 +17,7 @@ class AnimationHelper:
         index = members.index(self)
         return members[(index + 1) % len(members)]
 
-class WalkDownAnimations(Enum, AnimationHelper):
+class WalkDownAnimations(AnimationHelper, Enum):
     WALK_DOWN_1 = "walk_down_1.png"
     WALK_DOWN_2 = "walk_down_2.png"
     WALK_DOWN_3 = "walk_down_3.png"
@@ -65,7 +65,7 @@ class WalkDownLeftAnimations(Enum):
     WALK_UP_3 = "walk_up_3.png"
     WALK_UP_4 = "walk_up_4.png"
 
-class IdleAnimation(Enum, AnimationHelper):
+class IdleAnimation(AnimationHelper, Enum):
     IDLE = "idle.png"
 
 class Player: 

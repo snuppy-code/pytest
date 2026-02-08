@@ -1,36 +1,57 @@
 import pygame
 
-
 class FadeBlackManager():
-    def __init__(self,ctx):
+    HOLD_TIME = 0.05 
+
+    def __init__(self, ctx):
         self.ctx = ctx
         self.running = False
-        self.blackscreen = pygame.Surface((ctx.w,ctx.h),pygame.SRCALPHA)
+        self.blackscreen = pygame.Surface((ctx.w, ctx.h), pygame.SRCALPHA)
         self.fadedtoblack = False
-    
-    def world_tick_draw(self):
-        if self.running:
-            self.elapsed_time += self.ctx.dt_s
-            if self.elapsed_time >= self.fadetotal_time:
-                self.running = False
-                self.elapsed_time = None
-                self.fadeout_time = None
-                self.fadetotal_time = None
-                self.fadedtoblack = False
-                self.blackscreen.fill((0,0,0,0))
-            elif self.elapsed_time >= self.fadeout_time:
-                self.fadedtoblack = True
-                self.blackscreen.fill((0,0,0,(1-((self.elapsed_time-self.fadeout_time)/self.fadeout_time))*255))
-            else:
-                self.blackscreen.fill((0,0,0,self.elapsed_time/self.fadeout_time*255))
+        self.elapsed_time = 0
+        self.fadeout_time = 0
+        self.fadetotal_time = 0
 
+    def world_tick_draw(self):
+        if not self.running:
+            return
+
+        self.elapsed_time += self.ctx.dt_s
+        
+        #turn black
+        if self.elapsed_time < self.fadeout_time:
+            progress = self.elapsed_time / self.fadeout_time
+            alpha = int(progress * 255)
+            self.fadedtoblack = False
+        
+        #hold
+        elif self.elapsed_time < (self.fadeout_time + self.HOLD_TIME):
+            alpha = 255
+            self.fadedtoblack = True
+            
+        elif self.elapsed_time < self.fadetotal_time:
+            time_into_fadein = self.elapsed_time - (self.fadeout_time + self.HOLD_TIME)
+            progress = time_into_fadein / self.fadeout_time
+            alpha = int((1 - progress) * 255)
+            self.fadedtoblack = False
+            
+        # cleanup
+        else:
+            self.running = False
+            alpha = 0
+            self.fadedtoblack = False
+            self.blackscreen.fill((0, 0, 0, 0))
+
+        if self.running:
+            self.blackscreen.fill((0, 0, 0, alpha))
             self.ctx.vscreen.blit(self.blackscreen)
-    
-    def request_fadeoutin(self,fadeout_time):
+
+    def request_fadeoutin(self, fadeout_time):
         self.running = True
         self.elapsed_time = 0
         self.fadeout_time = fadeout_time
-        self.fadetotal_time = fadeout_time*2
+        # total time = (fade out) + (hold) + (fade in)
+        self.fadetotal_time = (fadeout_time * 2) + self.HOLD_TIME
     
     def faded_to_black(self):
         return self.fadedtoblack

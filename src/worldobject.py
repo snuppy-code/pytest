@@ -48,7 +48,7 @@ class World:
     def transition_scene_to(self,newSceneName):
         self.nextscene = newSceneName
         print(f"preparing transition from {self.current_scene} to {newSceneName}")
-        self.fademanager.request_fadeoutin(0.5)
+        self.fademanager.request_fadeoutin(0.4)
     
     def _actually_transition_scene(self):
         print(f"actually transitioning from {self.current_scene} to {self.nextscene}")

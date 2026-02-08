@@ -7,9 +7,6 @@ from pygame.mixer import Sound
 
 BASE_PATH = "assets/audio/"
 
-print(pygame.mixer.get_init())
-print("awdaoiwdjoawjdoiawjdo")
-
 class Audios(Enum):
     WALKING = "walking_loopable.wav"
     WILDWIND = "wildwind.wav"
@@ -26,6 +23,6 @@ class Audios(Enum):
             self.s.set_volume(volume)
             self.s.play(loops=loops)
 
-
-
-
+    def stop(self):
+        if self.s:
+            self.s.stop()

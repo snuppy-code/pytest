@@ -15,14 +15,14 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      overlays = [ nixgl.overlay ];
+      overlays = [nixgl.overlay];
     };
     # pkgs = nixpkgs.legacyPackages.${system};
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
         pkgs.nixgl.nixGLIntel
-        (pkgs.python314.withPackages (ps: with ps; [pygame-ce pygame-gui]))
+        (pkgs.python314.withPackages (ps: with ps; [pygame-ce]))
       ];
       shellHook = ''
         echo "Entered Nix devShell."

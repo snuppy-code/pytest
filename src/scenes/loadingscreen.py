@@ -42,6 +42,31 @@ class LoadingScreen:
             "mainmenu_continue_disabled.png": pygame.image.load("assets/images/mainmenu_continue_disabled.png"),
             
             "camp_background.png": pygame.image.load("assets/images/camp_background.png"),
+            
+            "potato_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "potato_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "potato_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "potato_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "potato_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "potato_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "potato_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            
+            "daikon_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "daikon_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "daikon_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "daikon_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "daikon_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "daikon_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "daikon_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            
+            "blueberry_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "blueberry_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "blueberry_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "blueberry_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "blueberry_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "blueberry_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            "blueberry_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            
 
             # "foraging_background.png": pygame.image.load("assets/images/foraging_background.png")
             # "potato_bush.png": pygame.image.load("assets/sprites/potato_bush.png").convert_alpha()

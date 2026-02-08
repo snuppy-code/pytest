@@ -98,9 +98,20 @@ class Player:
     def teleport(self, toPos):
         self.pos = toPos
 
+<<<<<<< Updated upstream
     def draw_to(self,surface):
         self.ctx.images[anim]
         pygame.draw.circle(surface,"red",self.pos+self.ctx.player.pos*-0.5,20)
+=======
+    def draw_to(self):
+        pygame.draw.circle(self.ctx.vscreen,"red",self.pos+self.ctx.player.pos*-0.5,20)
+    
+    def draw_indicator(self, obj): 
+        rect = self.harvest_indicator.get_rect()
+        rect.midbottom = obj.rect.midtop
+        rect.y -= 10
+        self.ctx.vscreen.blit(self.harvest_indicator, rect)
+>>>>>>> Stashed changes
 
     def lock(self):
         self.locked = True

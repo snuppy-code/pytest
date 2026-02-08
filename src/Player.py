@@ -15,9 +15,6 @@ class AnimationHelper:
         
         members = self.__class__._members_list
         index = members.index(self)
-        print(self)
-        print(members)
-        print(index)
         return members[(index + 1) % len(members)]
 
 class WalkDownAnimations(AnimationHelper, Enum):

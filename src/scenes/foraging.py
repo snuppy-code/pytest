@@ -10,15 +10,18 @@ class Foraging:
         self.objects_on_screen = []
         self.background_sound = Audios.WILDWIND
 
+        insertInfo(self.ctx.images, self.ctx)
+
 
     def onEnter(self):
         # fix this mama
         # you don't want to have rocks and stuff ON THE ROAD!!!!!!
         insertInfo(self.ctx.images, self.ctx)
-        self.background_sound.WILDWIND.play(-1, 0.2)
+        self.background_sound.WILDWIND.play(-1, 0.5)
 
         choices = [PotatoBush, Rock]
         weights = [1, 1]
+
 
         background_width, background_height = self.ctx.images["camp_background.png"].get_size()
 
@@ -43,6 +46,7 @@ class Foraging:
                 break
         
         self.bounds = RectZone(self.ctx.images["camp_background.png"].get_rect())
+        self.ctx.player.teleport(pygame.math.Vector2(100, 100))
 
         #ctx.player.objects_on_screen = self.objects_on_screen
 
@@ -55,5 +59,10 @@ class Foraging:
         h = self.ctx.h
         dt_s = self.ctx.dt_s
 
+        self.ctx.vscreen.blit(self.ctx.images["camp_background.png"], self.ctx.player.pos*-0.5)
 
-        #self.ctx.player.update(events)
+        for obj in self.objects_on_screen:
+            obj.draw()
+    
+        self.ctx.player.update(events)
+        self.ctx.player.draw()

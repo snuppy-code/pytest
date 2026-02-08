@@ -21,7 +21,7 @@ class PotatoBush(pygame.sprite.Sprite):
         self.harvestable = True
 
     def draw(self):
-        ctx.vscreen.blit(self.image, self.rect)
+        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.5)
 
     def forage(self):
         pass
@@ -34,4 +34,4 @@ class Rock:
         self.harvestable = False
 
     def draw(self):
-        ctx.vscreen.blit(self.image, self.rect)
+        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.5)

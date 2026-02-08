@@ -12,6 +12,9 @@ class Trader:
         pass
 
     def onFrame(self, events):
+        pass
+        # draw trader scene
         
-        demo_surface = pygame.Surface((218,236),pygame.SRCALPHA)
-        demo_surface.fill((0,0,255,100))
+    
+    def alwaysTick(self, events):
+        pass

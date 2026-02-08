@@ -127,3 +127,6 @@ class LoadingScreen:
         # s = self.loading_font.render(t,True,(255,255,255))
         # p = (self.ctx.w/2-self.initial_w/2,self.ctx.h/2-self.initial_h/2)
         # self.ctx.vscreen.blit(s,p)
+    
+    def alwaysTick(self, events):
+        pass

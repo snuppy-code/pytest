@@ -40,3 +40,6 @@ class MainMenu:
 
         if newgame_pressed:
             self.ctx.transition_scene_to("Camp")
+    
+    def alwaysTick(self, events):
+        pass

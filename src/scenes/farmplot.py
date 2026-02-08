@@ -11,6 +11,8 @@ class Farmplot:
     def onFrame(self, events):
         self.ctx.vscreen.blit(self.ctx.images["farmplot.png"])
 
+    def alwaysTick(self, events):
+        pass
 
 '''
 

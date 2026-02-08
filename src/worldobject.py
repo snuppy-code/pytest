@@ -5,8 +5,8 @@ from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
 from src.scenes.farmplot import Farmplot
 from src.scenes.foraging import Foraging
+from src.scenes.trader import Trader
 from math import pi, sin
-from src.Player import Player
 
 class World:
     def __init__(self):
@@ -41,6 +41,7 @@ class World:
             "Camp": Camp(self),
             "Foraging": Foraging(self),
             "Farmplot": Farmplot(self),
+            "Trader": Trader(self),
         }
         self.current_scene = "LoadingScreen"
         self.scenes[self.current_scene].onEnter()
@@ -57,8 +58,12 @@ class World:
         self.nextscene = None
         self.scenes[self.current_scene].onEnter()
 
+    def increment_day_time(self):
+        if (self.current_scene != "LoadingScreen") and (self.current_scene != "MainMenu"):
+            self.day_night_clock += self.dt_s
+
     def get_time_str(self) -> str:
-        DAY_DURATION_SECONDS = 5 * 60 
+        DAY_DURATION_SECONDS = 4 * 60 
         START_TIME = 6 # 6 am
         END_TIME = 22 # 10 pm
 
@@ -78,6 +83,20 @@ class World:
 
         return max(0, sunlight_intensity)
 
+    def draw_night_overlay(self):
+        NIGHT_COLOR = (20, 20, 50)
+        lighting_overlay = pygame.Surface((self.w, self.h))
+        brightness = self.get_sunlight()
+        assert brightness >= 0 and brightness <= 1
+        alpha = int((1 - brightness) * 200) # not darker than 200 out of 255 alpha for darkening
+        print(f"time: {self.get_time_str()}, sunlight: {self.get_sunlight()}, clamped: {brightness}, alpha: {alpha}")
+
+        # 2. Prepare the overlay
+        lighting_overlay.set_alpha(alpha)
+        lighting_overlay.fill(NIGHT_COLOR)
+
+        # 3. Blit it over the entire screen
+        self.vscreen.blit(lighting_overlay, (0, 0))
     
     def run(self):
         print("World started")
@@ -87,9 +106,9 @@ class World:
     def onFrame(self):
         # print("World frame!")
         self.dt_s = self.clock.tick(30) / 1000
-        self.day_night_clock += self.dt_s
+        
+        self.increment_day_time()
 
-        # .get gives a list of all events since last call
         events = pygame.event.get()
         for event in events:
             # allow closing the window,,
@@ -100,7 +119,8 @@ class World:
         self.fademanager.world_tick_draw()
         if self.fademanager.faded_to_black() and not (self.nextscene is None):
             self._actually_transition_scene()
-
+        
+        self.draw_night_overlay()
         # renders allat to the screen !
         pygame.transform.scale(self.vscreen, (self.non_v_w,self.non_v_h), self.screen)
         pygame.display.flip()

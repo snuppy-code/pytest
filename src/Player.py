@@ -15,9 +15,9 @@ class AnimationHelper:
         
         members = self.__class__._members_list
         index = members.index(self)
-        print(self)
-        print(members)
-        print(index)
+        # print(self)
+        # print(members)
+        # print(index)
         return members[(index + 1) % len(members)]
 
 class WalkDownAnimations(AnimationHelper, Enum):
@@ -74,8 +74,8 @@ class IdleAnimation(AnimationHelper, Enum):
 class Player: 
     def __init__(self,ctx,startpos_vector2):
         self.pos = startpos_vector2
-        self.inventory = {}
-        self.health = 100
+        self.inventory = Inventory()
+        self.health = Health()
         self.ctx = ctx
         self.prev_animation_class = IdleAnimation.IDLE
         self.animation_class = IdleAnimation.IDLE
@@ -180,4 +180,25 @@ class Player:
             max(buffer["top"], min(bound_rect.y+bound_rect.height-buffer["bottom"],self.pos.y)))
         self.animate()
         self.tick += self.ctx.dt_s
-        
+
+
+class Inventory:
+    def __init__(self):
+        self.potato_seed = 0
+        self.daikon_seed = 0
+        self.blueberry_seed = 0
+        self.potato_grown = 0
+        self.daikon_grown = 0
+        self.blueberry_grown = 0
+    
+class Health:
+    def __init__(self):
+        self.health = 100
+    
+    def add_health(self,amount):
+        self.health += amount
+        if self.health <= 0:
+            print("you dead !")
+
+    
+    

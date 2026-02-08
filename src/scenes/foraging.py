@@ -12,6 +12,8 @@ class Foraging:
 
 
     def onEnter(self):
+        print("hi")
+
         # fix this mama
         # you don't want to have rocks and stuff ON THE ROAD!!!!!!
         insertInfo(self.ctx.images, self.ctx)
@@ -57,3 +59,6 @@ class Foraging:
 
 
         #self.ctx.player.update(events)
+
+    def alwaysTick(self, events):
+        pass

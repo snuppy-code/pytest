@@ -18,7 +18,7 @@ class Camp:
             zone=RectZone(pygame.Rect(20,29,360,217)),
             image=demo_surface1,
             pos=pygame.Vector2(20,29),
-            target_scene="FarmPlot",
+            target_scene="Farmplot",
         ))
         # demo_surface2 = pygame.Surface((125,65),pygame.SRCALPHA)
         # demo_surface2.fill((0,255,0,100))
@@ -67,3 +67,6 @@ class Camp:
         
         self.ctx.player.update(events)
         self.ctx.player.draw()
+    
+    def alwaysTick(self, events):
+        pass

@@ -50,25 +50,6 @@ class Interactible:
         if self.reachable:
             self.ctx.vscreen.blit(self.reachable_prompt,pygame.Vector2(20,20))
 
-class Zone:
-    def contains(self, pos):
-        assert False
-
-class RectZone(Zone):
-    def __init__(self, zone_rect):
-        self.rect = zone_rect
-        
-    def contains(self, pos):
-        return self.rect.collidepoint(pos)
-
-class CircleZone(Zone):
-    def __init__(self, center_pos, radius):
-        self.center = pygame.Vector2(center_pos)
-        self.radius = radius
-        
-    def contains(self, pos):
-        return self.center.distance_to(pos) <= self.radius
-
 
 class ScenePortal(Interactible):
     def __init__(self,ctx,reachable_prompt,zone,target_scene,image=None,pos=None):
@@ -88,3 +69,23 @@ class ForageNode(Interactible):
 # class House(Interactible):
 #     def __init__(self,ctx,reachable_prompt,zone,image=None):
 #         self.
+
+
+class Zone:
+    def contains(self, pos):
+        assert False
+
+class RectZone(Zone):
+    def __init__(self, zone_rect):
+        self.rect = zone_rect
+        
+    def contains(self, pos):
+        return self.rect.collidepoint(pos)
+
+class CircleZone(Zone):
+    def __init__(self, center_pos, radius):
+        self.center = pygame.Vector2(center_pos)
+        self.radius = radius
+        
+    def contains(self, pos):
+        return self.center.distance_to(pos) <= self.radius

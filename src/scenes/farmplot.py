@@ -1,7 +1,7 @@
 import pygame
 
+from src.button import Button
 from src.util import get_mouse_pos
-
 
 class Farmplot:
     def __init__(self, ctx):
@@ -21,10 +21,6 @@ class Farmplot:
 
     def onFrame(self, events):
         self.ctx.vscreen.blit(self.ctx.images["farmplot.png"])
-
-        self.ctx.font.draw(str(self.ctx.player.inventory.potato_grown),415,240)
-        self.ctx.font.draw(str(self.ctx.player.inventory.daikon_grown),492,240)
-        self.ctx.font.draw(str(self.ctx.player.inventory.blueberry_grown),571,240)
         
         if self.holding_bag is None:
             if pygame.mouse.get_just_pressed()[0]:
@@ -50,12 +46,29 @@ class Farmplot:
                 maybe_oneheld_coords[self.holding_bag][1]-20
             )
 
+        for e in events:
+            if e.type == pygame.KEYDOWN and e.key == pygame.K_e:
+                print("Detected PLAYER pressed E")
+                self.ctx.transition_scene_to("Camp")
+
         self.draw_growths()
+
+        self.ctx.font.draw(str(self.ctx.player.inventory.potato_grown),429,240)
+        self.ctx.font.draw(str(self.ctx.player.inventory.daikon_grown),518,240)
+        self.ctx.font.draw(str(self.ctx.player.inventory.blueberry_grown),586,240)
 
         self.ctx.vscreen.blit(self.ctx.images["potato_seedbag.png"],maybe_oneheld_coords[0])
         self.ctx.vscreen.blit(self.ctx.images["daikon_seedbag.png"],maybe_oneheld_coords[1])
         self.ctx.vscreen.blit(self.ctx.images["blueberry_seedbag.png"],maybe_oneheld_coords[2])
 
+        (x0,y0) = maybe_oneheld_coords[0]
+        (x1,y1) = maybe_oneheld_coords[1]
+        (x2,y2) = maybe_oneheld_coords[2]
+        self.ctx.font.draw(str(self.ctx.player.inventory.potato_seed),x0+40,y0+20)
+        self.ctx.font.draw(str(self.ctx.player.inventory.daikon_seed),x1+40,y1+20)
+        self.ctx.font.draw(str(self.ctx.player.inventory.blueberry_seed),x2+40,y2+20)
+
+        self.ctx.font.draw("Press e to exit",10,319,22)
 
     def alwaysTick(self, events):
         for _,maybe_growth in self.slots.items():

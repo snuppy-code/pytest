@@ -125,7 +125,7 @@ class World:
 
         self.scenes[self.current_scene].onFrame(events)
         for k,scene in self.scenes.items():
-            print(k,scene)
+            # print(k,scene)
             scene.alwaysTick(events)
         
         self.fademanager.world_tick_draw()

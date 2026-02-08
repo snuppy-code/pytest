@@ -14,7 +14,7 @@ class Camp:
         demo_surface1.fill((255,0,0,100))
         self.interactibles.add(ScenePortal(
             ctx=self.ctx,
-            reachable_prompt=self.ctx.images["press_f_to_go_to_farm_plot.png"],
+            reachable_prompt=self.ctx.font.render("Press f to view farm plot",15),
             zone=RectZone(pygame.Rect(20,29,360,217)),
             image=demo_surface1,
             pos=pygame.Vector2(20,29),
@@ -24,7 +24,7 @@ class Camp:
         demo_surface2.fill((0,255,0,100))
         self.interactibles.add(House(
             ctx=self.ctx,
-            reachable_prompt=self.ctx.font.render("Press f to go to sleep"),
+            reachable_prompt=self.ctx.font.render("Press f to go to sleep",15),
             zone=RectZone(pygame.Rect(820,142,125,65)),
             image=demo_surface2,
             pos=pygame.Vector2(820,142),
@@ -33,7 +33,7 @@ class Camp:
         demo_surface3.fill((0,0,255,100))
         self.interactibles.add(ScenePortal(
             ctx=self.ctx,
-            reachable_prompt=self.ctx.images["press_f_to_go_to_the_wilds.png"],
+            reachable_prompt=self.ctx.font.render("Press f to go into the wilds",15),
             zone=RectZone(pygame.Rect(1062,484,218,236)),
             image=demo_surface3,
             pos=pygame.Vector2(1062,484),
@@ -43,7 +43,7 @@ class Camp:
         demo_surface4.fill((0,180,180,100))
         self.interactibles.add(ScenePortal(
             ctx=self.ctx,
-            reachable_prompt=self.ctx.images["press_f_to_talk_with_trader.png"],
+            reachable_prompt=self.ctx.font.render("Press f to talk with the trader",15),
             zone=RectZone(pygame.Rect(238,472,200,200)),
             image=demo_surface4,
             pos=pygame.Vector2(238,472),

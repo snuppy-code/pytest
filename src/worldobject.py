@@ -134,22 +134,20 @@ class World:
     
 class Font:
     def __init__(self,ctx):
-        self.font_daydream = pygame.font.Font("assets/fonts/Daydream DEMO.otf",26)
         self.ctx = ctx
     
-    # def draw_at(self,text,x,y):
-        # self.ctx.vscreen.blit(self.font_daydream_20.render(text,False,"white"),(x,y))
-    
-    def render(self,text):
-        a = self.font_daydream.render(text,False,"black")
-        b = self.font_daydream.render(text,False,"white")
+    def render(self,text,size=26):
+        font_daydream = pygame.font.Font("assets/fonts/Daydream DEMO.otf",size)
+        a = font_daydream.render(text,False,"black")
+        b = font_daydream.render(text,False,"white")
         c = pygame.Surface((a.get_width()+2,a.get_height()+2),pygame.SRCALPHA)
         c.blit(a,(2,2))
         c.blit(b,(0,0))
         return c
 
 
-    def draw(self,text,x,y):
-        self.ctx.vscreen.blit(self.font_daydream.render(text,False,"black"),(x,y))
-        self.ctx.vscreen.blit(self.font_daydream.render(text,False,"white"),(x+2,y+2))
+    def draw(self,text,x,y,size=26):
+        font_daydream = pygame.font.Font("assets/fonts/Daydream DEMO.otf",size)
+        self.ctx.vscreen.blit(font_daydream.render(text,False,"black"),(x,y))
+        self.ctx.vscreen.blit(font_daydream.render(text,False,"white"),(x+2,y+2))
 

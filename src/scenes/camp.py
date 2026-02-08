@@ -20,16 +20,15 @@ class Camp:
             pos=pygame.Vector2(20,29),
             target_scene="Farmplot",
         ))
-        # demo_surface2 = pygame.Surface((125,65),pygame.SRCALPHA)
-        # demo_surface2.fill((0,255,0,100))
-        # self.interactibles.add(ScenePortal(
-        #     ctx=self.ctx,
-        #     reachable_prompt=self.ctx.images["press_f_to_go_to_sleep.png"],
-        #     zone=RectZone(pygame.Rect(820,142,125,65)),
-        #     image=demo_surface2,
-        #     pos=pygame.Vector2(820,142),
-        #     target_scene="TheWilds",
-        # ))
+        demo_surface2 = pygame.Surface((125,65),pygame.SRCALPHA)
+        demo_surface2.fill((0,255,0,100))
+        self.interactibles.add(House(
+            ctx=self.ctx,
+            reachable_prompt=self.ctx.font.render("Press f to go to sleep"),
+            zone=RectZone(pygame.Rect(820,142,125,65)),
+            image=demo_surface2,
+            pos=pygame.Vector2(820,142),
+        ))
         demo_surface3 = pygame.Surface((218,236),pygame.SRCALPHA)
         demo_surface3.fill((0,0,255,100))
         self.interactibles.add(ScenePortal(
@@ -62,11 +61,11 @@ class Camp:
         dt_s = self.ctx.dt_s
         
         self.ctx.vscreen.blit(self.ctx.images["camp_background.png"],self.ctx.player.pos*-0.5)
-
-        self.interactibles.tick_and_draw(self.ctx,events)
         
         self.ctx.player.update(events)
         self.ctx.player.draw()
+
+        self.interactibles.tick_and_draw(self.ctx,events)
     
     def alwaysTick(self, events):
         pass

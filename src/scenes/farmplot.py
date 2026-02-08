@@ -7,9 +7,9 @@ class Farmplot:
     def __init__(self, ctx):
         self.ctx = ctx
         self.slots = {
-            "topleft": "empty", "topmiddle": "empty", "topright": "empty",
-            "horleft": "empty", "hormiddle": "empty", "horright": "empty",
-            "lowleft": "empty", "lowmiddle": "empty", "lowright": "empty",
+            "topleft": None, "topmiddle": None, "topright": None,
+            "horleft": None, "hormiddle": None, "horright": None,
+            "lowleft": None, "lowmiddle": None, "lowright": None,
         }
         self.holding_bag = None
 
@@ -25,19 +25,48 @@ class Farmplot:
         self.ctx.font.draw(str(self.ctx.player.inventory.potato_grown),415,240)
         self.ctx.font.draw(str(self.ctx.player.inventory.daikon_grown),492,240)
         self.ctx.font.draw(str(self.ctx.player.inventory.blueberry_grown),571,240)
-
+        
+        if self.holding_bag is None:
+            if pygame.mouse.get_just_pressed()[0]:
+                self.holding_bag = self.get_bag_mouse_over()
+        else:
+            if pygame.mouse.get_just_released()[0]:
+                target_tile = self.get_tile_mouse_in()
+                if not (target_tile is None):
+                    self.try_plant_in(target_tile)
+                self.holding_bag = None
+        
+        original_coords = [
+            (410,50),
+            (481,50),
+            (550,50),
+        ]
+        maybe_oneheld_coords = original_coords.copy()
+        
         if not (self.holding_bag is None):
-            self.ctx.vscreen.blit(self.ctx.images["potato_seedbag.png"])
-            self.ctx.vscreen.blit(self.ctx.images["daikon_seedbag.png"])
-            self.ctx.vscreen.blit(self.ctx.images["blueberry_seedbag.png"])
+            maybe_oneheld_coords[self.holding_bag] = get_mouse_pos(self.ctx)
+            maybe_oneheld_coords[self.holding_bag] = (
+                maybe_oneheld_coords[self.holding_bag][0]-20,
+                maybe_oneheld_coords[self.holding_bag][1]-20
+            )
 
-        mouse_over_bag = self.get_bag_mouse_over()
-        if not (mouse_over_bag is None):
-            if pygame.mouse.get_pressed()[0]:
-                print("grab bag "+str(mouse_over_bag))
+        self.ctx.vscreen.blit(self.ctx.images["potato_seedbag.png"],maybe_oneheld_coords[0])
+        self.ctx.vscreen.blit(self.ctx.images["daikon_seedbag.png"],maybe_oneheld_coords[1])
+        self.ctx.vscreen.blit(self.ctx.images["blueberry_seedbag.png"],maybe_oneheld_coords[2])
+
 
     def alwaysTick(self, events):
         pass
+    
+    # def try_plant_in(self,target_tile):
+
+    
+    # def try_plant_potato(self,target_tile):
+
+    # def try_plant_daikon(self,target_tile):
+        
+    # def try_plant_blueberry(self,target_tile):
+        
     
     def get_bag_mouse_over(self):
         mousepos = get_mouse_pos(self.ctx)
@@ -56,7 +85,7 @@ class Farmplot:
 
     def get_tile_mouse_in(self):
         mousepos = get_mouse_pos(self.ctx)
-        mx, my = mousepos.x, mousepos.y
+        mx, my = mousepos[0], mousepos[1]
         
         x_bounds = [(10, 101), (117, 224), (246, 350)]
         y_bounds = [(21, 108), (120, 217), (232, 329)]
@@ -72,25 +101,12 @@ class Farmplot:
         
         return None
 
-# class Tile:
-#     def __init__(self):
-#         contained = 
-#         self.image_sprout = image_sprout
-#         self.image_medium = image_medium
-#         self.image_grown = image_grown
+class Growth:
+    def __init__(self,image_sprout,image_medium,image_grown):
+        self.image_sprout = image_sprout
+        self.image_medium = image_medium
+        self.image_grown = image_grown
 
+        self.existed_s = 0
 
-# class PotatoGrowing:
-    
-#     @staticmethod
-#     def draw_at():
-        
-    
-# class DaikonGrowing:
-    
-# class BlueberryGrowing:
-
-
-# '''
-
-# '''
+    # def tick():

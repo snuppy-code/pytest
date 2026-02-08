@@ -48,8 +48,9 @@ class World:
         self.current_scene = "LoadingScreen"
         self.scenes[self.current_scene].onEnter()
 
-    def transition_scene_to(self,newSceneName):
+    def transition_scene_to(self,newSceneName,reset_time=False):
         self.nextscene = newSceneName
+        self.nextscene_resetclock = reset_time
         print(f"preparing transition from {self.current_scene} to {newSceneName}")
         self.fademanager.request_fadeoutin(0.4)
     
@@ -57,6 +58,9 @@ class World:
         print(f"actually transitioning from {self.current_scene} to {self.nextscene}")
         self.scenes[self.current_scene].onExit()
         self.current_scene = self.nextscene
+        if self.nextscene_resetclock:
+            self.reset_clock()
+        self.nextscene_resetclock = None
         self.nextscene = None
         self.scenes[self.current_scene].onEnter()
 
@@ -136,6 +140,15 @@ class Font:
     # def draw_at(self,text,x,y):
         # self.ctx.vscreen.blit(self.font_daydream_20.render(text,False,"white"),(x,y))
     
+    def render(self,text):
+        a = self.font_daydream.render(text,False,"black")
+        b = self.font_daydream.render(text,False,"white")
+        c = pygame.Surface((a.get_width()+2,a.get_height()+2),pygame.SRCALPHA)
+        c.blit(a,(2,2))
+        c.blit(b,(0,0))
+        return c
+
+
     def draw(self,text,x,y):
         self.ctx.vscreen.blit(self.font_daydream.render(text,False,"black"),(x,y))
         self.ctx.vscreen.blit(self.font_daydream.render(text,False,"white"),(x+2,y+2))

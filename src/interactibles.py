@@ -48,7 +48,7 @@ class Interactible:
             self.ctx.vscreen.blit(self.image,self.pos+pygame.Vector2(0,0)+self.ctx.player.pos*-0.5)
         
         if self.reachable:
-            self.ctx.vscreen.blit(self.reachable_prompt,pygame.Vector2(20,20))
+            self.ctx.vscreen.blit(self.reachable_prompt,pygame.Vector2(200,150))
 
 
 class ScenePortal(Interactible):
@@ -66,9 +66,12 @@ class ForageNode(Interactible):
     def interact(self):
         self.ctx.player.playMinigame("foresting")
 
-# class House(Interactible):
-#     def __init__(self,ctx,reachable_prompt,zone,image=None):
-#         self.
+class House(Interactible):
+    def __init__(self,ctx,reachable_prompt,zone,image=None,pos=None):
+        super().__init__(ctx,reachable_prompt,zone,image,pos)
+    
+    def interact(self):
+        self.ctx.transition_scene_to("Camp",reset_time=True)
 
 
 class Zone:

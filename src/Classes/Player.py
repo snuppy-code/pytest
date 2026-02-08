@@ -30,40 +30,40 @@ class WalkUpAnimations(AnimationHelper, Enum):
     WALK_UP_4 = "walk_up_4.png"
 
 class WalkLeftAnimations(AnimationHelper, Enum):
-    WALK_UP_1 = "walk_up_1.png"
-    WALK_UP_2 = "walk_up_2.png"
-    WALK_UP_3 = "walk_up_3.png"
-    WALK_UP_4 = "walk_up_4.png"
+    WALK_LEFT_1 = "walk_up_1.png"
+    WALK_LEFT_2 = "walk_up_2.png"
+    WALK_LEFT_3 = "walk_up_3.png"
+    WALK_LEFT_4 = "walk_up_4.png"
 
 class WalkRightAnimations(AnimationHelper,Enum):
-    WALK_UP_1 = "walk_up_1.png"
-    WALK_UP_2 = "walk_up_2.png"
-    WALK_UP_3 = "walk_up_3.png"
-    WALK_UP_4 = "walk_up_4.png"
+    WALK_RIGHT_1 = "walk_up_1.png"
+    WALK_RIGHT_2 = "walk_up_2.png"
+    WALK_RIGHT_3 = "walk_up_3.png"
+    WALK_RIGHT_4 = "walk_up_4.png"
 
 class WalkUpRightAnimations(AnimationHelper,Enum):
-    WALK_UP_1 = "walk_up_1.png"
-    WALK_UP_2 = "walk_up_2.png"
-    WALK_UP_3 = "walk_up_3.png"
-    WALK_UP_4 = "walk_up_4.png"
+    WALK_UP_RIGHT_1 = "walk_up_1.png"
+    WALK_UP_RIGHT_2 = "walk_up_2.png"
+    WALK_UP_RIGHT_3 = "walk_up_3.png"
+    WALK_UP_RIGHT_4 = "walk_up_4.png"
 
 class WalkUpLeftAnimations(AnimationHelper,Enum):
-    WALK_UP_1 = "walk_up_1.png"
-    WALK_UP_2 = "walk_up_2.png"
-    WALK_UP_3 = "walk_up_3.png"
-    WALK_UP_4 = "walk_up_4.png"
+    WALK_UP_LEFT_1 = "walk_up_1.png"
+    WALK_UP_LEFT_2 = "walk_up_2.png"
+    WALK_UP_LEFT_3 = "walk_up_3.png"
+    WALK_UP_LEFT_4 = "walk_up_4.png"
 
 class WalkDownRightAnimations(AnimationHelper,Enum):
-    WALK_UP_1 = "walk_up_1.png"
-    WALK_UP_2 = "walk_up_2.png"
-    WALK_UP_3 = "walk_up_3.png"
-    WALK_UP_4 = "walk_up_4.png"
+    WALK_DOWN_RIGHT_1 = "walk_up_1.png"
+    WALK_DOWN_RIGHT_2 = "walk_up_2.png"
+    WALK_DOWN_RIGHT_3 = "walk_up_3.png"
+    WALK_DOWN_RIGHT_4 = "walk_up_4.png"
 
 class WalkDownLeftAnimations(AnimationHelper,Enum):
-    WALK_UP_1 = "walk_up_1.png"
-    WALK_UP_2 = "walk_up_2.png"
-    WALK_UP_3 = "walk_up_3.png"
-    WALK_UP_4 = "walk_up_4.png"
+    WALK_DOWN_LEFT_1 = "walk_up_1.png"
+    WALK_DOWN_LEFT_2 = "walk_up_2.png"
+    WALK_DOWN_LEFT_3 = "walk_up_3.png"
+    WALK_DOWN_LEFT_4 = "walk_up_4.png"
 
 class IdleAnimation(AnimationHelper, Enum):
     IDLE = "idle.png"
@@ -74,8 +74,8 @@ class Player:
         self.inventory = {}
         self.health = 100
         self.ctx = ctx
-        self.prev_animation_class = IdleAnimation
-        self.animation_class = IdleAnimation
+        self.prev_animation_class = IdleAnimation.IDLE
+        self.animation_class = IdleAnimation.IDLE
         self.locked = False
         self.fps = 10
         self.tick = 0
@@ -88,15 +88,15 @@ class Player:
         
 
         self.animations = {
-            "up": WalkUpAnimations,
-            "down": WalkDownAnimations,
-            "left": WalkLeftAnimations,
-            "right": WalkRightAnimations,
-            "upleft": WalkUpLeftAnimations,
-            "upright": WalkUpRightAnimations,
-            "downleft": WalkDownLeftAnimations,
-            "downright": WalkDownRightAnimations,
-            "idle": IdleAnimation
+            "up": WalkUpAnimations.WALK_UP_1,
+            "down": WalkDownAnimations.WALK_DOWN_1,
+            "left": WalkLeftAnimations.WALK_LEFT_1,
+            "right": WalkRightAnimations.WALK_RIGHT_1,
+            "upleft": WalkUpLeftAnimations.WALK_UP_LEFT_1,
+            "upright": WalkUpRightAnimations.WALK_UP_RIGHT_1,
+            "downleft": WalkDownLeftAnimations.WALK_DOWN_LEFT_1,
+            "downright": WalkDownRightAnimations.WALK_DOWN_RIGHT_1,
+            "idle": IdleAnimation.IDLE
         }
     
     def teleport(self, toPos):
@@ -115,7 +115,7 @@ class Player:
     def animate(self):
         if (self.tick - self.t0) >= self.dt:
             self.current_frame = self.animation_class.next().value
-            self.draw(self.ctx.vscreen)
+            self.draw()
         
     def update(self, events):
         keys = pygame.key.get_pressed()
@@ -139,7 +139,7 @@ class Player:
             self.walk_channel.stop()
         else:
             if not self.walk_channel.get_busy():
-                self.walk_channel.play(self.walk_sound, loops=-1)
+                self.walk_channel.play(self.walk_sound.s, loops=-1)
             facing_vec = facing_vec.normalize()
 
         directions = {

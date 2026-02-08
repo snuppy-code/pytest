@@ -12,6 +12,7 @@ if not pygame.mixer.get_init():
 
 class Audios(Enum):
     WALKING = "walking_loopable.wav"
+    WILDWIND = "wildwind.wav"
 
     def __init__(self, filename):
         full_path = BASE_PATH + filename

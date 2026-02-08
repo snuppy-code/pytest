@@ -23,43 +23,43 @@ class WalkDownAnimations(AnimationHelper, Enum):
     WALK_DOWN_3 = "walk_down_3.png"
     WALK_DOWN_4 = "walk_down_4.png"
 
-class WalkUpAnimations(Enum):
+class WalkUpAnimations(AnimationHelper, Enum):
     WALK_UP_1 = "walk_up_1.png"
     WALK_UP_2 = "walk_up_2.png"
     WALK_UP_3 = "walk_up_3.png"
     WALK_UP_4 = "walk_up_4.png"
 
-class WalkLeftAnimations(Enum):
+class WalkLeftAnimations(AnimationHelper, Enum):
     WALK_UP_1 = "walk_up_1.png"
     WALK_UP_2 = "walk_up_2.png"
     WALK_UP_3 = "walk_up_3.png"
     WALK_UP_4 = "walk_up_4.png"
 
-class WalkRightAnimations(Enum):
+class WalkRightAnimations(AnimationHelper,Enum):
     WALK_UP_1 = "walk_up_1.png"
     WALK_UP_2 = "walk_up_2.png"
     WALK_UP_3 = "walk_up_3.png"
     WALK_UP_4 = "walk_up_4.png"
 
-class WalkUpRightAnimations(Enum):
+class WalkUpRightAnimations(AnimationHelper,Enum):
     WALK_UP_1 = "walk_up_1.png"
     WALK_UP_2 = "walk_up_2.png"
     WALK_UP_3 = "walk_up_3.png"
     WALK_UP_4 = "walk_up_4.png"
 
-class WalkUpLeftAnimations(Enum):
+class WalkUpLeftAnimations(AnimationHelper,Enum):
     WALK_UP_1 = "walk_up_1.png"
     WALK_UP_2 = "walk_up_2.png"
     WALK_UP_3 = "walk_up_3.png"
     WALK_UP_4 = "walk_up_4.png"
 
-class WalkDownRightAnimations(Enum):
+class WalkDownRightAnimations(AnimationHelper,Enum):
     WALK_UP_1 = "walk_up_1.png"
     WALK_UP_2 = "walk_up_2.png"
     WALK_UP_3 = "walk_up_3.png"
     WALK_UP_4 = "walk_up_4.png"
 
-class WalkDownLeftAnimations(Enum):
+class WalkDownLeftAnimations(AnimationHelper,Enum):
     WALK_UP_1 = "walk_up_1.png"
     WALK_UP_2 = "walk_up_2.png"
     WALK_UP_3 = "walk_up_3.png"

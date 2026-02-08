@@ -50,12 +50,6 @@ class LevelInteractibles:
                 interactible.interact()
                 interacted = True
 
-<<<<<<< Updated upstream
-
-class Harvestable:
-    def __init__(self,):
-        self.sprite = 0
-=======
 class Interactible:
     def __init__(self,ctx,reachable_prompt,zone,image=None):
         self.ctx = ctx
@@ -63,7 +57,6 @@ class Interactible:
         self.reachable_prompt = reachable_prompt
         self.zone = zone
         self.reachable = False
->>>>>>> Stashed changes
     
     def tick(self):
         self.is_reachable = self.zone.contains(self.ctx.player.pos)

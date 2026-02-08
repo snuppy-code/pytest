@@ -37,11 +37,12 @@ class Foraging:
             temp_sprite = asset_class()
             w, h = temp_sprite.image.get_size()
 
-            attempts = 50
+            attempts = 80
             for a in range(attempts):
                 x = random.randint(0, background_width - w)
                 y = random.randint(0, background_height - h)
-
+                if (x < 200) and (y < 200):
+                    continue
                 new_rect = pygame.Rect(x, y, w, h)
 
                 if any(new_rect.colliderect(a) for a in self.collidables):

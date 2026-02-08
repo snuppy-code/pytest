@@ -122,9 +122,13 @@ class Trader:
 
         if sell:
             if self.get[0] == "blueberry":
-                self.player.inventory.blueberry_seed += self.get[1]
+                self.ctx.player.inventory.blueberry_seed += self.get[1]
             elif self.get[0] == "money":
-                self.player.inventory.rouble += self.get[1]
+                self.ctx.player.inventory.rouble += self.get[1]
+            self.get = None
+            self.give = None
+            if self.give is None:
+                self.pick_quest()
 
     def alwaysTick(self, events):
         pass

@@ -7,8 +7,7 @@ from pygame.mixer import Sound
 
 BASE_PATH = "assets/audio/"
 
-if not pygame.mixer.get_init():
-    pygame.mixer.init()
+print(pygame.mixer.get_init())
 
 class Audios(Enum):
     WALKING = "walking_loopable.wav"

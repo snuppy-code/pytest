@@ -30,40 +30,40 @@ class WalkUpAnimations(AnimationHelper, Enum):
     WALK_UP_4 = "walk_up_4.png"
 
 class WalkLeftAnimations(AnimationHelper, Enum):
-    WALK_LEFT_1 = "walk_up_1.png"
-    WALK_LEFT_2 = "walk_up_2.png"
-    WALK_LEFT_3 = "walk_up_3.png"
-    WALK_LEFT_4 = "walk_up_4.png"
+    WALK_LEFT_1 = "walk_left_1.png"
+    WALK_LEFT_2 = "walk_left_2.png"
+    WALK_LEFT_3 = "walk_left_3.png"
+    WALK_LEFT_4 = "walk_left_4.png"
 
 class WalkRightAnimations(AnimationHelper,Enum):
-    WALK_RIGHT_1 = "walk_up_1.png"
-    WALK_RIGHT_2 = "walk_up_2.png"
-    WALK_RIGHT_3 = "walk_up_3.png"
-    WALK_RIGHT_4 = "walk_up_4.png"
+    WALK_RIGHT_1 = "walk_right_1.png"
+    WALK_RIGHT_2 = "walk_right_2.png"
+    WALK_RIGHT_3 = "walk_right_3.png"
+    WALK_RIGHT_4 = "walk_right_4.png"
 
 class WalkUpRightAnimations(AnimationHelper,Enum):
-    WALK_UP_RIGHT_1 = "walk_up_1.png"
-    WALK_UP_RIGHT_2 = "walk_up_2.png"
-    WALK_UP_RIGHT_3 = "walk_up_3.png"
-    WALK_UP_RIGHT_4 = "walk_up_4.png"
+    WALK_UP_RIGHT_1 = "walk_up_right_1.png"
+    WALK_UP_RIGHT_2 = "walk_up_right_2.png"
+    WALK_UP_RIGHT_3 = "walk_up_right_3.png"
+    WALK_UP_RIGHT_4 = "walk_up_right_4.png"
 
 class WalkUpLeftAnimations(AnimationHelper,Enum):
-    WALK_UP_LEFT_1 = "walk_up_1.png"
-    WALK_UP_LEFT_2 = "walk_up_2.png"
-    WALK_UP_LEFT_3 = "walk_up_3.png"
-    WALK_UP_LEFT_4 = "walk_up_4.png"
+    WALK_UP_LEFT_1 = "walk_up_left_1.png"
+    WALK_UP_LEFT_2 = "walk_up_left_2.png"
+    WALK_UP_LEFT_3 = "walk_up_left_3.png"
+    WALK_UP_LEFT_4 = "walk_up_left_4.png"
 
 class WalkDownRightAnimations(AnimationHelper,Enum):
-    WALK_DOWN_RIGHT_1 = "walk_up_1.png"
-    WALK_DOWN_RIGHT_2 = "walk_up_2.png"
-    WALK_DOWN_RIGHT_3 = "walk_up_3.png"
-    WALK_DOWN_RIGHT_4 = "walk_up_4.png"
+    WALK_DOWN_RIGHT_1 = "walk_down_right_1.png"
+    WALK_DOWN_RIGHT_2 = "walk_down_right_2.png"
+    WALK_DOWN_RIGHT_3 = "walk_down_right_3.png"
+    WALK_DOWN_RIGHT_4 = "walk_down_right_4.png"
 
 class WalkDownLeftAnimations(AnimationHelper,Enum):
-    WALK_DOWN_LEFT_1 = "walk_up_1.png"
-    WALK_DOWN_LEFT_2 = "walk_up_2.png"
-    WALK_DOWN_LEFT_3 = "walk_up_3.png"
-    WALK_DOWN_LEFT_4 = "walk_up_4.png"
+    WALK_DOWN_LEFT_1 = "walk_down_left_1.png"
+    WALK_DOWN_LEFT_2 = "walk_down_left_2.png"
+    WALK_DOWN_LEFT_3 = "walk_down_left_3.png"
+    WALK_DOWN_LEFT_4 = "walk_down_left_4.png"
 
 class IdleAnimation(AnimationHelper, Enum):
     IDLE = "idle.png"
@@ -86,7 +86,6 @@ class Player:
         self.walk_channel = pygame.mixer.Channel(1) # Reserve Channel 1 for walking
         self.walk_sound = Audios.WALKING
         
-
         self.animations = {
             "up": WalkUpAnimations.WALK_UP_1,
             "down": WalkDownAnimations.WALK_DOWN_1,
@@ -134,13 +133,6 @@ class Player:
         if keys[pygame.K_d]:
             facing_vec += RIGHT
 
-        if facing_vec.length_squared() < 0.001:
-            self.animation_class = self.animations["idle"]
-            self.walk_channel.stop()
-        else:
-            if not self.walk_channel.get_busy():
-                self.walk_channel.play(self.walk_sound.s, loops=-1)
-            facing_vec = facing_vec.normalize()
 
         directions = {
             "up": facing_vec.dot(UP),
@@ -155,11 +147,18 @@ class Player:
 
         look_dir = max(directions, key=directions.get)
         self.animation_class = self.animations[look_dir]
+
+        if facing_vec.length_squared() < 0.001:
+            self.animation_class = self.animations["idle"]
+            self.walk_channel.stop()
+        else:
+            if not self.walk_channel.get_busy():
+                self.walk_channel.play(self.walk_sound.s, loops=-1)
+            facing_vec = facing_vec.normalize()
         
         self.animate()
         self.pos += (facing_vec * 200) * self.ctx.dt_s
         self.pos = self.ctx.scenes[self.ctx.current_scene].bounds.moveinside(self.pos)
         self.tick += self.ctx.dt_s
         print(self.current_frame)
-            
         

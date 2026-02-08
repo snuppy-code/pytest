@@ -62,7 +62,7 @@ class Camp:
         h = self.ctx.h
         dt_s = self.ctx.dt_s
         
-        if self.ctx.player is not None:
+        if self.ctx.player is None:
             self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
 
         self.ctx.vscreen.blit(self.ctx.images["camp_background.png"],self.ctx.player.pos*-0.5)

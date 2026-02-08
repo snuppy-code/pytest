@@ -22,7 +22,7 @@ class Foraging:
         insertInfo(self.ctx.images, self.ctx)
         self.background_sound.WILDWIND.play(-1, 0.5)
 
-        choices = [PotatoBush, Rock]
+        choices = [PotatoBush, DaikonBush]
         weights = [1, 1]
 
 

@@ -48,7 +48,11 @@ class Interactible:
             self.ctx.vscreen.blit(self.image,self.pos+pygame.Vector2(0,0)+self.ctx.player.pos*-0.5)
         
         if self.reachable:
-            self.ctx.vscreen.blit(self.reachable_prompt,pygame.Vector2(200,150))
+            self.ctx.vscreen.blit(
+                self.reachable_prompt,
+                pygame.Vector2(
+                    self.ctx.w/2-self.reachable_prompt.get_width()/2,
+                    self.ctx.h/1.4-self.reachable_prompt.get_height()/2))
 
 
 class ScenePortal(Interactible):

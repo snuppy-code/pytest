@@ -56,17 +56,51 @@ class Farmplot:
 
 
     def alwaysTick(self, events):
-        pass
+        for maybe_growth in self.slots:
+            if not (maybe_growth is None):
+                maybe_growth.tick(self.ctx.dt_s)
+                if self.ctx.dt_s > 0.1:
+                    print("growth detected abnormally high dt: "+str(self.ctx.dt_s))
     
-    # def try_plant_in(self,target_tile):
+    def draw_growths(self):
+        13,42 x 136,38 x 260,35
+        11,128 x 123,129 x 262,130
+        14,239 x 128,235 x 259,238
+        self.ctx.vscreen.blit()
 
+    def try_plant_in(self,target_tile):
+        if self.holding_bag == 0:
+            self.try_plant_potato(target_tile)
+        elif self.holding_bag == 1:
+            self.try_plant_daikon(target_tile)
+        elif self.holding_bag == 2:
+            self.try_plant_blueberry(target_tile)
+        else:
+            assert False
     
-    # def try_plant_potato(self,target_tile):
+    def try_plant_potato(self,target_tile):
+        there = self.slots[target_tile]
+        if there is None:
+            self.slots[target_tile] = Growth(
+                self.ctx.images["potato_growing_sprout.png"],
+                self.ctx.images["potato_growing_medium.png"],
+                self.ctx.images["potato_growing_grown.png"])
 
-    # def try_plant_daikon(self,target_tile):
-        
-    # def try_plant_blueberry(self,target_tile):
-        
+    def try_plant_daikon(self,target_tile):
+        there = self.slots[target_tile]
+        if there is None:
+            self.slots[target_tile] = Growth(
+                self.ctx.images["daikon_growing_sprout.png"],
+                self.ctx.images["daikon_growing_medium.png"],
+                self.ctx.images["daikon_growing_grown.png"])
+            
+    def try_plant_blueberry(self,target_tile):
+        there = self.slots[target_tile]
+        if there is None:
+            self.slots[target_tile] = Growth(
+                self.ctx.images["blueberry_growing_sprout.png"],
+                self.ctx.images["blueberry_growing_medium.png"],
+                self.ctx.images["blueberry_growing_grown.png"])
     
     def get_bag_mouse_over(self):
         mousepos = get_mouse_pos(self.ctx)
@@ -102,11 +136,30 @@ class Farmplot:
         return None
 
 class Growth:
-    def __init__(self,image_sprout,image_medium,image_grown):
+    def __init__(self, image_sprout, image_medium, image_grown):
         self.image_sprout = image_sprout
         self.image_medium = image_medium
         self.image_grown = image_grown
+        
+        self.growth_stages = [
+            {"range": (0, 160), "image": self.image_sprout},
+            {"range": (161, 320), "image": self.image_medium},
+            {"range": (321, 480), "image": self.image_grown}
+        ]
 
         self.existed_s = 0
+        self.current_image = self.image_sprout
 
-    # def tick():
+    def tick(self, dt_s):
+        self.existed_s += dt_s
+        
+        for stage in self.growth_stages:
+            start, end = stage["range"]
+            if start <= self.existed_s <= end:
+                self.current_image = stage["image"]
+                break
+        else:
+            if self.existed_s > 480:
+                self.current_image = self.image_grown
+
+        return self.current_image

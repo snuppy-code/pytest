@@ -158,8 +158,11 @@ class Player:
                             self.inventory.potato_seed += 1
                         elif item.__class__.__name__ == "DaikonBush":
                             self.inventory.daikon_seed += 1
+                        if item.__class__.__name__ == "ScenePortal":
+                            item.interact()
                         
-                        item.to_del = True
+                        if item.__class__.__name__ != "ScenePortal":
+                            item.to_del = True
 
         directions = {
             "up": facing_vec.dot(UP),

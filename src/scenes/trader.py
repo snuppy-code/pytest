@@ -23,7 +23,7 @@ class Trader:
         if offer_type == 1:
             self.to_draw["blueberry_seedbag.png"] = amount
         else:
-            self.to_draw["blueberry_seedbag.png"] = amount
+            self.to_draw["moneybag.png"] = amount
 
     def onExit(self):
         pass
@@ -39,7 +39,7 @@ class Trader:
 
         for img in self.to_draw:
             self.ctx.vscreen.blit(self.ctx.images[img], dest=(500,200))
-        
+            
     
     def alwaysTick(self, events):
         pass

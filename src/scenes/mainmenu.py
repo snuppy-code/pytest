@@ -39,4 +39,4 @@ class MainMenu:
         self.newgameButton.draw_to(self.ctx.vscreen)
 
         if newgame_pressed:
-            self.ctx.transition_scene_to("Farmplot")
+            self.ctx.transition_scene_to("Camp")

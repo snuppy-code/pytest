@@ -1,4 +1,3 @@
-from src.Classes.ForagingAssets import insertSprites
 import pygame
 import random
 from src.Classes.ForagingAssets import *

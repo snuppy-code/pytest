@@ -53,4 +53,5 @@ class Camp:
         self.interactibles.tick_and_draw(self.ctx,events)
         
         self.ctx.player.update(events)
+        self.ctx.player.pos # constrain that shit
         self.ctx.player.draw()

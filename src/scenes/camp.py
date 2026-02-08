@@ -10,11 +10,13 @@ class Camp:
         self.ctx.player = Player(ctx,pygame.Vector2(640,360))
         
         self.interactibles = LevelInteractibles()
+
+    def onEnter(self):
         demo_surface1 = pygame.Surface((400,300))
         demo_surface1.fill("red")
         self.interactibles.add(ScenePortal(
-            ctx=ctx,
-            reachable_prompt=ctx.images["press_f_to_go_to_farm_plot.png"],
+            ctx=self.ctx,
+            reachable_prompt=self.ctx.images["press_f_to_go_to_farm_plot.png"],
             zone=RectZone(pygame.Rect(0,0,400,300)),
             image=demo_surface1,
             target_scene="FarmPlot",
@@ -22,8 +24,8 @@ class Camp:
         demo_surface2 = pygame.Surface((400,300))
         demo_surface2.fill("red")
         self.interactibles.add(ScenePortal(
-            ctx=ctx,
-            reachable_prompt=ctx.images["press_f_to_go_to_the_wilds.png"],
+            ctx=self.ctx,
+            reachable_prompt=self.ctx.images["press_f_to_go_to_the_wilds.png"],
             zone=RectZone(pygame.Rect(800,500,400,300)),
             image=demo_surface2,
             target_scene="TheWilds",
@@ -31,15 +33,12 @@ class Camp:
         demo_surface3 = pygame.Surface((300,300))
         demo_surface3.fill("red")
         self.interactibles.add(ScenePortal(
-            ctx=ctx,
-            reachable_prompt=ctx.images["press_f_to_talk_with_trader.png"],
+            ctx=self.ctx,
+            reachable_prompt=self.ctx.images["press_f_to_talk_with_trader.png"],
             zone=RectZone(pygame.Rect(200,400,300,300)),
             image=demo_surface3,
             target_scene="Trader",
         ))
-
-    def onEnter(self):
-        pass
 
     def onExit(self):
         pass
@@ -51,7 +50,7 @@ class Camp:
         
         self.ctx.vscreen.blit(self.ctx.images["camp_background.png"],self.ctx.player.pos*-0.5)
 
-        self.tick_and_draw(self.ctx,events)
+        self.interactibles.tick_and_draw(self.ctx,events)
         
         self.ctx.player.update(events)
         self.ctx.player.draw()

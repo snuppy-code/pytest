@@ -102,9 +102,9 @@ class Player:
     def teleport(self, toPos):
         self.pos = toPos
 
-    def draw_to(self,surface):
+    def draw(self):
         image = self.current_frame
-        pygame.draw.circle(surface,"red",self.pos+self.ctx.player.pos*-0.5,20)
+        pygame.draw.circle(self.ctx.vscreen,"red",self.pos+self.ctx.player.pos*-0.5,20)
 
     def lock(self):
         self.locked = True
@@ -115,7 +115,7 @@ class Player:
     def animate(self):
         if (self.tick - self.t0) >= self.dt:
             self.current_frame = self.animation_class.next().value
-            self.draw_to(self.ctx.vscreen)
+            self.draw(self.ctx.vscreen)
         
     def update(self, events):
         keys = pygame.key.get_pressed()

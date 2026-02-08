@@ -49,29 +49,29 @@ class LoadingScreen:
             
             
             
-            "potato_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "potato_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "potato_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "potato_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "potato_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "potato_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "potato_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "potato_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "potato_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "potato_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "potato_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "potato_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "potato_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "potato_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
             
-            "daikon_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "daikon_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "daikon_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "daikon_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "daikon_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "daikon_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "daikon_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "daikon_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "daikon_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "daikon_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "daikon_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "daikon_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "daikon_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "daikon_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
             
-            "blueberry_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "blueberry_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "blueberry_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "blueberry_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "blueberry_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "blueberry_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
-            "blueberry_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "blueberry_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "blueberry_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "blueberry_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "blueberry_growing_grown.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "blueberry_seedbag.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "blueberry_bush.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
+            # "blueberry_icon.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
             
 
             # "foraging_background.png": pygame.image.load("assets/images/foraging_background.png")
@@ -82,6 +82,7 @@ class LoadingScreen:
             # "walk_down_3.png": pygame.image.load("assets/sprites/walk_down_3.png").convert_alpha(),
             # "walk_down_4.png": pygame.image.load("assets/sprites/walk_down_4.png").convert_alpha()
         }
+        print("loaded EVERYTHING !")
 
         self.ctx.transition_scene_to("MainMenu")
 

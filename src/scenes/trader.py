@@ -7,7 +7,7 @@ from src.button import Button
 def createbutton(on):
     on.sellButton = Button(
             on.ctx,
-            (449,71),
+            (440,63),
             on.ctx.images["sell_checkmark_normal.png"],
             on.ctx.images["sell_checkmark_hovered.png"],
             on.ctx.images["sell_checkmark_selected.png"],
@@ -77,11 +77,12 @@ class Trader:
         if self.give is None:
             self.pick_quest()
 
+
         if self.give[0] == "potato":
             self.ctx.vscreen.blit(self.ctx.images["potato_trader.png"], dest=(399,184))
             self.ctx.font.draw(str(self.give[1]),399,184,size=22)
 
-            if self.ctx.player.inventory.blueberry_grown < self.give[1]:
+            if self.ctx.player.inventory.potato_grown < self.give[1]:
                 self.sellButton.disable_button()
             else:
                 self.sellButton.enable_button()
@@ -89,10 +90,23 @@ class Trader:
         elif self.give[0] == "daikon":
             self.ctx.vscreen.blit(self.ctx.images["daik_trader.png"], dest=(399,184))
             self.ctx.font.draw(str(self.give[1]),399,184,size=22)
+
+            if self.ctx.player.inventory.daikon_grown < self.give[1]:
+                self.sellButton.disable_button()
+            else:
+                self.sellButton.enable_button()
+
         elif self.give[0] == "blueberry":
             self.ctx.vscreen.blit(self.ctx.images["blue_trader.png"], dest=(399,184))
             self.ctx.font.draw(str(self.give[1]),399,184,size=22)
-        
+
+            if self.ctx.player.inventory.blueberry_grown < self.give[1]:
+                self.sellButton.disable_button()
+            else:
+                self.sellButton.enable_button()
+
+
+
         if self.get[0] == "blueberry":
             self.ctx.vscreen.blit(self.ctx.images["blueberry_seedbag.png"], dest=(515,187))
             self.ctx.font.draw(str(self.give[1]),515,187,size=22)
@@ -105,6 +119,12 @@ class Trader:
         
         sell = self.sellButton.tick_just_pressed()
         self.sellButton.draw_to(self.ctx.vscreen)
+
+        if sell:
+            if self.get[0] == "blueberry":
+                self.player.inventory.blueberry_seed += self.get[1]
+            elif self.get[0] == "money":
+                self.player.inventory.rouble += self.get[1]
 
     def alwaysTick(self, events):
         pass

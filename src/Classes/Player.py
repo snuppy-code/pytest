@@ -86,7 +86,6 @@ class Player:
         self.walk_channel = pygame.mixer.Channel(1) # Reserve Channel 1 for walking
         self.walk_sound = Audios.WALKING
         
-
         self.animations = {
             "up": WalkUpAnimations.WALK_UP_1,
             "down": WalkDownAnimations.WALK_DOWN_1,

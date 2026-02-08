@@ -63,10 +63,27 @@ class Farmplot:
                     print("growth detected abnormally high dt: "+str(self.ctx.dt_s))
     
     def draw_growths(self):
-        13,42 x 136,38 x 260,35
-        11,128 x 123,129 x 262,130
-        14,239 x 128,235 x 259,238
-        self.ctx.vscreen.blit()
+        slot_coords = {
+            # top
+            "topleft": (13, 42),
+            "topmiddle": (136, 38),
+            "topright": (260, 35),
+            
+            # hor
+            "horleft": (11, 128),
+            "hormiddle": (123, 129),
+            "horright": (262, 130),
+            
+            # low
+            "lowleft": (14, 239),
+            "lowmiddle": (128, 235),
+            "lowright": (259, 238)
+        }
+
+        for slot_name, position in slot_coords.items():
+            growth = self.slots[slot_name]
+            if growth is not None:
+                self.ctx.vscreen.blit(growth.current_image, position)
 
     def try_plant_in(self,target_tile):
         if self.holding_bag == 0:

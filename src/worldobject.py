@@ -87,6 +87,7 @@ class World:
 
     def reset_clock(self):
         self.day_night_clock = 0
+        self.dt_s = (self.dt_s + 120)
 
     def draw_night_overlay(self):
         NIGHT_COLOR = (20, 20, 50)
@@ -109,7 +110,7 @@ class World:
     def onFrame(self):
         # print("World frame!")
         self.dt_s = self.clock.tick(30) / 1000
-        
+
         self.increment_day_time()
 
         events = pygame.event.get()

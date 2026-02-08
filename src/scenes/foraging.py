@@ -8,6 +8,7 @@ class Foraging:
     def __init__(self,ctx):
         self.ctx = ctx
         self.objects_on_screen = []
+        self.collidables = []
         self.background_sound = Audios.WILDWIND
 
         insertInfo(self.ctx.images, self.ctx)
@@ -28,7 +29,7 @@ class Foraging:
 
         background_width, background_height = self.ctx.images["foraging_map.png"].get_size()
 
-        for i in range(50):
+        for i in range(100):
             asset_class = random.choices(choices, weights, k=1)[0]
             temp_sprite = asset_class()
             w, h = temp_sprite.image.get_size()
@@ -40,16 +41,14 @@ class Foraging:
 
                 new_rect = pygame.Rect(x, y, w, h)
 
-                if any(new_rect.colliderect(a.rect) for a in self.objects_on_screen):
-                    continue
-
-                if new_rect.colliderect(self.collision_rect):
+                if any(new_rect.colliderect(a) for a in self.collidables):
                     continue
 
                 temp_sprite.pos = pygame.math.Vector2(x, y)
                 temp_sprite.rect = new_rect
                 temp_sprite.collision_rect = pygame.Rect(0,0, 10, 10)
                 temp_sprite.collision_rect.center = temp_sprite.rect.center
+                self.collidables.append(temp_sprite.collision_rect)
                 self.objects_on_screen.append(temp_sprite)
                 break
         
@@ -67,7 +66,7 @@ class Foraging:
         h = self.ctx.h
         dt_s = self.ctx.dt_s
 
-        self.ctx.vscreen.blit(self.ctx.images["foraging_map.png"], self.ctx.player.pos*-0.5)
+        self.ctx.vscreen.blit(self.ctx.images["foraging_map.png"], self.ctx.player.pos*-0.3)
 
         for obj in self.objects_on_screen:
             obj.draw()

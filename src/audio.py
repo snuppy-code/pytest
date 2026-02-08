@@ -11,7 +11,7 @@ if not pygame.mixer.get_init():
     pygame.mixer.init()
 
 class Audios(Enum):
-    PLING = "PLING.wav"
+    WALKING = "walking_loopable.wav"
     PLING_2 = "PLING2.wav"
 
     def __init__(self, filename):

@@ -2,6 +2,7 @@ import pygame
 from pygame.math import Vector2
 from src.constants.vectors import *
 from enum import Enum
+from src.audio import Audios
 
 pygame.init()
 
@@ -81,6 +82,9 @@ class Player:
         self.t0 = 0
         self.dt = 1 / self.fps
         self.current_frame = "idle.png"
+
+        self.walk_channel = pygame.mixer.Channel(1) # Reserve Channel 1 for walking
+        self.walk_sound = Audios.WALKING
         
 
         self.animations = {
@@ -99,7 +103,7 @@ class Player:
         self.pos = toPos
 
     def draw_to(self,surface):
-        self.ctx.images[anim]
+        image = self.current_frame
         pygame.draw.circle(surface,"red",self.pos+self.ctx.player.pos*-0.5,20)
 
     def lock(self):
@@ -132,7 +136,10 @@ class Player:
 
         if facing_vec.length_squared() < 0.001:
             self.animation_class = self.animations["idle"]
+            self.walk_channel.stop()
         else:
+            if not self.walk_channel.get_busy():
+                self.walk_channel.play(self.walk_sound, loops=-1)
             facing_vec = facing_vec.normalize()
 
         directions = {
@@ -148,7 +155,6 @@ class Player:
 
         look_dir = max(directions, key=directions.get)
         self.animation_class = self.animations[look_dir]
-
         
         self.animate()
         self.pos += (facing_vec * 200) * self.ctx.dt_s

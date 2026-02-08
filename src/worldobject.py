@@ -60,6 +60,9 @@ class World:
         self.current_scene = self.nextscene
         if self.nextscene_resetclock:
             self.reset_clock()
+            for k,scene in self.scenes.items():
+                # print(k,scene)
+                scene.alwaysTick(pygame.event.get())
         self.nextscene_resetclock = None
         self.nextscene = None
         self.scenes[self.current_scene].onEnter()

@@ -71,6 +71,8 @@ class LoadingScreen:
             "blueberry_bush.png": pygame.image.load("assets/images/blueberry_bush.png"),
 
             "trader_stall.png": pygame.image.load("assets/images/trader_stall.png"),
+
+            "moneybag.png": pygame.image.load("assets/images/moneybag.png"),
             
             "walk_down_1.png": pygame.image.load("assets/sprites/walk_down_1.png").convert_alpha(),
             "walk_down_2.png": pygame.image.load("assets/sprites/walk_down_2.png").convert_alpha(),

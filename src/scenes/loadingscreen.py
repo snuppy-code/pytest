@@ -43,6 +43,12 @@ class LoadingScreen:
             
             "camp_background.png": pygame.image.load("assets/images/camp_background.png"),
             
+            "press_f_to_go_to_farm_plot.png": pygame.image.load("assets/images/press_f_to_go_to_farm_plot.png"),
+            "press_f_to_go_to_the_wilds.png": pygame.image.load("assets/images/press_f_to_go_to_the_wilds.png"),
+            "press_f_to_talk_with_trader.png": pygame.image.load("assets/images/press_f_to_talk_with_trader.png"),
+            
+            
+            
             "potato_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
             "potato_growing_sprout.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),
             "potato_growing_medium.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),

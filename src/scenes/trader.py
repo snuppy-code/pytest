@@ -1,4 +1,5 @@
 import pygame
+import random
 
 
 class Trader:
@@ -6,7 +7,19 @@ class Trader:
         self.ctx = ctx
 
     def onEnter(self):
-        pass
+        blueberry_seed_image = self.ctx.images["blueberry_seedbag.png"]
+        money_image = self.ctx.images["blueberry_seedbag.png"]
+        potato_image = self.ctx.images["potato_growing_grown.png"]
+        daikon_image = self.ctx.images["daikon_growing_grown.png"]
+        camp
+
+        offer_type = random.randint(1,2)
+        amount = 0
+        if offer_type == 1:
+            amount = random.randint(1, 10)
+        else:
+            amount = random.randint(1,5)
+
 
     def onExit(self):
         pass

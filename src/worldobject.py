@@ -76,9 +76,11 @@ class World:
         return f"{game_hours:02d}:{game_minutes:02d}"
 
     def get_sunlight(self):
+        DAY_DURATION_SECONDS = 5 * 60
         START_TIME = 6
+        END_TIME = 22
         
-        t = (4/75) * self.day_night_clock + START_TIME
+        t = ((DAY_DURATION_SECONDS / (END_TIME-START_TIME)) ** -1) * self.day_night_clock + START_TIME
         sunlight_intensity = sin((pi / 24) * t)
 
         return max(0, sunlight_intensity)

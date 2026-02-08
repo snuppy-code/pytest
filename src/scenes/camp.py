@@ -9,6 +9,8 @@ class Camp:
         self.interactibles = LevelInteractibles()
 
     def onEnter(self):
+        if self.ctx.player is not None:
+            self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
 
         demo_surface1 = pygame.Surface((360,217),pygame.SRCALPHA)
         demo_surface1.fill((255,0,0,100))
@@ -50,8 +52,7 @@ class Camp:
             target_scene="Trader",
         ))
         self.bounds = RectZone(self.ctx.images["camp_background.png"].get_rect())
-        if self.ctx.player is not None:
-            self.ctx.player = Player(self.ctx,pygame.Vector2(640,360))
+
 
     def onExit(self):
         pass

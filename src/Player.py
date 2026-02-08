@@ -91,14 +91,14 @@ class Player:
         self.walk_sound = Audios.WALKING
         
         self.animations = {
-            "up": WalkUpAnimations.WALK_UP_1,
-            "down": WalkDownAnimations.WALK_DOWN_1,
-            "left": WalkLeftAnimations.WALK_LEFT_1,
-            "right": WalkRightAnimations.WALK_RIGHT_1,
-            "upleft": WalkUpLeftAnimations.WALK_UP_LEFT_1,
-            "upright": WalkUpRightAnimations.WALK_UP_RIGHT_1,
-            "downleft": WalkDownLeftAnimations.WALK_DOWN_LEFT_1,
-            "downright": WalkDownRightAnimations.WALK_DOWN_RIGHT_1,
+            "up": WalkUpAnimations.WALK_UP_2,
+            "down": WalkDownAnimations.WALK_DOWN_2,
+            "left": WalkLeftAnimations.WALK_LEFT_2,
+            "right": WalkRightAnimations.WALK_RIGHT_2,
+            "upleft": WalkUpLeftAnimations.WALK_UP_LEFT_2,
+            "upright": WalkUpRightAnimations.WALK_UP_RIGHT_2,
+            "downleft": WalkDownLeftAnimations.WALK_DOWN_LEFT_2,
+            "downright": WalkDownRightAnimations.WALK_DOWN_RIGHT_2,
             "idle": IdleAnimation.IDLE
         }
     
@@ -119,6 +119,7 @@ class Player:
         if (self.tick - self.t0) >= self.dt:
             self.animation_class = self.animation_class.next()
             self.current_frame = self.ctx.images[self.animation_class.value]
+
             self.t0 = self.tick
             self.draw()
         
@@ -166,8 +167,8 @@ class Player:
         if type(self.animation_class) != type(target_anim):
             self.animation_class = target_anim
         
-        self.animate()
         self.pos += (facing_vec * 200) * self.ctx.dt_s
         self.pos = self.ctx.scenes[self.ctx.current_scene].bounds.moveinside(self.pos)
+        self.animate()
         self.tick += self.ctx.dt_s
         

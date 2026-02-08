@@ -30,6 +30,8 @@ class World:
         # initialized in loadingscreen
         self.images = None
 
+        self.audios = None
+        
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),

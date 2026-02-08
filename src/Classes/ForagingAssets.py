@@ -20,7 +20,15 @@ class PotatoBush(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=pos)
         self.collision_rect = pygame.Rect(0,0, 10, 10)
         self.collision_rect.center = self.rect.center
-        self.node = 
+        
+        self.node = ForageNode(
+            ctx=self.ctx,
+            reachable_prompt=self.ctx.font.render("Press f to talk with the trader",15),
+            zone=RectZone(pygame.Rect(238,472,200,200)),
+            image=demo_surface4,
+            pos=pygame.Vector2(238,472),
+            target_scene="Trader",
+        )
 
         print(self.collision_rect)
         print(self.rect)

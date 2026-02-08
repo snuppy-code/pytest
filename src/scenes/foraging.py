@@ -46,7 +46,7 @@ class Foraging:
                 break
         
         self.bounds = RectZone(self.ctx.images["camp_background.png"].get_rect())
-        self.ctx.player.teleport(pygame.math.Vector2(100, 100))
+        self.ctx.player.teleport(pygame.math.Vector2(50, 50))
 
         #ctx.player.objects_on_screen = self.objects_on_screen
 

@@ -12,6 +12,5 @@ class Trader:
         pass
 
     def onFrame(self, events):
-        
         demo_surface = pygame.Surface((218,236),pygame.SRCALPHA)
         demo_surface.fill((0,0,255,100))

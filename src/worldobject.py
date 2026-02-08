@@ -1,4 +1,5 @@
 import pygame
+from src.fadeblack import FadeBlackManager
 from src.scenes.camp import Camp
 from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
@@ -23,6 +24,8 @@ class World:
         self.w = self.vscreen.get_width()
         self.h = self.vscreen.get_height()
 
+
+        self.fademanager = FadeBlackManager(self)
         self.clock = pygame.time.Clock()
         self.dt_s = 0
         self.day_night_clock = 0 # seconds
@@ -36,7 +39,7 @@ class World:
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
             "Camp": Camp(self),
-            # "Foraging": Foraging(self),
+            # "Foraging":   (self),
             "Farmplot": Farmplot(self),
         }
         self.current_scene = "LoadingScreen"
@@ -44,6 +47,7 @@ class World:
 
     def transition_scene_to(self,newSceneName):
         print(f"transitioning from {self.current_scene} to {newSceneName}")
+        self.fademanager.request_fadeoutin(1)
         self.scenes[self.current_scene].onExit()
         self.current_scene = newSceneName
         self.scenes[self.current_scene].onEnter()
@@ -89,6 +93,7 @@ class World:
                 self.running = False
 
         self.scenes[self.current_scene].onFrame(events)
+        self.fademanager.world_tick_draw()
 
         # renders allat to the screen !
         pygame.transform.scale(self.vscreen, (self.non_v_w,self.non_v_h), self.screen)

@@ -204,12 +204,12 @@ class Growth:
         self.offset = offset
 
         self.growth_stages = [
-            # {"range": (0, 160), "image": self.image_sprout},
-            # {"range": (161, 320), "image": self.image_medium},
-            # {"range": (321, 480), "image": self.image_grown},
-            {"range": (0, 1), "image": self.image_sprout},
-            {"range": (1.1, 2), "image": self.image_medium},
-            {"range": (2.1, 3), "image": self.image_grown}
+            {"range": (0, 160), "image": self.image_sprout},
+            {"range": (161, 320), "image": self.image_medium},
+            {"range": (321, 480), "image": self.image_grown},
+            # {"range": (0, 1), "image": self.image_sprout},
+            # {"range": (1.1, 2), "image": self.image_medium},
+            # {"range": (2.1, 3), "image": self.image_grown}
         ]
 
         self.existed_s = 0

@@ -5,6 +5,9 @@ from enum import Enum
 
 pygame.init()
 
+
+
+
 class WalkDownAnimations(Enum):
     WALK_DOWN_1 = "walk_down_1.png"
     WALK_DOWN_2 = "walk_down_2.png"
@@ -14,10 +17,9 @@ class WalkDownAnimations(Enum):
 class IdleAnimation(Enum):
     IDLE = "idle.png"
 
-
 class Player:
-    def __init__(self,ctx):
-        self.pos = Vector2(ctx.w/2, ctx.h/2)
+    def __init__(self,ctx,startpos_vector2):
+        self.pos = startpos_vector2
         self.inventory = {}
         self.health = 100
         self.objects_on_screen = []
@@ -29,16 +31,13 @@ class Player:
         self.t0 = 0
         self.last_animation_class = IdleAnimation
         self.animation_class = IdleAnimation
-
-    def _move(self, lookVector):
-        self.pos += (lookVector * 200) * self.ctx.dt_s
-
-    def _animate(self):
-        pass
-
+    
     def teleport(self, toPos):
         self.pos = toPos
 
+    def draw_to(self,surface):
+        pygame.draw.circle(surface,"red",self.pos+self.ctx.player.pos*-0.5,20)
+    
     def draw_indicator(self, obj): 
         rect = self.harvest_indicator.get_rect()
         rect.midbottom = obj.rect.midtop
@@ -47,7 +46,6 @@ class Player:
 
     def quick_time_event(self):
         pass
-
         
     def update(self, events):
         keys = pygame.key.get_pressed()
@@ -61,19 +59,22 @@ class Player:
                     self.qte = True
                     self.quick_time_event()
                     
-
+        facing_vec = Vector2(0,0)
+        
         if keys[pygame.K_w]:
-            self._move(UP)
+            facing_vec += UP
 
         if keys[pygame.K_a]:
-            self._move(LEFT)
+            facing_vec += LEFT
 
         if keys[pygame.K_s]:
-            self._move(DOWN)
+            facing_vec += DOWN
 
         if keys[pygame.K_d]:
-            self._move(RIGHT)
-            self._animate()
+            facing_vec += RIGHT
+        
+        self.pos += (facing_vec * 200) * self.ctx.dt_s
+        # self._animate()
 
 
         closest_harvestable_obj = None

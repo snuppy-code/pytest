@@ -1,9 +1,14 @@
 import pygame
-import pygame_gui # type: ignore
+
+from src.Classes.Player import Player
 
 class Camp:
     def __init__(self,ctx):
         self.ctx = ctx
+        
+        self.ctx.player = Player(ctx,pygame.Vector2(640,360))
+        
+        self.interactibles = Interactibles()
 
     def onEnter(self):
         pass
@@ -15,15 +20,32 @@ class Camp:
         w = self.ctx.w
         h = self.ctx.h
         dt_s = self.ctx.dt_s
-    
-        # replace with background image 
-        self.ctx.vscreen.fill((195, 176, 165))
-    
-        menu = pygame.Surface((self.ctx.w,self.ctx.h))
-    
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*0,400,150),0,40)
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*1,400,150),0,40)
-        pygame.draw.rect(menu,(222, 212, 203),pygame.Rect(self.ctx.w/2-400/2,60+(150+20)*2,400,150),0,40)
+        
+        self.ctx.vscreen.blit(self.ctx.images["camp_background.png"],self.ctx.player.pos*-0.5)
+        
+        self.ctx.player.update(events)
+        self.ctx.player.draw_to(self.ctx.vscreen)
+        
 
-        self.ctx.vscreen.blit(menu)    
-        self.ctx.vscreen.blit(menu)
+'''
+Interactibles system.
+- Transition to another scene (shop,the wilds,farm plot)
+- Popup (house- to sleep)
+- Harvest minigame
+'''
+        
+class LevelInteractibles:
+    def __init__(self,interactibles):
+        self.interactibles = interactibles
+    
+    def tick_all(self):
+        for interactible in self.interactibles:
+            interactible.tick()
+
+
+class Harvestable:
+    def __init__(self,):
+        self.sprite = 
+    
+    def tick(self):
+        pass

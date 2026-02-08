@@ -26,7 +26,6 @@ class World:
         self.clock = pygame.time.Clock()
         self.dt_s = 0
         self.day_night_clock = 0 # seconds
-        self.player = Player(self)
         
         # initialized in loadingscreen
         self.images = None

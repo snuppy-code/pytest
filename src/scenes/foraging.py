@@ -3,6 +3,7 @@ import random
 from src.Classes.ForagingAssets import *
 from src.audio import Audios
 from src.interactibles import *
+from src.storm import Storm
 
 class Foraging:
     def __init__(self,ctx):
@@ -29,7 +30,6 @@ class Foraging:
 
         choices = [PotatoBush, DaikonBush]
         weights = [1, 1/2]
-
 
         background_width, background_height = self.ctx.images["foraging_map.png"].get_size()
         for i in range(20):
@@ -61,6 +61,7 @@ class Foraging:
         self.bounds = RectZone(self.ctx.images["foraging_map.png"].get_rect())
         self.ctx.player.teleport(pygame.math.Vector2(40, 162))
         self.ctx.player.obj_in_scene = self.objects_on_screen
+        self
 
     def onExit(self):
         self.background_sound.WILDWIND.stop()
@@ -92,6 +93,7 @@ class Foraging:
         self.ctx.player.update(events)
         self.ctx.player.draw()
 
+        self.ctx.storm.draw()
 
     def alwaysTick(self, events):
         pass

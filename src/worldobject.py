@@ -7,6 +7,7 @@ from src.scenes.mainmenu import MainMenu
 from src.scenes.farmplot import Farmplot
 from src.scenes.foraging import Foraging
 from src.scenes.trader import Trader
+from src.storm import Storm
 from math import pi, sin
 
 class World:
@@ -38,6 +39,8 @@ class World:
         self.images = None
 
         self.audios = None
+
+        self.storm = Storm(self)
         
         self.scenes = {
             "LoadingScreen": LoadingScreen(self),
@@ -138,6 +141,8 @@ class World:
         self.fademanager.world_tick_draw()
         if self.fademanager.faded_to_black() and not (self.nextscene is None):
             self._actually_transition_scene()
+
+        self.storm.update()
         
         self.draw_night_overlay()
         # renders allat to the screen !

@@ -1,4 +1,4 @@
-class FarmPlot:
+class Farmplot:
     def __init__(self, ctx):
         self.ctx = ctx
 
@@ -9,4 +9,9 @@ class FarmPlot:
         pass
 
     def onFrame(self, events):
-        pass
+        self.ctx.vscreen.blit(self.ctx.images["farmplot.png"])
+
+
+'''
+
+'''

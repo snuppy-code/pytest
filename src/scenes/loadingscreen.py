@@ -47,6 +47,7 @@ class LoadingScreen:
             "press_f_to_go_to_the_wilds.png": pygame.image.load("assets/images/press_f_to_go_to_the_wilds.png"),
             "press_f_to_talk_with_trader.png": pygame.image.load("assets/images/press_f_to_talk_with_trader.png"),
             
+            "farmplot.png": pygame.image.load("assets/images/farmplot.png"),
             
             
             # "potato_growing_seed.png": pygame.image.load("assets/images/AAAAAAAAAA.png"),

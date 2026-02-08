@@ -2,7 +2,8 @@ import pygame
 from src.scenes.camp import Camp
 from src.scenes.loadingscreen import LoadingScreen
 from src.scenes.mainmenu import MainMenu
-from src.scenes.test_scene import TestScene
+from src.scenes.farmplot import Farmplot
+from src.scenes.foraging import Foraging
 from src.audio import Audios
 from math import pi, sin
 from src.Classes.Player import Player
@@ -36,7 +37,7 @@ class World:
             "LoadingScreen": LoadingScreen(self),
             "MainMenu": MainMenu(self),
             "Camp": Camp(self),
-            "TestScene": TestScene(self),
+            "Farmplot": Farmplot(self),
         }
         self.current_scene = "LoadingScreen"
         self.scenes[self.current_scene].onEnter()

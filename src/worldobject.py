@@ -40,7 +40,11 @@ class World:
             "MainMenu": MainMenu(self),
             "Camp": Camp(self),
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             # "Foraging":   (self),
+=======
+            "Foraging": Foraging(self),
+>>>>>>> Stashed changes
 =======
             "Foraging": Foraging(self),
 >>>>>>> Stashed changes

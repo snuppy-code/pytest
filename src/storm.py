@@ -20,9 +20,9 @@ class Storm:
         self.radius = self.ctx.day_night_clock * (-16.667) + 2000
         print(self.radius)
 
-        cycle_progress = (self.ctx.day_night_clock % 240) / 240 
+        self.cycle_progress = (self.ctx.day_night_clock % 240) / 240 
         
-        if cycle_progress < 0.5:
+        if self.cycle_progress < 0.5:
             # First half: Move towards/stay at Camp
             self.current_world_pos = self.camp_center
         else:

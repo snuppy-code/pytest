@@ -34,6 +34,7 @@ class World:
         self.dt_s = 0
         self.day_night_clock = 0 # seconds
         self.player = None
+        self.fonts_to_blit = []
         
         # initialized in loadingscreen
         self.images = None
@@ -64,6 +65,18 @@ class World:
     def _actually_transition_scene(self):
         print(f"actually transitioning from {self.current_scene} to {self.nextscene}")
         self.scenes[self.current_scene].onExit()
+
+        if self.current_scene == "Foraging" and self.nextscene == "Camp":
+            self.player.teleport(pygame.math.Vector2(1009, 503))
+        elif self.current_scene == "Camp" and self.nextscene == "Foraging":
+            self.player.teleport(pygame.math.Vector2(66, 195))
+        elif self.current_scene == "Farmplot":
+            self.player.teleport(pygame.math.Vector2(382, 216))
+        elif self.current_scene == "Trader":
+            self.player.teleport(pygame.math.Vector2(299, 432))
+        elif self.nextscene == "Camp":
+            self.player.teleport(pygame.math.Vector2(869, 210))
+
         self.current_scene = self.nextscene
         if self.nextscene_resetclock:
             self.reset_clock()
@@ -87,7 +100,7 @@ class World:
         game_hours = int(raw_hours)
         game_minutes = int((raw_hours - game_hours) * 60)
 
-        return f"{game_hours:02d}:{game_minutes:02d}"
+        return f"{game_hours:02d}.{game_minutes:02d}"
 
     def get_sunlight(self):
         DAY_DURATION_SECONDS = 4 * 60
@@ -146,6 +159,10 @@ class World:
         
         self.draw_night_overlay()
         # renders allat to the screen !
+
+        for f in self.fonts_to_blit:
+            self.vscreen.blit(f)
+
         pygame.transform.scale(self.vscreen, (self.non_v_w,self.non_v_h), self.screen)
         pygame.display.flip()
     

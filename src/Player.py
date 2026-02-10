@@ -3,6 +3,7 @@ from pygame.math import Vector2
 from src.constants.vectors import *
 from enum import Enum
 from src.audio import Audios
+import random
 
 pygame.init()
 
@@ -156,8 +157,10 @@ class Player:
 
                         if item.__class__.__name__ == "PotatoBush":
                             self.inventory.potato_seed += 1
+                            Audios.FORESTING_COMPLETE_GOOD.play()
                         elif item.__class__.__name__ == "DaikonBush":
                             self.inventory.daikon_seed += 1
+                            Audios.FORESTING_COMPLETE_GOOD.play()
                         if item.__class__.__name__ == "ScenePortal":
                             item.interact()
                         
@@ -206,6 +209,13 @@ class Player:
             max(buffer["top"], min(bound_rect.y+bound_rect.height-buffer["bottom"],self.pos.y)))
         self.animate()
         self.available_plants = []
+
+        clock = self.ctx.font.render(self.ctx.get_time_str(), 15)
+        clock_pos = (self.ctx.w - 10, 10)
+        self.ctx.fonts_to_blit.append((clock, clock_pos))
+        self.ctx.vscreen.blit(clock, text_rect)
+
+
         self.tick += self.ctx.dt_s
 
 
@@ -227,5 +237,15 @@ class Health:
     
     def add_health(self,amount):
         self.health += amount
+        
+        if amount < 0:
+            choices = [
+                Audios.DAMAGE_1, Audios.DAMAGE_2, Audios.DAMAGE_3,
+                Audios.DAMAGE_4, Audios.DAMAGE_5, Audios.DAMAGE_6,
+                Audios.DAMAGE_7
+            ]
+
+            random.choice(choices).play()
+            
         if self.health <= 0:
             print("you dead !")

@@ -1,4 +1,5 @@
 import pygame
+import time
 
 class Storm:
     def __init__(self, ctx):
@@ -9,6 +10,7 @@ class Storm:
         
         self.current_world_pos = pygame.Vector2(self.camp_center)
         self.radius = 2000
+        self.last_time_damage_taken = time.time()
         
         # Overlay setup
         self.overlay = pygame.Surface((self.ctx.w, self.ctx.h))
@@ -17,17 +19,20 @@ class Storm:
         self.overlay.set_alpha(150)
 
     def update(self):
-        self.radius = self.ctx.day_night_clock * (-16.667) + 2000
-        print(self.radius)
+        if self.ctx.current_scene == "Camp":
+            self.radius = max(0, self.ctx.day_night_clock * (-16.667) + 4000.04)
+        else:
+            self.radius = max(0, self.ctx.day_night_clock * (-16.667) + 2000)
 
-        cycle_progress = (self.ctx.day_night_clock % 240) / 240 
+        self.cycle_progress = self.ctx.day_night_clock / 240 
         
-        if cycle_progress < 0.5:
+        if self.cycle_progress < 0.5:
             # First half: Move towards/stay at Camp
-            self.current_world_pos = self.camp_center
+            self.current_world_pos = self.forage_center
         else:
             # Second half: Move towards/stay at Foraging
-            self.current_world_pos = self.forage_center
+            self.current_world_pos = self.camp_center
+
 
 
     def draw(self):
@@ -43,5 +48,12 @@ class Storm:
             self.MAGIC_PINK, 
             (int(screen_x), int(screen_y)), 
             int(self.radius)
+            
         )
+
+        if self.ctx.player.pos.distance_to(self.current_world_pos) > self.radius:
+            if (time.time() - self.last_time_damage_taken) >= 1:
+                self.ctx.player.health.add_health(-10)
+                self.last_time_damage_taken = time.time()
+
         self.ctx.vscreen.blit(self.overlay, (0, 0))

@@ -17,17 +17,19 @@ class Storm:
         self.overlay.set_alpha(150)
 
     def update(self):
-        self.radius = self.ctx.day_night_clock * (-16.667) + 2000
-        print(self.radius)
+        if self.ctx.current_scene == "Camp":
+            self.radius = max(0, self.ctx.day_night_clock * (-16.667) + 4000.04)
+        else:
+            self.radius = max(0, self.ctx.day_night_clock * (-16.667) + 2000)
 
-        self.cycle_progress = (self.ctx.day_night_clock % 240) / 240 
+        self.cycle_progress = self.ctx.day_night_clock / 240 
         
         if self.cycle_progress < 0.5:
             # First half: Move towards/stay at Camp
-            self.current_world_pos = self.camp_center
+            self.current_world_pos = self.forage_center
         else:
             # Second half: Move towards/stay at Foraging
-            self.current_world_pos = self.forage_center
+            self.current_world_pos = self.camp_center
 
 
     def draw(self):

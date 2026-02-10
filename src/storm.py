@@ -1,4 +1,5 @@
 import pygame
+import time
 
 class Storm:
     def __init__(self, ctx):
@@ -9,6 +10,7 @@ class Storm:
         
         self.current_world_pos = pygame.Vector2(self.camp_center)
         self.radius = 2000
+        self.last_time_damage_taken = time.time()
         
         # Overlay setup
         self.overlay = pygame.Surface((self.ctx.w, self.ctx.h))
@@ -32,6 +34,7 @@ class Storm:
             self.current_world_pos = self.camp_center
 
 
+
     def draw(self):
         self.overlay.fill((75, 0, 130))
         
@@ -45,5 +48,12 @@ class Storm:
             self.MAGIC_PINK, 
             (int(screen_x), int(screen_y)), 
             int(self.radius)
+            
         )
+
+        if self.ctx.player.pos.distance_to(self.current_world_pos) > self.radius:
+            if (time.time() - self.last_time_damage_taken) >= 1:
+                self.ctx.player.health.add_health(-10)
+                self.last_time_damage_taken = time.time()
+
         self.ctx.vscreen.blit(self.overlay, (0, 0))

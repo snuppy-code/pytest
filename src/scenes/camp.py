@@ -8,6 +8,7 @@ class Camp:
     def __init__(self,ctx):
         self.ctx = ctx
         self.interactibles = LevelInteractibles()
+        self.first_enter = True
 
     def onEnter(self):
         # if self.ctx.player is None:
@@ -54,7 +55,6 @@ class Camp:
         ))
         self.bounds = RectZone(self.ctx.images["camp_background.png"].get_rect())
 
-
     def onExit(self):
         pass
 
@@ -71,7 +71,6 @@ class Camp:
         self.ctx.player.update(events)
         self.ctx.player.draw()
         self.interactibles.tick_and_draw(self.ctx,events)
-
         self.ctx.storm.draw()
     
     def alwaysTick(self, events):

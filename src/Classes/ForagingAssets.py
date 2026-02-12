@@ -1,9 +1,11 @@
 import pygame
 from src.interactibles import *
+
 pygame.init()
 
 sprites_dict = {}
 ctx = None
+
 
 def insertInfo(sprites, incoming_ctx):
     global sprites_dict
@@ -14,17 +16,17 @@ def insertInfo(sprites, incoming_ctx):
 
 
 class PotatoBush(pygame.sprite.Sprite):
-    def __init__(self, pos=pygame.math.Vector2(0,0)):
+    def __init__(self, pos=pygame.math.Vector2(0, 0)):
         super().__init__()
         self.image = sprites_dict["potato_bush.png"]
         self.rect = self.image.get_rect(topleft=pos)
-        self.collision_rect = pygame.Rect(0,0, 10, 10)
+        self.collision_rect = pygame.Rect(0, 0, 10, 10)
         self.collision_rect.center = self.rect.center
         self.to_del = False
-        
+
         self.node = ForageNode(
             ctx=ctx,
-            reachable_prompt=ctx.font.render("Press f to forage potato",15),
+            reachable_prompt=ctx.font.render("Press f to forage potato", 15),
             zone=CircleZone(self.rect.center, 20),
         )
 
@@ -32,18 +34,19 @@ class PotatoBush(pygame.sprite.Sprite):
         self.harvestable = True
 
     def draw(self):
-        self.collision_rect.topleft = self.pos+ctx.player.pos*-0.8
-        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.8)
+        self.collision_rect.topleft = self.pos + ctx.player.pos * -0.8
+        ctx.vscreen.blit(self.image, dest=self.pos + ctx.player.pos * -0.8)
 
     def forage(self):
         pass
 
+
 class DaikonBush(pygame.sprite.Sprite):
-    def __init__(self, pos=pygame.math.Vector2(0,0)):
+    def __init__(self, pos=pygame.math.Vector2(0, 0)):
         super().__init__()
         self.image = sprites_dict["daikon_bush.png"]
         self.rect = self.image.get_rect(topleft=pos)
-        self.collision_rect = pygame.Rect(0,0, 10, 10)
+        self.collision_rect = pygame.Rect(0, 0, 10, 10)
         self.collision_rect.center = self.rect.center
         self.to_del = False
 
@@ -51,11 +54,12 @@ class DaikonBush(pygame.sprite.Sprite):
         self.harvestable = True
 
     def draw(self):
-        self.collision_rect.topleft = self.pos+ctx.player.pos*-0.8
-        ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.8)
+        self.collision_rect.topleft = self.pos + ctx.player.pos * -0.8
+        ctx.vscreen.blit(self.image, dest=self.pos + ctx.player.pos * -0.8)
 
     def forage(self):
         pass
+
 
 """
 class Rock:
@@ -69,4 +73,4 @@ class Rock:
 
     def draw(self):
         ctx.vscreen.blit(self.image, dest=self.pos+ctx.player.pos*-0.8)
-        """
+"""

@@ -1,11 +1,14 @@
+import random
+from enum import Enum
 import pygame
 from pygame.math import Vector2
 from src.constants.vectors import *
-from enum import Enum
+
 from src.audio import Audios
-import random
+
 
 pygame.init()
+
 
 class AnimationHelper:
     _members_list = None
@@ -13,7 +16,7 @@ class AnimationHelper:
     def next(self):
         if not self.__class__._members_list:
             self.__class__._members_list = list(self.__class__)
-        
+
         members = self.__class__._members_list
         index = members.index(self)
         # print(self)
@@ -21,11 +24,13 @@ class AnimationHelper:
         # print(index)
         return members[(index + 1) % len(members)]
 
+
 class WalkDownAnimations(AnimationHelper, Enum):
     WALK_DOWN_1 = "walk_down_1.png"
     WALK_DOWN_2 = "walk_down_2.png"
     WALK_DOWN_3 = "walk_down_3.png"
     WALK_DOWN_4 = "walk_down_4.png"
+
 
 class WalkUpAnimations(AnimationHelper, Enum):
     WALK_UP_1 = "walk_up_1.png"
@@ -33,47 +38,55 @@ class WalkUpAnimations(AnimationHelper, Enum):
     WALK_UP_3 = "walk_up_3.png"
     WALK_UP_4 = "walk_up_4.png"
 
+
 class WalkLeftAnimations(AnimationHelper, Enum):
     WALK_LEFT_1 = "walk_left_1.png"
     WALK_LEFT_2 = "walk_left_2.png"
     WALK_LEFT_3 = "walk_left_3.png"
     WALK_LEFT_4 = "walk_left_4.png"
 
-class WalkRightAnimations(AnimationHelper,Enum):
+
+class WalkRightAnimations(AnimationHelper, Enum):
     WALK_RIGHT_1 = "walk_right_1.png"
     WALK_RIGHT_2 = "walk_right_2.png"
     WALK_RIGHT_3 = "walk_right_3.png"
     WALK_RIGHT_4 = "walk_right_4.png"
 
-class WalkUpRightAnimations(AnimationHelper,Enum):
+
+class WalkUpRightAnimations(AnimationHelper, Enum):
     WALK_UP_RIGHT_1 = "walk_up_right_1.png"
     WALK_UP_RIGHT_2 = "walk_up_right_2.png"
     WALK_UP_RIGHT_3 = "walk_up_right_3.png"
     WALK_UP_RIGHT_4 = "walk_up_right_4.png"
 
-class WalkUpLeftAnimations(AnimationHelper,Enum):
+
+class WalkUpLeftAnimations(AnimationHelper, Enum):
     WALK_UP_LEFT_1 = "walk_up_left_1.png"
     WALK_UP_LEFT_2 = "walk_up_left_2.png"
     WALK_UP_LEFT_3 = "walk_up_left_3.png"
     WALK_UP_LEFT_4 = "walk_up_left_4.png"
 
-class WalkDownRightAnimations(AnimationHelper,Enum):
+
+class WalkDownRightAnimations(AnimationHelper, Enum):
     WALK_DOWN_RIGHT_1 = "walk_down_right_1.png"
     WALK_DOWN_RIGHT_2 = "walk_down_right_2.png"
     WALK_DOWN_RIGHT_3 = "walk_down_right_3.png"
     WALK_DOWN_RIGHT_4 = "walk_down_right_4.png"
 
-class WalkDownLeftAnimations(AnimationHelper,Enum):
+
+class WalkDownLeftAnimations(AnimationHelper, Enum):
     WALK_DOWN_LEFT_1 = "walk_down_left_1.png"
     WALK_DOWN_LEFT_2 = "walk_down_left_2.png"
     WALK_DOWN_LEFT_3 = "walk_down_left_3.png"
     WALK_DOWN_LEFT_4 = "walk_down_left_4.png"
 
+
 class IdleAnimation(AnimationHelper, Enum):
     IDLE = "idle.png"
 
-class Player: 
-    def __init__(self,ctx,startpos_vector2):
+
+class Player:
+    def __init__(self, ctx, startpos_vector2):
         self.pos = startpos_vector2
         self.inventory = Inventory()
         self.health = Health()
@@ -91,9 +104,9 @@ class Player:
         self.obj_in_scene = []
         self.available_plants = []
 
-        self.walk_channel = pygame.mixer.Channel(1) # Reserve Channel 1 for walking
+        self.walk_channel = pygame.mixer.Channel(1)  # Reserve Channel 1 for walking
         self.walk_sound = Audios.WALKING
-        
+
         self.animations = {
             "up": WalkUpAnimations.WALK_UP_2,
             "down": WalkDownAnimations.WALK_DOWN_2,
@@ -103,18 +116,22 @@ class Player:
             "upright": WalkUpRightAnimations.WALK_UP_RIGHT_2,
             "downleft": WalkDownLeftAnimations.WALK_DOWN_LEFT_2,
             "downright": WalkDownRightAnimations.WALK_DOWN_RIGHT_2,
-            "idle": IdleAnimation.IDLE
+            "idle": IdleAnimation.IDLE,
         }
-    
+
     def teleport(self, toPos):
         self.pos = toPos
 
     def draw(self):
         image = self.current_frame
         if self.ctx.current_scene == "Foraging":
-            self.ctx.vscreen.blit(image, dest=(self.pos+self.ctx.player.pos*-0.8)-Vector2(20,40))
+            self.ctx.vscreen.blit(
+                image, dest=(self.pos + self.ctx.player.pos * -0.8) - Vector2(20, 40)
+            )
         else:
-            self.ctx.vscreen.blit(image, dest=(self.pos+self.ctx.player.pos*-0.5)-Vector2(20,40))
+            self.ctx.vscreen.blit(
+                image, dest=(self.pos + self.ctx.player.pos * -0.5) - Vector2(20, 40)
+            )
         self.rect = self.current_frame.get_rect()
         self.rect.x, self.rect.y = self.pos.x, self.pos.y
 
@@ -122,7 +139,7 @@ class Player:
         self.locked = True
 
     def unlock(self):
-        self.locked = False    
+        self.locked = False
 
     def animate(self):
         if (self.tick - self.t0) >= self.dt:
@@ -131,12 +148,12 @@ class Player:
 
             self.t0 = self.tick
             self.draw()
-        
+
     def update(self, events):
         keys = pygame.key.get_pressed()
-                    
-        facing_vec = Vector2(0,0)
-        
+
+        facing_vec = Vector2(0, 0)
+
         if keys[pygame.K_w]:
             facing_vec += UP
 
@@ -163,7 +180,7 @@ class Player:
                             Audios.FORESTING_COMPLETE_GOOD.play()
                         if item.__class__.__name__ == "ScenePortal":
                             item.interact()
-                        
+
                         if item.__class__.__name__ != "ScenePortal":
                             item.to_del = True
 
@@ -175,7 +192,7 @@ class Player:
             "upleft": facing_vec.dot((UP + LEFT).normalize()),
             "upright": facing_vec.dot((UP + RIGHT).normalize()),
             "downleft": facing_vec.dot((DOWN + LEFT).normalize()),
-            "downright": facing_vec.dot((DOWN + RIGHT).normalize())
+            "downright": facing_vec.dot((DOWN + RIGHT).normalize()),
         }
 
         look_dir = max(directions, key=directions.get)
@@ -192,8 +209,8 @@ class Player:
 
         if type(self.animation_class) != type(target_anim):
             self.animation_class = target_anim
-        
-        self.target_pos = (self.pos + (facing_vec * 200) * self.ctx.dt_s)
+
+        self.target_pos = self.pos + (facing_vec * 200) * self.ctx.dt_s
         self.rect.x, self.rect.y = self.target_pos.x, self.target_pos.y
         self.pos = self.target_pos
 
@@ -205,8 +222,15 @@ class Player:
             "bottom": 70,
         }
         self.pos = pygame.Vector2(
-            max(buffer["left"], min(bound_rect.x+bound_rect.width-buffer["right"],self.pos.x)),
-            max(buffer["top"], min(bound_rect.y+bound_rect.height-buffer["bottom"],self.pos.y)))
+            max(
+                buffer["left"],
+                min(bound_rect.x + bound_rect.width - buffer["right"], self.pos.x),
+            ),
+            max(
+                buffer["top"],
+                min(bound_rect.y + bound_rect.height - buffer["bottom"], self.pos.y),
+            ),
+        )
         self.animate()
         self.available_plants = []
 
@@ -214,7 +238,6 @@ class Player:
         clock_pos = (self.ctx.w - 10, 10)
         self.ctx.fonts_to_blit.append((clock, clock_pos))
         self.ctx.vscreen.blit(clock, text_rect)
-
 
         self.tick += self.ctx.dt_s
 
@@ -230,22 +253,27 @@ class Inventory:
         self.blueberry_grown = 0
 
         self.rouble = 0
-    
+
+
 class Health:
     def __init__(self):
         self.health = 100
-    
-    def add_health(self,amount):
+
+    def add_health(self, amount):
         self.health += amount
-        
+
         if amount < 0:
             choices = [
-                Audios.DAMAGE_1, Audios.DAMAGE_2, Audios.DAMAGE_3,
-                Audios.DAMAGE_4, Audios.DAMAGE_5, Audios.DAMAGE_6,
-                Audios.DAMAGE_7
+                Audios.DAMAGE_1,
+                Audios.DAMAGE_2,
+                Audios.DAMAGE_3,
+                Audios.DAMAGE_4,
+                Audios.DAMAGE_5,
+                Audios.DAMAGE_6,
+                Audios.DAMAGE_7,
             ]
 
             random.choice(choices).play()
-            
+
         if self.health <= 0:
             print("you dead !")

@@ -3,11 +3,13 @@ import pygame
 
 pygame.init()
 
+
 class GrowthStages(Enum):
     SEED = 0
     SPROUT = 1
     MID_GROWTH = 2
     HARVESTABLE = 3
+
 
 class Plant(pygame.sprite.Sprite):
     def __init__(self, species, center_pos):
@@ -18,7 +20,9 @@ class Plant(pygame.sprite.Sprite):
         self._set_image()
 
     def _set_image(self):
-        self.image = pygame.image.load(f"assets/sprites/{self.species}_{self.stage.name.lower()}.png").convert_alpha()
+        self.image = pygame.image.load(
+            f"assets/sprites/{self.species}_{self.stage.name.lower()}.png"
+        ).convert_alpha()
         self.rect = self.image.get_rect(center=self.center_pos)
 
     def draw(self):

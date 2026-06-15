@@ -1,8 +1,8 @@
 {
-  description = "A very basic flake";
+  description = "devshell for developing this game";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixgl.url = "github:nix-community/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -17,7 +17,6 @@
       inherit system;
       overlays = [nixgl.overlay];
     };
-    # pkgs = nixpkgs.legacyPackages.${system};
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = [
@@ -26,11 +25,11 @@
       ];
       shellHook = ''
         echo "Entered Nix devShell."
-        echo "Use 'nixGLIntel python <file>.py' to run with hardware acceleration."
+        echo "Use 'nixGLIntel <command>' to run with hardware acceleration. (Should also fix issues with running on non-nixos systems.)"
 
-        alias npy="nixGLIntel python -m"
+        alias npy="nixGLIntel python -m "
 
-        echo "Aliased: \`npy=\"nixGLIntel python -m\"\`"
+        echo "Aliased: \`npy=\"nixGLIntel python -m \"\` (supply module path, e.g. \`npy src.main\`)"
       '';
     };
   };

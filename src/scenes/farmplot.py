@@ -1,6 +1,5 @@
 import pygame
 
-from src.button import Button
 from src.util import get_mouse_pos
 
 
@@ -41,7 +40,7 @@ class Farmplot:
         else:
             if pygame.mouse.get_just_released()[0]:
                 target_tile = self.get_tile_mouse_in()
-                if not (target_tile is None):
+                if target_tile is not None:
                     self.try_plant_in(target_tile)
                 self.holding_bag = None
 
@@ -52,7 +51,7 @@ class Farmplot:
         ]
         maybe_oneheld_coords = original_coords.copy()
 
-        if not (self.holding_bag is None):
+        if self.holding_bag is not None:
             maybe_oneheld_coords[self.holding_bag] = get_mouse_pos(self.ctx)
             maybe_oneheld_coords[self.holding_bag] = (
                 maybe_oneheld_coords[self.holding_bag][0] - 20,
@@ -93,7 +92,7 @@ class Farmplot:
 
     def alwaysTick(self, events):
         for _, maybe_growth in self.slots.items():
-            if not (maybe_growth is None):
+            if maybe_growth is not None:
                 maybe_growth.tick(self.ctx.dt_s)
                 if self.ctx.dt_s > 0.1:
                     print("growth detected abnormally high dt: " + str(self.ctx.dt_s))

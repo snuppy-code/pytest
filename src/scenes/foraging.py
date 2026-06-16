@@ -5,7 +5,6 @@ import pygame
 from src.audio import Audios
 from src.Classes.ForagingAssets import *
 from src.interactibles import *
-from src.storm import Storm
 
 
 class Foraging:

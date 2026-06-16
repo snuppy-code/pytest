@@ -154,7 +154,7 @@ class World:
             scene.alwaysTick(events)
 
         self.fademanager.world_tick_draw()
-        if self.fademanager.faded_to_black() and not (self.nextscene is None):
+        if self.fademanager.faded_to_black() and self.nextscene is not None:
             self._actually_transition_scene()
 
         self.storm.update()

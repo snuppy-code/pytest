@@ -1,8 +1,6 @@
 import pygame
 
 from src.interactibles import *
-from src.Player import Player
-from src.storm import Storm
 
 
 class Camp:

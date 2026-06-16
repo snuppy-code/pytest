@@ -28,7 +28,7 @@ class Button:
             image_surface_selected.get_width(),
             image_surface_selected.get_height(),
         )
-        if not (image_surface_disabled is None):
+        if image_surface_disabled is not None:
             self.image_states["disabled"] = image_surface_disabled
             assert (
                 image_surface_selected.get_width(),

@@ -1,4 +1,3 @@
-import pygame
 
 from src.button import Button
 

@@ -11,4 +11,4 @@ devenv.local.yaml
 
 .vscode/*
 
-__pycache*
+*__pycache*

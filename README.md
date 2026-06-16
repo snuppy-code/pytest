@@ -13,3 +13,6 @@ pygame-ce
 - clone this project or download zip
 - `cd` to the root of the copy you downloaded/cloned
 - run `python -m src.main`
+
+# Note
+A nix flake is included, if you have the nix package manager installed (available for linux & macos), you can run `nix develop` to enter a reproducable shell from which you can run the code, and e.g. launch editors from command line.

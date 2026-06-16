@@ -1,11 +1,13 @@
-import pygame
 from enum import Enum
 from pathlib import Path
+
+import pygame
 from pygame.mixer import Sound
 
 ###########
 
 BASE_PATH = "assets/audio/"
+
 
 class Audios(Enum):
     WALKING = "walking_loopable.wav"

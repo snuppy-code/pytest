@@ -11,19 +11,11 @@ exclude = [".ruff_cache"]
 [tool.ruff]
 target-version = "py314"
 
-# https://pypi.org/project/flake8-annotations/
-# ANN seems to be the code for "flake8-annotations", which is a plugin for "flake8",
-# that forces type annotations for functions.
 [tool.ruff.lint]
 select = [
-    "ANN",
-    "ANN401",
-    # this should be a thing but this version of ruff doesn't know it?
-    # probably removed or added recently and my ruff version is
-    # out of sync with the docs I saw this on.
-    # "ANN402",
+    "ANN", # flake8-annotations, require type annotations
 
-    # snippet copied from ruff docs:
+    # snippet from ruff docs:
     "E", # pycodestyle
     "F", # Pyflakes
     "UP", # pyupgrade
@@ -31,10 +23,8 @@ select = [
     "SIM", # flake8-simplify
     "I", # isort
 
+    # snippet from reddit comment:
     "DTZ", # require strict timezone manipulation with datetime
     "FBT", # detect boolean traps
     "N",   # enforce naming conventions, e.g. ClassName vs function_name
-]
-ignore = [
-    "COM",
 ]

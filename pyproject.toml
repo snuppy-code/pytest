@@ -1,0 +1,40 @@
+# https://zed.dev/docs/languages/python
+
+# rather this than json !
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+[tool.basedpyright]
+typeCheckingMode = "all"
+pythonVersion = "3.14"
+executionEnvironments = ["Linux", "Darwin", "Windows"]
+exclude = [".ruff_cache"]
+
+[tool.ruff]
+target-version = "py314"
+
+# https://pypi.org/project/flake8-annotations/
+# ANN seems to be the code for "flake8-annotations", which is a plugin for "flake8",
+# that forces type annotations for functions.
+[tool.ruff.lint]
+select = [
+    "ANN",
+    "ANN401",
+    # this should be a thing but this version of ruff doesn't know it?
+    # probably removed or added recently and my ruff version is
+    # out of sync with the docs I saw this on.
+    # "ANN402",
+
+    # snippet copied from ruff docs:
+    "E", # pycodestyle
+    "F", # Pyflakes
+    "UP", # pyupgrade
+    "B", # flake8-bugbear
+    "SIM", # flake8-simplify
+    "I", # isort
+
+    "DTZ", # require strict timezone manipulation with datetime
+    "FBT", # detect boolean traps
+    "N",   # enforce naming conventions, e.g. ClassName vs function_name
+]
+ignore = [
+    "COM",
+]

@@ -25,8 +25,15 @@ Loading happens as follows:
   - init function for each scene object runs
 - initial transition to loadingscreen
 - when loadingscreen is done, transition to main menu
+
 From then on:
 - `onFrame` is called for the current scene every frame
 - `alwaysTick` is called for every scene every frame
-- `ctx.transition_scene_to` causes:
-  - fademanager
+
+And when a `ctx.transition_scene_to` call happens:
+  - fademanager+worldobject performs fade to black
+  - fademanager+worldobject call `ctx._actually_transition_scene`
+  - `onExit` called for last scene
+  - `onEnter` called for new scene
+  - `current_scene` variable changed
+  - fademanager+worldobvject perform fade in from black

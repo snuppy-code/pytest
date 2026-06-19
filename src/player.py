@@ -1,12 +1,11 @@
 import random
 from enum import Enum
+
 import pygame
 from pygame.math import Vector2
-from src.constants.vectors import *
 
 from src.audio import Audios
 from src.constants.vectors import *
-
 
 pygame.init()
 

@@ -1,6 +1,7 @@
 import random
+
 import pygame
-from src.Classes.ForagingAssets import *
+
 from src.audio import Audios
 from src.Classes.ForagingAssets import *
 from src.interactibles import *

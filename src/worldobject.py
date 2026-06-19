@@ -1,8 +1,9 @@
 from math import pi, sin
+
 import pygame
-from src.player import Player
-from src.fadeblack import FadeBlackManager
 from src.Player import Player
+
+from src.fadeblack import FadeBlackManager
 from src.scenes.camp import Camp
 from src.scenes.farmplot import Farmplot
 from src.scenes.foraging import Foraging

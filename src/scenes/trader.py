@@ -1,4 +1,5 @@
 import random
+import pygame
 
 import pygame
 
@@ -21,7 +22,7 @@ class Trader:
         self.ctx = ctx
         self.give = None
         self.get = None
-        self.sellButton = None
+        self.sell_button = None
 
     def onEnter(self):
         if self.give is None:
@@ -92,25 +93,25 @@ class Trader:
             self.ctx.font.draw(str(self.give[1]), 399, 184, size=22)
 
             if self.ctx.player.inventory.potato_grown < self.give[1]:
-                self.sellButton.disable_button()
+                self.sell_button.disable_button()
             else:
-                self.sellButton.enable_button()
+                self.sell_button.enable_button()
 
         elif self.give[0] == "daikon":
             self.ctx.vscreen.blit(self.ctx.images["daik_trader.png"], dest=(399, 184))
             self.ctx.font.draw(str(self.give[1]), 399, 184, size=22)
 
             if self.ctx.player.inventory.daikon_grown < self.give[1]:
-                self.sellButton.disable_button()
+                self.sell_button.disable_button()
             else:
-                self.sellButton.enable_button()
+                self.sell_button.enable_button()
 
         elif self.give[0] == "blueberry":
             self.ctx.vscreen.blit(self.ctx.images["blue_trader.png"], dest=(399, 184))
             self.ctx.font.draw(str(self.give[1]), 399, 184, size=22)
 
             if self.ctx.player.inventory.blueberry_grown < self.give[1]:
-                self.sellButton.disable_button()
+                self.sell_button.disable_button()
             else:
                 self.sellButton.enable_button()
 
@@ -123,11 +124,11 @@ class Trader:
             self.ctx.vscreen.blit(self.ctx.images["moneybag.png"], dest=(515, 187))
             self.ctx.font.draw(str(self.give[1]), 515, 187, size=22)
 
-        if self.sellButton is None:
+        if self.sell_button is None:
             createbutton(self)
 
-        sell = self.sellButton.tick_just_pressed()
-        self.sellButton.draw_to(self.ctx.vscreen)
+        sell = self.sell_button.tick_just_pressed()
+        self.sell_button.draw_to(self.ctx.vscreen)
 
         if sell:
             if self.get[0] == "blueberry":

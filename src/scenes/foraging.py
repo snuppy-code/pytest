@@ -1,10 +1,10 @@
 import random
-
 import pygame
-
+from src.Classes.ForagingAssets import *
 from src.audio import Audios
 from src.Classes.ForagingAssets import *
 from src.interactibles import *
+
 
 
 class Foraging:
@@ -63,7 +63,6 @@ class Foraging:
                 break
 
         self.bounds = RectZone(self.ctx.images["foraging_map.png"].get_rect())
-        self.ctx.player.teleport(pygame.math.Vector2(40, 162))
         self.ctx.player.obj_in_scene = self.objects_on_screen
         self
 
@@ -99,7 +98,6 @@ class Foraging:
         # pygame.draw.rect(self.ctx.vscreen, "red", self.collision_rect)
         self.ctx.player.update(events)
         self.ctx.player.draw()
-
         self.ctx.storm.draw()
 
     def alwaysTick(self, events):

@@ -7,6 +7,7 @@ class Camp:
     def __init__(self, ctx):
         self.ctx = ctx
         self.interactibles = LevelInteractibles()
+        self.first_enter = True
 
     def onEnter(self):
         # if self.ctx.player is None:

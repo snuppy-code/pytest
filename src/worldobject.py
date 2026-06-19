@@ -1,7 +1,6 @@
 from math import pi, sin
-
 import pygame
-
+from src.player import Player
 from src.fadeblack import FadeBlackManager
 from src.Player import Player
 from src.scenes.camp import Camp
@@ -18,12 +17,12 @@ class World:
         self.running = True
 
         primary_display_size = pygame.display.get_desktop_sizes()[0]
-        vscreen_scaling_factor_x = primary_display_size[0] // 640
-        vscreen_scaling_factor_y = primary_display_size[1] // 360
+        # soo yeah its fine to scale non integer apparently...
+        vscreen_scaling_factor_x = primary_display_size[0] / 640
+        vscreen_scaling_factor_y = primary_display_size[1] / 360
         self.vscreen_scaling_factor = min(
             vscreen_scaling_factor_x, vscreen_scaling_factor_y
         )
-
         self.screen = pygame.display.set_mode(
             (640 * self.vscreen_scaling_factor, 360 * self.vscreen_scaling_factor)
         )
@@ -36,15 +35,20 @@ class World:
         self.font = Font(self)
 
         self.transitioning = False
+        self.nextscene = None
+        self.nextscene_resetclock = None
         self.fademanager = FadeBlackManager(self)
+
         self.clock = pygame.time.Clock()
         self.dt_s = 0
+
         self.day_night_clock = 0  # seconds
+
         self.player = None
+        self.fonts_to_blit = []
 
         # initialized in loadingscreen
         self.images = None
-
         self.audios = None
 
         self.storm = Storm(self)
@@ -62,15 +66,27 @@ class World:
 
         self.player = Player(self, pygame.Vector2(640, 360))
 
-    def transition_scene_to(self, newSceneName, reset_time=False):
-        self.nextscene = newSceneName
+    def transition_scene_to(self, new_scene_name, reset_time=False):
+        self.nextscene = new_scene_name
         self.nextscene_resetclock = reset_time
-        print(f"preparing transition from {self.current_scene} to {newSceneName}")
+        print(f"preparing transition from {self.current_scene} to {new_scene_name}")
         self.fademanager.request_fadeoutin(0.4)
 
     def _actually_transition_scene(self):
         print(f"actually transitioning from {self.current_scene} to {self.nextscene}")
         self.scenes[self.current_scene].onExit()
+
+        if self.current_scene == "Foraging" and self.nextscene == "Camp":
+            self.player.teleport(pygame.math.Vector2(1009, 503))
+        elif self.current_scene == "Camp" and self.nextscene == "Foraging":
+            self.player.teleport(pygame.math.Vector2(66, 195))
+        elif self.current_scene == "Farmplot":
+            self.player.teleport(pygame.math.Vector2(382, 216))
+        elif self.current_scene == "Trader":
+            self.player.teleport(pygame.math.Vector2(299, 432))
+        elif self.nextscene == "Camp":
+            self.player.teleport(pygame.math.Vector2(869, 210))
+
         self.current_scene = self.nextscene
         if self.nextscene_resetclock:
             self.reset_clock()
@@ -98,7 +114,7 @@ class World:
         game_hours = int(raw_hours)
         game_minutes = int((raw_hours - game_hours) * 60)
 
-        return f"{game_hours:02d}:{game_minutes:02d}"
+        return f"{game_hours:02d}.{game_minutes:02d}"
 
     def get_sunlight(self):
         DAY_DURATION_SECONDS = 4 * 60
@@ -161,6 +177,10 @@ class World:
 
         self.draw_night_overlay()
         # renders allat to the screen !
+
+        for f in self.fonts_to_blit:
+            self.vscreen.blit(f)
+
         pygame.transform.scale(self.vscreen, (self.non_v_w, self.non_v_h), self.screen)
         pygame.display.flip()
 

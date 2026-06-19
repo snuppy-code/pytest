@@ -31,6 +31,8 @@ class LoadingScreen:
         # {string: surface}
         # fmt: off
         self.ctx.images = {
+            # pylint: disable=line-too-long
+            # fmt: off
             "mainmenu_background.png": pygame.image.load("assets/images/mainmenu_background.png"),
 
             "mainmenu_newgame_normal.png": pygame.image.load("assets/images/mainmenu_newgame_normal.png"),

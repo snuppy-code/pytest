@@ -2,7 +2,6 @@ import pygame
 import time
 
 
-
 class Storm:
     def __init__(self, ctx):
         self.ctx = ctx

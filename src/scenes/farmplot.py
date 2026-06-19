@@ -7,12 +7,10 @@ class Farmplot:
     def __init__(self, ctx):
         self.ctx = ctx
         self.slots = {
-            # fmt: off
             "topleft": None, "topmiddle": None, "topright": None,
             "horleft": None, "hormiddle": None, "horright": None,
             "lowleft": None, "lowmiddle": None, "lowright": None,
-            # fmt: on
-        }
+        }  # fmt: skip
         self.holding_bag = None
 
     def onEnter(self):
@@ -173,7 +171,7 @@ class Farmplot:
         mousepos = get_mouse_pos(self.ctx)
         mx, my = mousepos[0], mousepos[1]
 
-        if my<40 or my>113:
+        if my < 40 or my > 113:
             return None
 
         x_bounds = [(409, 473), (482, 548), (552, 616)]

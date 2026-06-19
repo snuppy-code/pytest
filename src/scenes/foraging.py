@@ -6,7 +6,6 @@ from src.Classes.ForagingAssets import *
 from src.interactibles import *
 
 
-
 class Foraging:
     def __init__(self, ctx):
         self.ctx = ctx

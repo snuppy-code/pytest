@@ -23,6 +23,7 @@
         pkgs.nixgl.nixGLIntel
         (pkgs.python314.withPackages (ps: with ps; [pygame-ce]))
         pkgs.ruff # for command-line linting or formatting
+        pkgs.python314Packages.pydeps
       ];
       shellHook = ''
         echo "Entered Nix devShell."
